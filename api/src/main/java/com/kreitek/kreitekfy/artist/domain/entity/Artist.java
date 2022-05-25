@@ -1,21 +1,21 @@
-package com.kreitek.kreitekfy.musica.domain.entity;
+package com.kreitek.kreitekfy.artist.domain.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "styles")
-public class Style {
+@Table(name = "artists")
+public class Artist {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "StyleSequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ArtistSequence")
     private Long id;
 
     @Column(length = 100, nullable = false)
     @Size(min = 4, max = 100)
     private String name;
 
-    public Style() {
+    public Artist() {
     }
 
     public Long getId() {
