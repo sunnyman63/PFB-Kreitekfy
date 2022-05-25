@@ -34,6 +34,12 @@ public class SongRestController {
 
     }
 
+    @GetMapping(value = "/songs/newests", produces = "application/json")
+    public ResponseEntity<List<SongDTO>> getNewestSongs() {
+        List<SongDTO> songDTOS = this.service.getNewestSongs();
+        return new ResponseEntity<>(songDTOS, HttpStatus.OK);
+    }
+
     @PostMapping(value = "/songs", produces = "application/json", consumes = "application/json")
     public ResponseEntity<SongDTO> saveSong(@RequestBody SongDTO songDTO) {
         songDTO = this.service.saveSong(songDTO);

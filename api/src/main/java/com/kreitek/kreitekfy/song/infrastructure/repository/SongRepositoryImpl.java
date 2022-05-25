@@ -1,40 +1,48 @@
 package com.kreitek.kreitekfy.song.infrastructure.repository;
 
-import com.kreitek.kreitekfy.shared.infrastructure.repository.EntityRepository;
 import com.kreitek.kreitekfy.song.domain.entity.Song;
 import com.kreitek.kreitekfy.song.domain.repository.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class SongRepositoryImpl implements SongRepository {
 
-    private final EntityRepository<Song> entityRepository;
+    private final SongJpaRepository songJpaRepository;
 
     @Autowired
-    public SongRepositoryImpl(EntityRepository<Song> entityRepository) {
-        this.entityRepository = entityRepository;
+    public SongRepositoryImpl(SongJpaRepository songJpaRepository) {
+        this.songJpaRepository = songJpaRepository;
     }
 
 
     @Override
     public List<Song> findAll() {
-        return this.entityRepository.findAll();
+        return this.songJpaRepository.findAll();
     }
 
     @Override
     public Song save(Song entity) {
-        return this.entityRepository.save(entity);
+        return this.songJpaRepository.save(entity);
     }
 
     @Override
     public void deleteById(Long id) {
-        this.entityRepository.deleteById(id);
+        this.songJpaRepository.deleteById(id);
     }
 
     @Override
     public Optional<Song> findById(Long id) {
-        return entityRepository.findById(id);
+        return songJpaRepository.findById(id);
     }
+
+    @Override
+    public List<Song> getAllSongsByOrderInclusion_DateDesc() {
+        return songJpaRepository.getAllSongsByOrderInclusion_DateDesc();
+    }
+
+
 }
