@@ -1,6 +1,8 @@
 package com.kreitek.kreitekfy.user.application.dto;
 
-public class UserDTO {
+import java.io.Serializable;
+
+public class UserDTO implements Serializable {
 
     private Long idUser;
     private boolean admin;
