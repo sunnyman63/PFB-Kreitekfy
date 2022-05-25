@@ -5,15 +5,19 @@ import com.kreitek.kreitekfy.album.application.mapper.AlbumMapper;
 import com.kreitek.kreitekfy.album.application.service.AlbumService;
 import com.kreitek.kreitekfy.album.domain.entity.Album;
 import com.kreitek.kreitekfy.album.domain.persistence.AlbumPersistence;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class AlbumServiceImpl implements AlbumService {
 
     private final AlbumPersistence persistence;
     private final AlbumMapper mapper;
 
+    @Autowired
     public AlbumServiceImpl(AlbumPersistence persistence, AlbumMapper mapper) {
         this.persistence = persistence;
         this.mapper = mapper;

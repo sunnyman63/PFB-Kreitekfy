@@ -1,6 +1,8 @@
 package com.kreitek.kreitekfy.album.application.dto;
 
-public class AlbumDTO {
+import java.io.Serializable;
+
+public class AlbumDTO implements Serializable {
 
     private Long id;
     private String name;
