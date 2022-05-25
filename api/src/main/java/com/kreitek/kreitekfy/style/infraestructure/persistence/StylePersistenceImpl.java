@@ -1,8 +1,6 @@
 package com.kreitek.kreitekfy.style.infraestructure.persistence;
 
 import com.kreitek.kreitekfy.artist.domain.entity.Artist;
-import com.kreitek.kreitekfy.style.application.dto.StyleDTO;
-import com.kreitek.kreitekfy.style.application.mapper.StyleMapper;
 import com.kreitek.kreitekfy.style.domain.entity.Style;
 import com.kreitek.kreitekfy.style.domain.persistence.StylePersistence;
 

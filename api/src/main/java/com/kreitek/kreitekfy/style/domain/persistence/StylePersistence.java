@@ -1,8 +1,6 @@
 package com.kreitek.kreitekfy.style.domain.persistence;
 
-import com.kreitek.kreitekfy.artist.application.dto.ArtistDTO;
 import com.kreitek.kreitekfy.artist.domain.entity.Artist;
-import com.kreitek.kreitekfy.style.application.dto.StyleDTO;
 import com.kreitek.kreitekfy.style.domain.entity.Style;
 import org.springframework.stereotype.Repository;
 
