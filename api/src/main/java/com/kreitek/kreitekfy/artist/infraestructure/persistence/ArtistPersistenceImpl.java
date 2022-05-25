@@ -1,12 +1,13 @@
 package com.kreitek.kreitekfy.artist.infraestructure.persistence;
 
-import com.kreitek.kreitekfy.artist.application.mapper.ArtistMapper;
 import com.kreitek.kreitekfy.artist.domain.entity.Artist;
 import com.kreitek.kreitekfy.artist.domain.persistence.ArtistPersistence;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class ArtistPersistenceImpl implements ArtistPersistence {
 
     private final ArtistRepository artistRepository;

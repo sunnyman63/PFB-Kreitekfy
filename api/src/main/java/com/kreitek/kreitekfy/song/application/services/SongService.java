@@ -11,6 +11,5 @@ public interface SongService {
     Optional<SongDTO> getSongById(Long idSong);
     SongDTO saveSong(SongDTO songDTO);
     void deleteSong(Long idSong);
-
     List<SongDTO> getNewestSongs();
 }

@@ -1,10 +1,10 @@
 package com.kreitek.kreitekfy.album.infraestructure.persistance;
 
 import com.kreitek.kreitekfy.album.domain.entity.Album;
-import com.kreitek.kreitekfy.shared.infrastructure.repository.EntityRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface AlbumRepository extends EntityRepository<Album> {
+public interface AlbumRepository extends JpaRepository<Album,Long> {
     List<Album> findByNameContainsIgnoreCase(String partialName);
 }

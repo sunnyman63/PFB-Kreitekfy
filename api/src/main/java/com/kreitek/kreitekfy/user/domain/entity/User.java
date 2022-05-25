@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categorySequence")
-    private Long idUser;
+    private Long id;
 
     @Column(length = 100, nullable = false)
     @Size(min = 3, max = 100)
@@ -22,12 +22,12 @@ public class User{
     @Column(nullable = false)
     private boolean admin;
 
-    public Long getIdUsuar() {
-        return idUser;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdUsuar(Long idUsuar) {
-        this.idUser = idUsuar;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

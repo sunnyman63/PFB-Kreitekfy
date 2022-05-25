@@ -39,8 +39,8 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public List<SongDTO> getNewestSongs() {
-        List<Song> songDTOs = this.repository.getAllSongsByOrderInclusion_DateDesc();
-        List<Song> newests = new ArrayList<>();
+//        List<Song> songDTOs = this.repository.getAllSongsByOrderByInclusion_DateDesc();
+//        List<Song> newests = new ArrayList<>();
         return null;
     }
 

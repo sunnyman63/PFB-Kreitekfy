@@ -1,6 +1,5 @@
 package com.kreitek.kreitekfy.song.domain.repository;
 
-import com.kreitek.kreitekfy.song.application.dto.SongDTO;
 import com.kreitek.kreitekfy.song.domain.entity.Song;
 
 import java.util.List;
@@ -11,5 +10,5 @@ public interface SongRepository {
     Song save(Song entity);
     void deleteById(Long id);
     Optional<Song> findById(Long id);
-    List<Song> getAllSongsByOrderInclusion_DateDesc();
+//    List<Song> getAllSongsByOrderByInclusion_DateDesc();
 }

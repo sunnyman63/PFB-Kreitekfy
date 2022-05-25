@@ -5,6 +5,7 @@ import com.kreitek.kreitekfy.user.application.mapper.UserMapper;
 import com.kreitek.kreitekfy.user.application.service.UserService;
 import com.kreitek.kreitekfy.user.domain.entity.User;
 import com.kreitek.kreitekfy.user.domain.persistence.UserPersistence;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class UserServiceImpl implements UserService {
     private final UserPersistence persistence;
     private final UserMapper mapper;
 
-
+    @Autowired
     public UserServiceImpl(UserPersistence persistence, UserMapper mapper) {
         this.persistence = persistence;
         this.mapper = mapper;
