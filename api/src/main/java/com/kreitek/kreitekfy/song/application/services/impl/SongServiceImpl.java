@@ -8,6 +8,7 @@ import com.kreitek.kreitekfy.song.domain.repository.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +38,13 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
+    public List<SongDTO> getNewestSongs() {
+        List<Song> songDTOs = this.repository.getAllSongsByOrderInclusion_DateDesc();
+        List<Song> newests = new ArrayList<>();
+        return null;
+    }
+
+    @Override
     public SongDTO saveSong(SongDTO songDTO) {
         songDTO.setTotalVisualizations(0L);
         Song song = this.mapper.toEntity(songDTO);
@@ -48,4 +56,6 @@ public class SongServiceImpl implements SongService {
     public void deleteSong(Long idSong) {
         this.repository.deleteById(idSong);
     }
+
+
 }
