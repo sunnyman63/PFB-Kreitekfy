@@ -2,6 +2,8 @@ package com.kreitek.kreitekfy.artist.infraestructure.rest;
 
 import com.kreitek.kreitekfy.artist.application.dto.ArtistDTO;
 import com.kreitek.kreitekfy.artist.application.service.ArtistService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +23,10 @@ public class ArtistRestController {
     }
 
     @GetMapping(produces = "application/json")
-    ResponseEntity<List<ArtistDTO>> getAllArtists(){
-        List<ArtistDTO> artists = this.artistService.getAllArtists();
-        return new ResponseEntity<>(artists, HttpStatus.OK);
+    ResponseEntity<Page<ArtistDTO>> getArtistByCriteriaPaged(@RequestParam(value = "filter", required = false) String filter, Pageable pageable){
+
+        Page<ArtistDTO> items = this.artistService.getArtistByCriteriaPaged(pageable, filter);
+        return new ResponseEntity<>(items, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{artistsId}", produces = "application/json")

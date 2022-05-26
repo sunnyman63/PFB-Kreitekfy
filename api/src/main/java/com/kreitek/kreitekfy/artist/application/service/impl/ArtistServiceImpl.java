@@ -6,6 +6,8 @@ import com.kreitek.kreitekfy.artist.application.service.ArtistService;
 import com.kreitek.kreitekfy.artist.domain.entity.Artist;
 import com.kreitek.kreitekfy.artist.domain.persistence.ArtistPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +28,9 @@ public class ArtistServiceImpl implements ArtistService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ArtistDTO> getAllArtists() {
-        List<Artist> artists = this.artistPersistence.getAllArtists();
-        return artistMapper.toDto(artists);
+    public Page<ArtistDTO> getArtistByCriteriaPaged(Pageable pageable, String filter) {
+        Page<Artist> itemPage = this.artistPersistence.findAll(pageable,filter);
+        return itemPage.map(artistMapper::toDto);
     }
 
     @Override
