@@ -1,4 +1,4 @@
-package com.kreitek.kreitekfy.album.infraestructure.specs.shared;
+package com.kreitek.kreitekfy.shared.infrastructure.specs;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

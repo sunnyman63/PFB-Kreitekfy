@@ -1,4 +1,4 @@
-package com.kreitek.kreitekfy.album.infraestructure.specs.shared;
+package com.kreitek.kreitekfy.shared.infrastructure.specs;
 
 import java.util.ArrayList;
 import java.util.List;
