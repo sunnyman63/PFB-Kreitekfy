@@ -1,8 +1,12 @@
 package com.kreitek.kreitekfy.song.infrastructure.repository;
 
+import com.kreitek.kreitekfy.shared.infrastructure.specs.SearchCriteriaHelper;
 import com.kreitek.kreitekfy.song.domain.entity.Song;
 import com.kreitek.kreitekfy.song.domain.repository.SongRepository;
+import com.kreitek.kreitekfy.song.infrastructure.specs.SongSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,8 +24,9 @@ public class SongRepositoryImpl implements SongRepository {
 
 
     @Override
-    public List<Song> findAll() {
-        return this.songJpaRepository.findAll();
+    public Page<Song> findAll(Pageable pageable, String filters) {
+        SongSpecification specification = new SongSpecification(SearchCriteriaHelper.fromFilterString(filters));
+        return this.songJpaRepository.findAll(specification, pageable);
     }
 
     @Override

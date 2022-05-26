@@ -1,11 +1,14 @@
 package com.kreitek.kreitekfy.song.application.services.impl;
 
+import com.kreitek.kreitekfy.artist.domain.entity.Artist;
 import com.kreitek.kreitekfy.song.application.dto.SongDTO;
 import com.kreitek.kreitekfy.song.application.mapper.SongMapper;
 import com.kreitek.kreitekfy.song.application.services.SongService;
 import com.kreitek.kreitekfy.song.domain.entity.Song;
 import com.kreitek.kreitekfy.song.domain.repository.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,12 +27,7 @@ public class SongServiceImpl implements SongService {
         this.repository = repository;
         this.mapper = mapper;
     }
-
-    @Override
-    public List<SongDTO> getAllSongs() {
-        List<Song> songs = this.repository.findAll();
-        return this.mapper.toDto(songs);
-    }
+   
 
     @Override
     public Optional<SongDTO> getSongById(Long idSong) {
@@ -43,6 +41,13 @@ public class SongServiceImpl implements SongService {
 //        List<Song> songDTOs = this.repository.getAllSongsByOrderByInclusion_DateDesc();
 //        List<Song> newests = new ArrayList<>();
         return null;
+    }
+
+    @Override
+    public Page<SongDTO> getSongByCriteriaPaged(Pageable pageable, String filter) {
+        Page<Song> itemPage = this.repository.findAll(pageable, filter);
+        return itemPage.map(mapper::toDto);
+
     }
 
     @Override
