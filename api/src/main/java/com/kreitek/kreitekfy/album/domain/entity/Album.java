@@ -1,5 +1,6 @@
 package com.kreitek.kreitekfy.album.domain.entity;
 
+import com.kreitek.kreitekfy.artist.domain.entity.Artist;
 import com.kreitek.kreitekfy.song.domain.entity.Song;
 
 import javax.persistence.*;
@@ -20,6 +21,10 @@ public class Album {
 
     @Lob
     private byte[] image;
+
+    @ManyToOne
+    @JoinColumn(name = "artist_id", nullable = false)
+    private Artist artist;
 
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
     private Set<Song> songs;
@@ -46,6 +51,14 @@ public class Album {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+   public Artist getArtist() {
+        return artist;
+    }
+
+    public void setArtist(Artist artist) {
+        this.artist = artist;
     }
 
     public Set<Song> getSongs() {

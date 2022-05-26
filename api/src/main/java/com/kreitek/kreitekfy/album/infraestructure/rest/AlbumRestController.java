@@ -20,7 +20,7 @@ public class AlbumRestController {
         this.albumService = albumService;
     }
 
-    @GetMapping(value = "/albums/{albumsId}")
+    @GetMapping(value = "/albums/{albumId}")
     ResponseEntity<AlbumDTO> getAlbumById(@PathVariable Long albumId) {
         Optional<AlbumDTO> album = this.albumService.getAlbumById(albumId);
         if(album.isPresent()) {
@@ -36,7 +36,7 @@ public class AlbumRestController {
         return new ResponseEntity<>(albumSaved, HttpStatus.CREATED);
     }
 
-    @DeleteMapping(value = "albums/{idAlbum}")
+    @DeleteMapping(value = "albums/{albumId}")
     ResponseEntity<?> deleteAlbumById(@PathVariable Long albumId) {
         this.albumService.deleteAlbum(albumId);
         return new ResponseEntity<>(HttpStatus.OK);

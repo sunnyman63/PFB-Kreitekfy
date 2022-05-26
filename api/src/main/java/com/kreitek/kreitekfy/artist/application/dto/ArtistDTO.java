@@ -1,11 +1,16 @@
 package com.kreitek.kreitekfy.artist.application.dto;
 
+import com.kreitek.kreitekfy.album.application.dto.AlbumDTO;
+
 import java.io.Serializable;
+import java.util.List;
 
 public class ArtistDTO implements Serializable {
 
     private Long id;
     private String name;
+
+    List<AlbumDTO> albums;
 
     public ArtistDTO() {
     }
@@ -24,5 +29,13 @@ public class ArtistDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<AlbumDTO> getAlbums() {
+        return albums;
+    }
+
+    public void setAlbums(List<AlbumDTO> albums) {
+        this.albums = albums;
     }
 }
