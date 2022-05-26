@@ -1,11 +1,9 @@
 package com.kreitek.kreitekfy.style.infraestructure.persistence;
 
-import com.kreitek.kreitekfy.artist.domain.entity.Artist;
 import com.kreitek.kreitekfy.style.domain.entity.Style;
 import com.kreitek.kreitekfy.style.domain.persistence.StylePersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -40,7 +38,7 @@ public class StylePersistenceImpl implements StylePersistence {
     }
 
     @Override
-    public List<Artist> getStyleByName(String partialName) {
-        return null;
+    public List<Style> getStyleByName(String partialName) {
+        return this.styleRepository.findByNameContainsIgnoreCase(partialName);
     }
 }
