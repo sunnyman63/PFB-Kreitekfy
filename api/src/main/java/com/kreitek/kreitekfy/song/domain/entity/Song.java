@@ -38,6 +38,8 @@ public class Song {
     @ManyToOne
     @JoinColumn(name = "style_id", nullable = false)
     private Style style;
+
+
     public Song() {
     }
     public Long getId() {

@@ -1,12 +1,10 @@
 package com.kreitek.kreitekfy.user.domain.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.kreitek.kreitekfy.userSong.domain.entity.UserSong;
+
+import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -21,10 +19,23 @@ public class User{
 
     @Column(nullable = false)
     private boolean admin;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<UserSong> songsData;
+
+
+    public Set<UserSong> getSongsData() {
+        return songsData;
+    }
+
+    public void setSongsData(Set<UserSong> songsData) {
+        this.songsData = songsData;
+    }
 
     public Long getId() {
         return id;
     }
+
+
 
     public void setId(Long id) {
         this.id = id;

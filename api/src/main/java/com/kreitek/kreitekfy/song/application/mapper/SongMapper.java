@@ -6,6 +6,7 @@ import com.kreitek.kreitekfy.song.application.dto.SongDTO;
 import com.kreitek.kreitekfy.song.application.dto.SongSimpleDTO;
 import com.kreitek.kreitekfy.song.domain.entity.Song;
 import com.kreitek.kreitekfy.style.application.mapper.StyleMapper;
+import com.kreitek.kreitekfy.user.domain.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -16,7 +17,7 @@ public interface SongMapper extends EntityMapper<SongDTO, Song> {
     @Mapping(source = "albumId", target = "album")
     @Mapping(source = "styleId", target = "style")
     Song toEntity(SongDTO songDTO);
-
+    
     @Override
     @Mapping(source = "album.id", target = "albumId")
     @Mapping(source = "album.name", target = "albumName")
@@ -32,5 +33,13 @@ public interface SongMapper extends EntityMapper<SongDTO, Song> {
     @Mapping(source = "styleId", target = "style")
     @Mapping(target = "album", ignore = true)
     Song toEntity(SongSimpleDTO songSimpleDTO);
+
+    default Song fromId(Long id) {
+        if (id == null) return null;
+
+        Song song = new Song();
+        song.setId(id);
+        return song;
+    }
 
 }
