@@ -9,6 +9,9 @@ public class SongSimpleDTO {
     private Integer duration;
     private Long totalViews;
     private Date inclusionDate;
+    private Long styleId;
+    private String styleName;
+
 
     public SongSimpleDTO() {
     }
@@ -51,5 +54,21 @@ public class SongSimpleDTO {
 
     public void setInclusionDate(Date inclusionDate) {
         this.inclusionDate = inclusionDate;
+    }
+
+    public Long getStyleId() {
+        return styleId;
+    }
+
+    public void setStyleId(Long styleId) {
+        this.styleId = styleId;
+    }
+
+    public String getStyleName() {
+        return styleName;
+    }
+
+    public void setStyleName(String styleName) {
+        this.styleName = styleName;
     }
 }

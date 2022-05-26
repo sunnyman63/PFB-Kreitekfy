@@ -8,12 +8,15 @@ public class SongDTO {
 
     private Long id;
     private String name;
-    private Integer duration;
+    private String duration;
     private Date inclusionDate;
     private Long totalViews;
     private Long albumId;
     private String albumName;
     private byte[] albumImage;
+    private Long styleId;
+    private String styleName;
+
     public SongDTO() {
     }
 
@@ -33,11 +36,11 @@ public class SongDTO {
         this.name = name;
     }
 
-    public Integer getDuration() {
+    public String getDuration() {
         return duration;
     }
 
-    public void setDuration(Integer duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 
@@ -48,7 +51,6 @@ public class SongDTO {
     public void setInclusionDate(Date inclusionDate) {
         this.inclusionDate = inclusionDate;
     }
-
     public Long getTotalViews() {
         return totalViews;
     }
@@ -79,5 +81,21 @@ public class SongDTO {
 
     public void setAlbumImage(byte[] albumImage) {
         this.albumImage = albumImage;
+    }
+
+    public Long getStyleId() {
+        return styleId;
+    }
+
+    public void setStyleId(Long styleId) {
+        this.styleId = styleId;
+    }
+
+    public String getStyleName() {
+        return styleName;
+    }
+
+    public void setStyleName(String styleName) {
+        this.styleName = styleName;
     }
 }

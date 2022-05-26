@@ -2,6 +2,8 @@ package com.kreitek.kreitekfy.song.domain.entity;
 
 import com.kreitek.kreitekfy.album.domain.entity.Album;
 
+import com.kreitek.kreitekfy.style.domain.entity.Style;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -32,9 +34,11 @@ public class Song {
     @JoinColumn(name = "album_id", nullable = false)
     private Album album;
 
+    @ManyToOne
+    @JoinColumn(name = "style_id", nullable = false)
+    private Style style;
     public Song() {
     }
-
     public Long getId() {
         return id;
     }
@@ -81,5 +85,13 @@ public class Song {
 
     public void setAlbum(Album album) {
         this.album = album;
+    }
+
+    public Style getStyle() {
+        return style;
+    }
+
+    public void setStyle(Style style) {
+        this.style = style;
     }
 }
