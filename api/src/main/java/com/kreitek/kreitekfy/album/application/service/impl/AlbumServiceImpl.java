@@ -6,7 +6,10 @@ import com.kreitek.kreitekfy.album.application.service.AlbumService;
 import com.kreitek.kreitekfy.album.domain.entity.Album;
 import com.kreitek.kreitekfy.album.domain.persistence.AlbumPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,12 +27,14 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public List<AlbumDTO> getAllAlbums() {
-        List<Album> albums = this.persistence.getAllAlbums();
-        return this.mapper.toDto(albums);
+    @Transactional(readOnly = true)
+    public Page<AlbumDTO> getAlbumsByCriteriaPaged(Pageable pageable, String filter) {
+        Page<Album> itemPage = this.persistence.findAll(pageable,filter);
+        return itemPage.map(mapper::toDto);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<AlbumDTO> getAlbumById(Long albumId) {
         return this.persistence
                 .getAlbumById(albumId)
@@ -37,17 +42,20 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
+    @Transactional
     public AlbumDTO saveAlbum(AlbumDTO albumDTO) {
         Album album = this.persistence.saveAlbum(this.mapper.toEntity(albumDTO));
         return this.mapper.toDto(album);
     }
 
     @Override
+    @Transactional
     public void deleteAlbum(Long albumId) {
         this.persistence.deleteAlbum(albumId);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<AlbumDTO> getAlbumByName(String partialName) {
         List<Album> albums = this.persistence.getAlbumByName(partialName);
         return this.mapper.toDto(albums);

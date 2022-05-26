@@ -2,7 +2,11 @@ package com.kreitek.kreitekfy.album.infraestructure.persistance;
 
 import com.kreitek.kreitekfy.album.domain.entity.Album;
 import com.kreitek.kreitekfy.album.domain.persistence.AlbumPersistence;
+import com.kreitek.kreitekfy.album.infraestructure.specs.ItemSpecification;
+import com.kreitek.kreitekfy.album.infraestructure.specs.shared.SearchCriteriaHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,10 +23,10 @@ public class AlbumPersistenceImpl implements AlbumPersistence {
     }
 
     @Override
-    public List<Album> getAllAlbums() {
-        return this.albumRepository.findAll();
+    public Page<Album> findAll(Pageable pageable, String filters) {
+        ItemSpecification specification = new ItemSpecification(SearchCriteriaHelper.fromFilterString(filters));
+        return this.albumRepository.findAll(specification,pageable);
     }
-
     @Override
     public Optional<Album> getAlbumById(Long albumId) {
         return this.albumRepository.findById(albumId);
