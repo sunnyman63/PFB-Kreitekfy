@@ -1,23 +1,19 @@
 package com.kreitek.kreitekfy.song.application.dto;
 
-import javax.persistence.Column;
-import javax.validation.constraints.Size;
 import java.util.Date;
 
-public class SongDTO {
+public class SongSimpleDTO {
 
     private Long id;
     private String name;
-    private String duration;
-    private Date inclusionDate;
+    private Integer duration;
     private Long totalViews;
-    private Long albumId;
-    private String albumName;
-    private byte[] albumImage;
+    private Date inclusionDate;
     private Long styleId;
     private String styleName;
 
-    public SongDTO() {
+
+    public SongSimpleDTO() {
     }
 
     public Long getId() {
@@ -36,21 +32,14 @@ public class SongDTO {
         this.name = name;
     }
 
-    public String getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(Integer duration) {
         this.duration = duration;
     }
 
-    public Date getInclusionDate() {
-        return inclusionDate;
-    }
-
-    public void setInclusionDate(Date inclusionDate) {
-        this.inclusionDate = inclusionDate;
-    }
     public Long getTotalViews() {
         return totalViews;
     }
@@ -59,28 +48,12 @@ public class SongDTO {
         this.totalViews = totalViews;
     }
 
-    public Long getAlbumId() {
-        return albumId;
+    public Date getInclusionDate() {
+        return inclusionDate;
     }
 
-    public void setAlbumId(Long albumId) {
-        this.albumId = albumId;
-    }
-
-    public String getAlbumName() {
-        return albumName;
-    }
-
-    public void setAlbumName(String albumName) {
-        this.albumName = albumName;
-    }
-
-    public byte[] getAlbumImage() {
-        return albumImage;
-    }
-
-    public void setAlbumImage(byte[] albumImage) {
-        this.albumImage = albumImage;
+    public void setInclusionDate(Date inclusionDate) {
+        this.inclusionDate = inclusionDate;
     }
 
     public Long getStyleId() {

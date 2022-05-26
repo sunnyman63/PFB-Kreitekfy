@@ -46,7 +46,7 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public SongDTO saveSong(SongDTO songDTO) {
-        songDTO.setTotalVisualizations(0L);
+        songDTO.setTotalViews(0L);
         Song song = this.mapper.toEntity(songDTO);
         song = this.repository.save(song);
         return this.mapper.toDto(song);

@@ -1,5 +1,9 @@
 package com.kreitek.kreitekfy.song.domain.entity;
 
+import com.kreitek.kreitekfy.album.domain.entity.Album;
+
+import com.kreitek.kreitekfy.style.domain.entity.Style;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -16,19 +20,25 @@ public class Song {
     @Size(min = 4, max = 100)
     private String name;
 
-    @Column(name = "duration", nullable = false, length = 8)
-    @Size(min = 8, max = 8)
-    private String duration;
+    @Column(name = "duration", nullable = false)
+    @Size(min = 1)
+    private Integer duration;
 
     @Column(name = "inclusion_date", nullable = false)
     private Date inclusionDate;
 
-    @Column(name = "total_visualizations", nullable = false)
-    private Long totalVisualizations;
+    @Column(name = "total_views", nullable = false)
+    private Long totalViews;
 
+    @ManyToOne
+    @JoinColumn(name = "album_id", nullable = false)
+    private Album album;
+
+    @ManyToOne
+    @JoinColumn(name = "style_id", nullable = false)
+    private Style style;
     public Song() {
     }
-
     public Long getId() {
         return id;
     }
@@ -45,11 +55,11 @@ public class Song {
         this.name = name;
     }
 
-    public String getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(Integer duration) {
         this.duration = duration;
     }
 
@@ -61,11 +71,27 @@ public class Song {
         this.inclusionDate = inclusionDate;
     }
 
-    public Long getTotalVisualizations() {
-        return totalVisualizations;
+    public Long getTotalViews() {
+        return totalViews;
     }
 
-    public void setTotalVisualizations(Long totalVisualizations) {
-        this.totalVisualizations = totalVisualizations;
+    public void setTotalViews(Long totalVisualizations) {
+        this.totalViews = totalVisualizations;
+    }
+
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
+    }
+
+    public Style getStyle() {
+        return style;
+    }
+
+    public void setStyle(Style style) {
+        this.style = style;
     }
 }

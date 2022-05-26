@@ -1,7 +1,10 @@
 package com.kreitek.kreitekfy.album.domain.entity;
 
+import com.kreitek.kreitekfy.song.domain.entity.Song;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 @Table(name = "albums")
@@ -18,8 +21,8 @@ public class Album {
     @Lob
     private byte[] image;
 
-    //To do
-    //Relation with song
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
+    private Set<Song> songs;
 
     public Long getId() {
         return id;
@@ -43,5 +46,13 @@ public class Album {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public Set<Song> getSongs() {
+        return songs;
+    }
+
+    public void setSongs(Set<Song> songs) {
+        this.songs = songs;
     }
 }
