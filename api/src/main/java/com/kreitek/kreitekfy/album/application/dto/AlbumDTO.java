@@ -1,12 +1,16 @@
 package com.kreitek.kreitekfy.album.application.dto;
 
+import com.kreitek.kreitekfy.song.application.dto.SongSimpleDTO;
+
 import java.io.Serializable;
+import java.util.List;
 
 public class AlbumDTO implements Serializable {
 
     private Long id;
     private String name;
     private byte[] image;
+    private List<SongSimpleDTO> songs;
 
     public AlbumDTO() {
     }
@@ -33,5 +37,13 @@ public class AlbumDTO implements Serializable {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public List<SongSimpleDTO> getSongs() {
+        return songs;
+    }
+
+    public void setSongs(List<SongSimpleDTO> songs) {
+        this.songs = songs;
     }
 }
