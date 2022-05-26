@@ -5,6 +5,7 @@ import com.kreitek.kreitekfy.album.domain.entity.Album;
 import com.kreitek.kreitekfy.style.domain.entity.Style;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -21,7 +22,7 @@ public class Song {
     private String name;
 
     @Column(name = "duration", nullable = false)
-    @Size(min = 1)
+    @Min(value = 1)
     private Integer duration;
 
     @Column(name = "inclusion_date", nullable = false)

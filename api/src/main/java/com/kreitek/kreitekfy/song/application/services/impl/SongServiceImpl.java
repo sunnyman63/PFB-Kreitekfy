@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,6 +48,7 @@ public class SongServiceImpl implements SongService {
     @Override
     public SongDTO saveSong(SongDTO songDTO) {
         songDTO.setTotalViews(0L);
+        songDTO.setInclusionDate(new Date());
         Song song = this.mapper.toEntity(songDTO);
         song = this.repository.save(song);
         return this.mapper.toDto(song);

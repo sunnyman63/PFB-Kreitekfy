@@ -12,6 +12,9 @@ public class AlbumDTO implements Serializable {
     private byte[] image;
     private List<SongSimpleDTO> songs;
 
+    private Long artistId;
+    private String artistName;
+
     public AlbumDTO() {
     }
 
@@ -45,5 +48,21 @@ public class AlbumDTO implements Serializable {
 
     public void setSongs(List<SongSimpleDTO> songs) {
         this.songs = songs;
+    }
+
+    public Long getArtistId() {
+        return artistId;
+    }
+
+    public void setArtistId(Long artistId) {
+        this.artistId = artistId;
+    }
+
+    public String getArtistName() {
+        return artistName;
+    }
+
+    public void setArtistName(String artistName) {
+        this.artistName = artistName;
     }
 }

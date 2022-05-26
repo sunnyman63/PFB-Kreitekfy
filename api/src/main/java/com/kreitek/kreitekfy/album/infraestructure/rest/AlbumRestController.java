@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/albums")
 public class AlbumRestController {
 
     private final AlbumService albumService;
@@ -20,7 +21,7 @@ public class AlbumRestController {
         this.albumService = albumService;
     }
 
-    @GetMapping(value = "/albums")
+    @GetMapping
     public ResponseEntity<Page<AlbumDTO>> getAlbumsByCriteriaPaged(@RequestParam(value = "filter", required = false) String filter, Pageable pageable) {
 
         Page<AlbumDTO> items = this.albumService.getAlbumsByCriteriaPaged(pageable, filter);
@@ -28,7 +29,7 @@ public class AlbumRestController {
     }
 
 
-    @GetMapping(value = "/albums/{albumId}")
+    @GetMapping(value = "/{albumId}")
     ResponseEntity<AlbumDTO> getAlbumById(@PathVariable Long albumId) {
         Optional<AlbumDTO> album = this.albumService.getAlbumById(albumId);
         if(album.isPresent()) {
@@ -38,13 +39,13 @@ public class AlbumRestController {
         }
     }
 
-    @PostMapping(value = "/albums", produces = "application/json")
+    @PostMapping(produces = "application/json")
     ResponseEntity<AlbumDTO> insertAlbum(@RequestBody AlbumDTO albumDTO) {
         AlbumDTO albumSaved = this.albumService.saveAlbum(albumDTO);
         return new ResponseEntity<>(albumSaved, HttpStatus.CREATED);
     }
 
-    @DeleteMapping(value = "/albums/{albumId}")
+    @DeleteMapping(value = "/{albumId}")
     ResponseEntity<?> deleteAlbumById(@PathVariable Long albumId) {
         this.albumService.deleteAlbum(albumId);
         return new ResponseEntity<>(HttpStatus.OK);

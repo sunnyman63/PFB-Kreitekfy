@@ -35,6 +35,18 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     @Transactional(readOnly = true)
+    public List<AlbumDTO> getAlbumsByArtist(Long artistId) {
+        return null;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Album> getAlbumByArtist(Long artistId, Long albumId) {
+        return Optional.empty();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public Optional<AlbumDTO> getAlbumById(Long albumId) {
         return this.persistence
                 .getAlbumById(albumId)
@@ -60,4 +72,5 @@ public class AlbumServiceImpl implements AlbumService {
         List<Album> albums = this.persistence.getAlbumByName(partialName);
         return this.mapper.toDto(albums);
     }
+
 }

@@ -2,6 +2,7 @@ package com.kreitek.kreitekfy.artist.infraestructure.persistence;
 
 import com.kreitek.kreitekfy.artist.domain.entity.Artist;
 import com.kreitek.kreitekfy.artist.domain.persistence.ArtistPersistence;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public class ArtistPersistenceImpl implements ArtistPersistence {
 
     private final ArtistRepository artistRepository;
 
+    @Autowired
     public ArtistPersistenceImpl(ArtistRepository artistRepository) {
         this.artistRepository = artistRepository;
     }
@@ -38,6 +40,6 @@ public class ArtistPersistenceImpl implements ArtistPersistence {
 
     @Override
     public List<Artist> getArtistByName(String partialName) {
-        return null;
+        return this.artistRepository.findByNameContainsIgnoreCase(partialName);
     }
 }
