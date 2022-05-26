@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AlbumService {
-    List<AlbumDTO> getAllAlbums();
+
     List<AlbumDTO> getAlbumsByArtist(Long artistId);
     Optional<Album> getAlbumByArtist(Long artistId, Long albumId);
     Optional<AlbumDTO> getAlbumById(Long albumId);
