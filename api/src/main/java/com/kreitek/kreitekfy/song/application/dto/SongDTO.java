@@ -8,7 +8,7 @@ public class SongDTO {
 
     private Long id;
     private String name;
-    private String duration;
+    private Integer duration;
     private Date inclusionDate;
     private Long totalViews;
     private Long albumId;
@@ -36,11 +36,11 @@ public class SongDTO {
         this.name = name;
     }
 
-    public String getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(Integer duration) {
         this.duration = duration;
     }
 
