@@ -1,15 +1,11 @@
 package com.kreitek.kreitekfy.song.infrastructure.rest;
 
 
-import com.kreitek.kreitekfy.shared.infrastructure.specs.EntitySpecification;
 import com.kreitek.kreitekfy.song.application.dto.SongDTO;
 import com.kreitek.kreitekfy.song.application.services.SongService;
-import com.kreitek.kreitekfy.song.domain.entity.Song;
-import com.kreitek.kreitekfy.user.domain.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class SongRestController  {
 
     private final SongService service;
