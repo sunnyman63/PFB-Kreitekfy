@@ -1,6 +1,7 @@
 package com.kreitek.kreitekfy.album.infraestructure.rest;
 
 import com.kreitek.kreitekfy.album.application.dto.AlbumDTO;
+import com.kreitek.kreitekfy.album.application.dto.AlbumSimpleDTO;
 import com.kreitek.kreitekfy.album.application.service.AlbumService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,9 +23,9 @@ public class AlbumRestController {
         this.albumService = albumService;
     }
 
-    @GetMapping(value = "/search")
-    public ResponseEntity<List<AlbumDTO>> getAlbums(@RequestParam(name = "partialName", required = false) String partialName) {
-        List<AlbumDTO> albums;
+    @GetMapping(value = "/search", produces = "application/json")
+    public ResponseEntity<List<AlbumSimpleDTO>> getAlbums(@RequestParam(name = "partialName", required = false) String partialName) {
+        List<AlbumSimpleDTO> albums;
 
         if(partialName == null) {
             albums = this.albumService.getAlbums();

@@ -1,6 +1,7 @@
 package com.kreitek.kreitekfy.album.application.service.impl;
 
 import com.kreitek.kreitekfy.album.application.dto.AlbumDTO;
+import com.kreitek.kreitekfy.album.application.dto.AlbumSimpleDTO;
 import com.kreitek.kreitekfy.album.application.mapper.AlbumMapper;
 import com.kreitek.kreitekfy.album.application.service.AlbumService;
 import com.kreitek.kreitekfy.album.domain.entity.Album;
@@ -67,16 +68,16 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public List<AlbumDTO> getAlbums() {
+    public List<AlbumSimpleDTO> getAlbums() {
         List <Album> albums = this.persistence.findAll();
-        return this.mapper.toDto(albums);
+        return this.mapper.toSimpleDto(albums);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<AlbumDTO> getAlbumByName(String partialName) {
+    public List<AlbumSimpleDTO> getAlbumByName(String partialName) {
         List<Album> albums = this.persistence.getAlbumByName(partialName);
-        return this.mapper.toDto(albums);
+        return this.mapper.toSimpleDto(albums);
     }
 
 }
