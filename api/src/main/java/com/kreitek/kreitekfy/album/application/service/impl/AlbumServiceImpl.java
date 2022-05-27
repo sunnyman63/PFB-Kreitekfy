@@ -67,6 +67,12 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
+    public List<AlbumDTO> getAlbums() {
+        List <Album> albums = this.persistence.findAll();
+        return this.mapper.toDto(albums);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public List<AlbumDTO> getAlbumByName(String partialName) {
         List<Album> albums = this.persistence.getAlbumByName(partialName);

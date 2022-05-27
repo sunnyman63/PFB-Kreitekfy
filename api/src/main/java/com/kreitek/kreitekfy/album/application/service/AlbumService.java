@@ -10,11 +10,13 @@ import java.util.Optional;
 
 public interface AlbumService {
 
+    List<AlbumDTO> getAlbums();
+    List<AlbumDTO> getAlbumByName(String partialName);
+    Page<AlbumDTO> getAlbumsByCriteriaPaged(Pageable pageable, String filter);
     List<AlbumDTO> getAlbumsByArtist(Long artistId);
     Optional<Album> getAlbumByArtist(Long artistId, Long albumId);
     Optional<AlbumDTO> getAlbumById(Long albumId);
     AlbumDTO saveAlbum(AlbumDTO albumDTO);
     void deleteAlbum(Long albumId);
-    List<AlbumDTO> getAlbumByName(String partialName);
-    Page<AlbumDTO> getAlbumsByCriteriaPaged(Pageable pageable, String filter);
+
 }
