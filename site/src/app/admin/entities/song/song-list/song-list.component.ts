@@ -12,7 +12,7 @@ export class SongListComponent implements OnInit {
   songs: Song[] = [];
 
   page: number = 0;
-  size: number = 20;
+  size: number = 25;
   sort: string = "name,asc";
 
   first: boolean = false;
