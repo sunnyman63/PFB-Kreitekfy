@@ -1,9 +1,73 @@
 <header>
-    <nav class="navbar bg-dark">
-        <div class="container">
-          <a class="navbar-brand" href="#">
-            <img src="./assets/image/Logo.png" alt="" width="100" height="20">
-          </a>
-        </div>
-      </nav>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="./assets/image/Logo.png" alt="" width="100" height="20">
+      </a>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">
+              <i class="bi bi-house-door-fill h4"></i>
+              Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="bi bi-tags h4"></i>
+              Estilos
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="bi bi-mic h4"></i>
+              Artistas
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="bi bi-play-circle h4"></i>
+              Canciones
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="d-flex div-buscador">
+        <form class="d-flex align-items-center buscador">
+          <button type="submit">
+            <i class="bi bi-search"></i>
+          </button>
+          <input type="search" placeholder="Search" aria-label="Search">
+        </form>
+      </div>
+      <button class="bg-white user-icon" type="button" data-bs-toggle="modal" data-bs-target="#userModal">
+        <img src="./assets/image/user.png" class="w-100" alt="user">
+      </button>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
 </header>
+
+<div class="modal fade" id="userModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-3">
+            <button class="selectUserBtn">
+              <img src="./assets/image/user.png" class="w-100" alt="user">
+            </button>
+            <p class="h5 text-center">ADMIN</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
