@@ -16,6 +16,7 @@ import org.mapstruct.Mapping;
 public interface UserSongMapper extends EntityMapper<UserSongDTO, UserSong> {
 
     @Override
+    @Mapping(target = "id", ignore = true)
     @Mapping(source = "userId", target = "user")
     @Mapping(source = "songId", target = "song")
     UserSong toEntity(UserSongDTO userSongDTO);
