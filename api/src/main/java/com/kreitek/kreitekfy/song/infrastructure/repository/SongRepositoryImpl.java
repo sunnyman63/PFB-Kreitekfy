@@ -22,7 +22,6 @@ public class SongRepositoryImpl implements SongRepository {
         this.songJpaRepository = songJpaRepository;
     }
 
-
     @Override
     public Page<Song> findAll(Pageable pageable, String filters) {
         SongSpecification specification = new SongSpecification(SearchCriteriaHelper.fromFilterString(filters));
@@ -44,9 +43,10 @@ public class SongRepositoryImpl implements SongRepository {
         return songJpaRepository.findById(id);
     }
 
-//    @Override
-//    public List<Song> getAllSongsByOrderByInclusion_DateDesc() {
-//        return songJpaRepository.getAllSongsByOrderByInclusion_DateDesc();
-//    }
+  //@Override
+ // public List<Song> getAllSongsByOrderByInclusion_DateDesc() {
+        //return songJpaRepository.getAllSongsByOrderByInclusion_DateDesc();
+  //}
+    }
 
-}
+

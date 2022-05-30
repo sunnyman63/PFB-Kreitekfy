@@ -10,8 +10,8 @@ export class SongsService {
 
   constructor(private http: HttpClient ) { }
 
-public getAllSongs(): Observable<Songs[]>{
-  const urlEndpoint: string = "http://localhost:8080/api/songs";
+public getAllSongs(pageSize: number ): Observable<Songs[]>{
+  const urlEndpoint: string = "http://localhost:8080/api/songs="+pageSize+"&pageSize";
   return this.http.get<Songs[]>(urlEndpoint);
 }
 

@@ -23,15 +23,15 @@ public class SongRestController  {
         this.service = service;
     }
 
-
+    @CrossOrigin
     @GetMapping(value = "/songs", produces = "application/json")
     ResponseEntity<Page<SongDTO>> getSongByCriteriaPaged(@RequestParam(value = "filter", required = false) String filter, Pageable pageable){
 
         Page<SongDTO> items = this.service.getSongByCriteriaPaged(pageable, filter);
-        return new ResponseEntity<>(items, HttpStatus.OK);
+        return new ResponseEntity<Page<SongDTO>>(items, HttpStatus.OK);
     }
 
-
+    @CrossOrigin
     @GetMapping(value = "/songs/{idSong}", produces = "application/json")
     public ResponseEntity<SongDTO> getSongById(@PathVariable Long idSong) {
         return this.service
@@ -40,13 +40,13 @@ public class SongRestController  {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
     }
-
-    @GetMapping(value = "/songs/newests", produces = "application/json")
-    public ResponseEntity<List<SongDTO>> getNewestSongs() {
-        List<SongDTO> songDTOS = this.service.getNewestSongs();
-        return new ResponseEntity<>(songDTOS, HttpStatus.OK);
-    }
-
+   // @CrossOrigin
+   // @GetMapping(value = "/songs/newests", produces = "application/json")
+   // public ResponseEntity<List<SongDTO>> getNewestSongs() {
+       // List<SongDTO> songDTOS = this.service.getNewestSongs();
+        //return new ResponseEntity<>(songDTOS, HttpStatus.OK);
+    //}
+    @CrossOrigin
     @PostMapping(value = "/songs", produces = "application/json", consumes = "application/json")
     public ResponseEntity<SongDTO> saveSong(@RequestBody SongDTO songDTO) {
         songDTO = this.service.saveSong(songDTO);

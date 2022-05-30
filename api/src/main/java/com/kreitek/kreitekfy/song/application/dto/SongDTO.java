@@ -1,15 +1,11 @@
 package com.kreitek.kreitekfy.song.application.dto;
 
-import javax.persistence.Column;
-import javax.validation.constraints.Size;
-import java.util.Date;
-
 public class SongDTO {
 
     private Long id;
     private String name;
     private Integer duration;
-    private Date inclusionDate;
+    private String inclusionDate;
     private Long totalViews;
     private Long albumId;
     private String albumName;
@@ -44,11 +40,11 @@ public class SongDTO {
         this.duration = duration;
     }
 
-    public Date getInclusionDate() {
+    public String getInclusionDate() {
         return inclusionDate;
     }
 
-    public void setInclusionDate(Date inclusionDate) {
+    public void setInclusionDate(String inclusionDate) {
         this.inclusionDate = inclusionDate;
     }
     public Long getTotalViews() {

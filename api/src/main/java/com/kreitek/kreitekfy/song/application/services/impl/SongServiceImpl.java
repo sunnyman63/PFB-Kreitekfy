@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,7 +29,6 @@ public class SongServiceImpl implements SongService {
         this.mapper = mapper;
     }
    
-
     @Override
     public Optional<SongDTO> getSongById(Long idSong) {
         return this.repository
@@ -36,24 +36,24 @@ public class SongServiceImpl implements SongService {
                 .map(mapper::toDto);
     }
 
-    @Override
-    public List<SongDTO> getNewestSongs() {
-//        List<Song> songDTOs = this.repository.getAllSongsByOrderByInclusion_DateDesc();
-//        List<Song> newests = new ArrayList<>();
-        return null;
-    }
+   // @Override
+    //public List<SongDTO> getNewestSongs() {
+    //  List<Song> songDTOs = this.repository.getAllSongsByOrderByInclusion_DateDesc();
+      //  List<Song> newests = new ArrayList<>();
+      //  return null;
+   // }
 
     @Override
     public Page<SongDTO> getSongByCriteriaPaged(Pageable pageable, String filter) {
         Page<Song> itemPage = this.repository.findAll(pageable, filter);
         return itemPage.map(mapper::toDto);
-
     }
 
     @Override
     public SongDTO saveSong(SongDTO songDTO) {
         songDTO.setTotalViews(0L);
-        songDTO.setInclusionDate(new Date());
+        SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+        songDTO.setInclusionDate(formateador.format(new Date()));
         Song song = this.mapper.toEntity(songDTO);
         song = this.repository.save(song);
         return this.mapper.toDto(song);
