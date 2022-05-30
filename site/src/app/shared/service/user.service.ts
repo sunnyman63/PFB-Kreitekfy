@@ -8,11 +8,11 @@ import { UserDTO } from '../models/UserDTO.model';
 })
 export class UserService {
 
-  url: string = 'http://localhost:8080/api/user/';
+  url: string = 'http://localhost:8080/api/users';
 
   constructor(private httpClient: HttpClient) { }
 
-  public getUser(id: number): Observable<UserDTO> {
-    return this.httpClient.get<UserDTO>(this.url);
+  public getUsers(): Observable<Array<UserDTO>> {
+    return this.httpClient.get<Array<UserDTO>>(this.url);
   }
 }
