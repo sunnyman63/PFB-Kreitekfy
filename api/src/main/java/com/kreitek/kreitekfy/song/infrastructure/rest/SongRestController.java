@@ -2,6 +2,7 @@ package com.kreitek.kreitekfy.song.infrastructure.rest;
 
 
 import com.kreitek.kreitekfy.song.application.dto.SongDTO;
+import com.kreitek.kreitekfy.song.application.dto.SongSimpleDTO;
 import com.kreitek.kreitekfy.song.application.services.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/songs")
 public class SongRestController  {
 
     private final SongService service;
@@ -24,7 +26,7 @@ public class SongRestController  {
     }
 
 
-    @GetMapping(value = "/songs", produces = "application/json")
+    @GetMapping(produces = "application/json")
     ResponseEntity<Page<SongDTO>> getSongByCriteriaPaged(@RequestParam(value = "filter", required = false) String filter, Pageable pageable){
 
         Page<SongDTO> items = this.service.getSongByCriteriaPaged(pageable, filter);
@@ -32,7 +34,7 @@ public class SongRestController  {
     }
 
 
-    @GetMapping(value = "/songs/{idSong}", produces = "application/json")
+    @GetMapping(value = "/{idSong}", produces = "application/json")
     public ResponseEntity<SongDTO> getSongById(@PathVariable Long idSong) {
         return this.service
                 .getSongById(idSong)
@@ -41,19 +43,33 @@ public class SongRestController  {
 
     }
 
-    @GetMapping(value = "/songs/newests", produces = "application/json")
+    @GetMapping(value = "/search", produces = "application/json")
+    ResponseEntity<List<SongSimpleDTO>> getAllSongs(@RequestParam(name = "partialName", required = false) String partialName){
+
+        List<SongSimpleDTO> songs;
+
+        if(partialName == null) {
+            songs = this.service.getSongs();
+        }else{
+            songs = this.service.getSongsByName(partialName);
+        }
+
+        return new ResponseEntity<>(songs, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/newests", produces = "application/json")
     public ResponseEntity<List<SongDTO>> getNewestSongs() {
         List<SongDTO> songDTOS = this.service.getNewestSongs();
         return new ResponseEntity<>(songDTOS, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/songs", produces = "application/json", consumes = "application/json")
+    @PostMapping(produces = "application/json", consumes = "application/json")
     public ResponseEntity<SongDTO> saveSong(@RequestBody SongDTO songDTO) {
         songDTO = this.service.saveSong(songDTO);
         return new ResponseEntity<>(songDTO,HttpStatus.CREATED);
     }
 
-    @PatchMapping(value = "/songs", produces = "application/json", consumes = "application/json")
+    @PatchMapping(produces = "application/json", consumes = "application/json")
     public ResponseEntity<SongDTO> updateSong(@RequestBody SongDTO songDTO) {
         songDTO = this.service.saveSong(songDTO);
         return new ResponseEntity<>(songDTO,HttpStatus.OK);

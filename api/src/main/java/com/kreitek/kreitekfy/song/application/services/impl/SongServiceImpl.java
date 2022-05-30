@@ -1,6 +1,7 @@
 package com.kreitek.kreitekfy.song.application.services.impl;
 
 import com.kreitek.kreitekfy.song.application.dto.SongDTO;
+import com.kreitek.kreitekfy.song.application.dto.SongSimpleDTO;
 import com.kreitek.kreitekfy.song.application.mapper.SongMapper;
 import com.kreitek.kreitekfy.song.application.services.SongService;
 import com.kreitek.kreitekfy.song.domain.entity.Song;
@@ -38,6 +39,18 @@ public class SongServiceImpl implements SongService {
         return this.repository
                 .findById(idSong)
                 .map(mapper::toDto);
+    }
+
+    @Override
+    public List<SongSimpleDTO> getSongs() {
+        List<Song> songs = repository.findAll();
+        return this.mapper.toSimpleDto(songs);
+    }
+
+    @Override
+    public List<SongSimpleDTO> getSongsByName(String partialName) {
+        List<Song> songs = repository.getSongsByName(partialName);
+        return this.mapper.toSimpleDto(songs);
     }
 
     @Override
