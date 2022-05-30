@@ -1,31 +1,35 @@
 package com.kreitek.kreitekfy.song.application.services.impl;
 
-import com.kreitek.kreitekfy.artist.domain.entity.Artist;
 import com.kreitek.kreitekfy.song.application.dto.SongDTO;
 import com.kreitek.kreitekfy.song.application.mapper.SongMapper;
 import com.kreitek.kreitekfy.song.application.services.SongService;
 import com.kreitek.kreitekfy.song.domain.entity.Song;
 import com.kreitek.kreitekfy.song.domain.repository.SongRepository;
+import com.kreitek.kreitekfy.userSong.application.dto.UserSongDTO;
+import com.kreitek.kreitekfy.userSong.application.service.UserSongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 public class SongServiceImpl implements SongService {
 
     private final SongRepository repository;
     private final SongMapper mapper;
+    private final UserSongService userSongService;
 
     @Autowired
-    public SongServiceImpl(SongRepository repository, SongMapper mapper) {
+    public SongServiceImpl(SongRepository repository, SongMapper mapper, UserSongService userSongService) {
         this.repository = repository;
         this.mapper = mapper;
+        this.userSongService = userSongService;
     }
    
 
@@ -46,12 +50,33 @@ public class SongServiceImpl implements SongService {
     @Override
     public Page<SongDTO> getSongByCriteriaPaged(Pageable pageable, String filter) {
         Page<Song> itemPage = this.repository.findAll(pageable, filter);
+        itemPage.forEach(song -> {
+            AtomicReference<Long> totalRate = new AtomicReference<>(0L);
+            AtomicReference<Long> totalViews = new AtomicReference<>(0L);
+            AtomicInteger numRates = new AtomicInteger();
+            List<UserSongDTO> userSongs = userSongService.getAllUserSongBySong_Id(song.getId());
+            userSongs.forEach(userSongDTO -> {
+                totalViews.updateAndGet(v -> v + userSongDTO.getPersonalViews());
+                if(userSongDTO.getPersonalValorations() != null) {
+                    totalRate.updateAndGet(v -> v + userSongDTO.getPersonalValorations());
+                    numRates.getAndIncrement();
+                }
+
+            });
+            song.setTotalViews(totalViews.get());
+            if(numRates.get() != 0) {
+                song.setTotalRate(totalRate.get() / numRates.get());
+            } else {
+                song.setTotalRate(totalRate.get());
+            }
+        });
         return itemPage.map(mapper::toDto);
 
     }
 
     @Override
     public SongDTO saveSong(SongDTO songDTO) {
+        songDTO.setTotalViews(0L);
         songDTO.setTotalViews(0L);
         songDTO.setInclusionDate(new Date());
         Song song = this.mapper.toEntity(songDTO);

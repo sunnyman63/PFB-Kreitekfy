@@ -7,6 +7,7 @@ import com.kreitek.kreitekfy.userSong.infraestructure.persistence.UserSongReposi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -78,5 +79,10 @@ public class UserSongPersistenceImpl implements UserSongPersistence {
     @Override
     public Optional<UserSong> getUserSongById(Long id) {
         return this.userSongRepository.findById(id);
+    }
+
+    @Override
+    public List<UserSong> getUserSongBySong_Id(Long id) {
+        return this.userSongRepository.getUserSongBySong_Id(id);
     }
 }
