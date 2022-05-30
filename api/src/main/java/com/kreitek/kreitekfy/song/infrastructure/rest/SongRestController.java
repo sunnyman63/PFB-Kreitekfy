@@ -52,4 +52,11 @@ public class SongRestController  {
         songDTO = this.service.saveSong(songDTO);
         return new ResponseEntity<>(songDTO,HttpStatus.CREATED);
     }
+
+    @PatchMapping(value = "/songs", produces = "application/json", consumes = "application/json")
+    public ResponseEntity<SongDTO> updateSong(@RequestBody SongDTO songDTO) {
+        songDTO = this.service.saveSong(songDTO);
+        return new ResponseEntity<>(songDTO,HttpStatus.OK);
+    }
+
 }
