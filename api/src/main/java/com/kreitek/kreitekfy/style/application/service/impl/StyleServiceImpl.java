@@ -50,6 +50,7 @@ public class StyleServiceImpl implements StyleService {
 
     @Override
     public List<StyleDTO> getStyleByName(String partialName) {
-        return null;
+        List<Style> styles = this.stylePersistence.getStyleByName(partialName);
+        return styleMapper.toDto(styles);
     }
 }

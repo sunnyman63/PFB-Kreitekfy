@@ -8,9 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AlbumPersistence {
+    Page<Album> findAll(Pageable pageable, String filter);
+    List<Album> findAll();
+    List<Album> getAlbumByName(String partialName);
     Optional<Album> getAlbumById(Long albumId);
     Album saveAlbum(Album album);
     void deleteAlbum(Long albumId);
-    List<Album> getAlbumByName(String partialName);
-    Page<Album> findAll(Pageable pageable, String filter);
+
 }

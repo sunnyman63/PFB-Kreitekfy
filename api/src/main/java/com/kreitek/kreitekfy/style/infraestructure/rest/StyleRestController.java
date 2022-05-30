@@ -21,8 +21,16 @@ public class StyleRestController {
     }
 
     @GetMapping(produces = "application/json")
-    ResponseEntity<List<StyleDTO>> getAllStyles(){
-        List<StyleDTO> styles = this.styleService.getAllStyles();
+    ResponseEntity<List<StyleDTO>> getAllStyles(@RequestParam(name = "partialName", required = false) String partialName){
+
+        List<StyleDTO> styles;
+
+        if(partialName == null) {
+            styles = this.styleService.getAllStyles();
+        }else{
+            styles = this.styleService.getStyleByName(partialName);
+        }
+
         return new ResponseEntity<>(styles, HttpStatus.OK);
     }
 
