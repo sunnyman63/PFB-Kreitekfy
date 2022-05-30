@@ -31,6 +31,11 @@ public class ArtistPersistenceImpl implements ArtistPersistence {
     }
 
     @Override
+    public List<Artist> findAll() {
+        return artistRepository.findAll();
+    }
+
+    @Override
     public Optional<Artist> getArtistById(Long artistId) {
         return this.artistRepository.findById(artistId);
     }
