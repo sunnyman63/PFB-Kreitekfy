@@ -1,5 +1,8 @@
-<h1>LISTA DE CANCIONES</h1>
+<h1  class="text-light">LISTA DE CANCIONES</h1>
 
+<div class="text-light">
+  <i class="bi bi-plus-square-fill" [routerLink]="['create']"> AÑADIR CANCION</i>
+</div>
 
 <section  *ngIf="songs.length > 0">
     <table class="table table-striped">
@@ -16,7 +19,7 @@
             <th scope="col">Acciones</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="table-light">
           <tr *ngFor="let song of songs">
             <th>{{ song.id }}</th>
             <td>{{ song.name }}</td>
@@ -34,10 +37,10 @@
         </tbody>
       </table>
     
-      <div class="botoneraPaginacion">
-        <button [disabled]="first" class="btn btn-secondary btnAtras" (click)="previousPage()">Anterior</button>
-        <span>Pagina {{(page+1)}} de {{totalPages}} - Elementos totales: {{totalElements}}</span>
-        <button [disabled]="last" class="btn btn-secondary btnSiguiente" (click)="nextPage()">Siguiente</button>
+      <div class="botonera-paginacion">
+        <button [disabled]="first" class="btn btn-primary btnAtras" (click)="previousPage()">Anterior</button>
+        <span class="text-light">Pagina {{(page+1)}} de {{totalPages}} - Elementos totales: {{totalElements}}</span>
+        <button [disabled]="last" class="btn btn-primary btnSiguiente" (click)="nextPage()">Siguiente</button>
       </div>
 </section>
 
