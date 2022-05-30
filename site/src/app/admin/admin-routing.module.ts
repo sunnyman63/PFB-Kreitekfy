@@ -7,7 +7,8 @@ import { SongListComponent } from './entities/song/song-list/song-list.component
 const routes: Routes = [
   { path: '', component: AdminComponent },
   { path: 'songs', component: SongListComponent },
-  { path: 'songs/:idSong/update', component: SongFormComponent }
+  { path: 'songs/:idSong/update', component: SongFormComponent },
+  { path: 'songs/create', component: SongFormComponent }
 
 ];
 
