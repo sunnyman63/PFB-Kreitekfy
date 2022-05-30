@@ -1,0 +1,23 @@
+.container{
+    margin-top: 3%;
+}
+.canciones{
+    display:flex;
+    flex-direction: column;
+}
+
+.info{
+    display:flex;
+    justify-content: space-around;
+    background-color: blue;
+}
+
+.style{
+    background-color: red;
+    display: block;
+}
+
+.interaccion{
+    display:flex;
+    justify-content: space-around;
+}
