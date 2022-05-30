@@ -1,23 +1,78 @@
 .container{
     margin-top: 3%;
+    background-color: #3b3b3b;
+}
+.foto{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+*{
+    color: white;
 }
 .canciones{
     display:flex;
     flex-direction: column;
+    background-color: #3b3b3b;
+}
+
+img{
+    width: 100%;
 }
 
 .info{
     display:flex;
-    justify-content: space-around;
-    background-color: blue;
+    justify-content: space-between;
+}
+hr{
+    margin-top: 0%;
+    height: 5px;
+    background-color: #6d41a1;
+}
+.duration{
+    font-size: 1rem;
+    margin-top: 5%;
+    margin-right: 15%;
+}
+.style{
+    font-size: 1.5rem;
+    margin-top: 5%;
+}
+.style p {
+    margin: 0;
+}
+.bi-play{
+    background-color: #6d41a1;
+    padding: 100%;
+    border-radius: 30px;
+}
+.play{
+    margin-top: 2%;
 }
 
-.style{
-    background-color: red;
-    display: block;
+
+label{ 
+    color:#6d41a1;
+    font-size: 2rem;
 }
+.clasification{
+    direction: rtl;/* right to left */
+    unicode-bidi: bidi-override;/* bidi de bidireccional */
+}
+label:hover{color:orange;}
+label:hover ~ label{color:orange;}
+input[type = "radio"]{ display:none;}
+.stars{
+    margin-bottom: 5%;
+}
+
 
 .interaccion{
     display:flex;
     justify-content: space-around;
+    margin-top: 5%;
+}
+.titulo{
+    font-size: 5rem;
+    font-weight: bold;
 }
