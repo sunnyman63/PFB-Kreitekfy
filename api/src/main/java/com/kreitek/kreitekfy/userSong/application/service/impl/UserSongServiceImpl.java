@@ -60,4 +60,15 @@ public class UserSongServiceImpl implements UserSongService {
                 .getUserSongById(id)
                 .map(userSongMapper::toDto);
     }
+
+    @Override
+    public Boolean existUserSongBySongIdAndUserId(Long idSong, Long idUser) {
+        return this.userSongPersistence.existUserSongBySongIdAndUserId(idSong, idUser);
+    }
+
+    @Override
+    public UserSongSimpleDTO findUserSongBySongIdAndUserId(Long idSong, Long idUser ) {
+        UserSong userSongsimple = this.userSongPersistence.findUserSongBySongIdAndUserId(idSong, idUser);
+        return this.userSongMapper.toSimpleDto(userSongsimple);
+    }
 }

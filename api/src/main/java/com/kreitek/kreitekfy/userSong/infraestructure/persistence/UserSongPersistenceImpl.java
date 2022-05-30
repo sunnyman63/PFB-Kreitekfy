@@ -22,7 +22,18 @@ public class UserSongPersistenceImpl implements UserSongPersistence {
     @Override
     public UserSong saveUserSong(UserSong userSong) {
 
-        return this.userSongRepository.save(userSong);
+            return this.userSongRepository.save(userSong);
+    }
+
+    @Override
+    public Boolean existUserSongBySongIdAndUserId(Long idSong, Long idUser){
+
+        return this.userSongRepository.existsBySong_IdAndUser_Id(idSong, idUser);
+    }
+
+    @Override
+    public UserSong findUserSongBySongIdAndUserId(Long idSong, Long idUser){
+        return this.userSongRepository.findBySong_IdAndUser_Id(idSong, idUser);
     }
 
     @Override
