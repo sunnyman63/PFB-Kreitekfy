@@ -1,1 +1,62 @@
-<p>song-form works!</p>
+<p-toast></p-toast>
+
+<main class="container mt-2">
+    <section class="row">
+        <article class="d-flex justify-content-center">
+            <form class="col-lg-5 col-md-6 col-sm-8 col-10" *ngIf="songForm" [formGroup]="songForm" novalidate autocomplete="off">
+            
+                <!-- ID -->
+    
+                <div>
+                    <label for="" class="form-label">Id</label>
+                    <input type="text" class="form-control" placeholder="Indefinido" formControlName="id">
+                </div>
+                
+                <!-- NAME  -->
+    
+                <div>
+                    <label for="" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" placeholder="Nombre" formControlName="name">
+                </div>
+    
+    
+                <!-- DURATION  -->
+    
+                <div>
+                    <label for="" class="form-label">Duration</label>
+                    <input type="number" class="form-control" placeholder="Duracion" formControlName="duration">
+                </div>
+    
+                <!-- ESTYLE -->
+    
+                <div>
+                    <label for="categoryId" class="form-label">Estilos</label>
+                    <p-autoComplete formControlName ="style" name="style" [suggestions]="styles" 
+                    (completeMethod)="getStyles($event)" field="name" 
+                    (onSelect)="styleSelected()" (onClear)="styleUnselected()" 
+                    [required]="true" [forceSelection]="true" [dropdown]="true"></p-autoComplete>
+                </div>
+    
+                <!-- ALBUM  -->
+    
+                <div>
+                    <label for="categoryId" class="form-label">Albumes</label>
+                    <p-autoComplete formControlName ="album" name="album" [suggestions]="albumns" 
+                    (completeMethod)="getAlbums($event)" field="name" 
+                    (onSelect)="albumSelected()" (onClear)="albumUnselected()" 
+                    [required]="true" [forceSelection]="true" [dropdown]="true"></p-autoComplete>
+                </div>
+    
+                <div>
+                    <img  *ngIf="song?.albumImage" [src]="'data:image/jpeg;base64,'+ song!.albumImage">
+                </div>
+    
+                <div class="songform-buttons mt-4">
+                    <input type="button" value="{{ textButton }}" (click)="saveSong()" [disabled]="songForm.invalid" class="btn btn-primary">
+                    <input type="button" value="Volver" [routerLink]="['/admin','songs']" class="btn btn-primary">
+                </div>
+
+            </form>
+        </article>
+    </section>
+</main>

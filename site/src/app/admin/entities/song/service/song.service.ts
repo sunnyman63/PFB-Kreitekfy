@@ -15,9 +15,24 @@ export class SongService {
     return this.http.get<Song[]>(urlEndPoint)
   }
 
+  getSong(songId: number): Observable<Song>{
+    const urlEndPoint: string = "http://localhost:8080/api/songs/"+ songId;
+    return this.http.get<Song>(urlEndPoint);
+  }
+
+  insertSong(song: Song) {
+    const urlEndPoint: string = "http://localhost:8080/api/songs/";
+    return this.http.post<Song>(urlEndPoint, song);
+  }
+
+  updateSong(song: Song) {
+    const urlEndPoint: string = "http://localhost:8080/api/songs/";
+    return this.http.patch<Song>(urlEndPoint, song);
+  }
+
   deleteSong(songIdToDelete: number): Observable<any>{
     const urlEndPoint: string = "http://localhost:8080/api/songs/"+ songIdToDelete;
-    return this.http.get<Song[]>(urlEndPoint)
+    return this.http.delete<Song[]>(urlEndPoint)
   }
 
 }

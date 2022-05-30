@@ -1,0 +1,18 @@
+
+form{
+    div{
+        label{
+            color: #f8f9fa;;
+        }
+    }
+
+    .songform-buttons{
+        display: flex;
+        justify-content: space-between;
+
+        input{
+            border-radius: 0.25rem;
+            width: 45%;
+        }
+    }
+}

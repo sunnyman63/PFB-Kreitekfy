@@ -1,27 +1,27 @@
 export class Song {
 
-    id: number;
+    id: number | undefined;
     name: string;
     duration: number;
-    inclusionDate: Date;
-    totalViews: number;
-    albumId: number;
-    albumName: string;
-    albumImage: string;
-    styleId: number;
-    styleName: string;
+    inclusionDate?: Date;
+    totalViews?: number;
+    albumId?: number;
+    albumName?: string;
+    albumImage?: string;
+    styleId?: number;
+    styleName?: string;
 
     constructor(
-        id: number,
+        id: number | undefined,
         name: string,
         duration: number,
-        inclusionDate: Date,
-        totalViews: number,
-        albumId: number,
-        albumName: string,
-        albumImage: string,
-        styleId: number,
-        styleName: string
+        inclusionDate?: Date,
+        totalViews?: number,
+        albumId?: number,
+        albumName?: string,
+        albumImage?: string,
+        styleId?: number,
+        styleName?: string
     ) {
         this.id = id
         this.name = name

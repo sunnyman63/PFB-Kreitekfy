@@ -12,19 +12,19 @@
               Home
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="isAdmin">
             <a class="nav-link" href="#">
               <i class="bi bi-tags h4"></i>
               Estilos
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="isAdmin">
             <a class="nav-link" href="#">
               <i class="bi bi-mic h4"></i>
               Artistas
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="isAdmin">
             <a class="nav-link" href="#">
               <i class="bi bi-play-circle h4"></i>
               Canciones
@@ -43,7 +43,7 @@
       <button class="bg-white user-icon" type="button" data-bs-toggle="modal" data-bs-target="#userModal">
         <img src="./assets/image/user.png" class="w-100" alt="user">
       </button>
-      
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -56,17 +56,13 @@
     <div class="modal-content">
       <div class="modal-body">
         <div class="row">
-          <div class="col-3">
-            <button class="selectUserBtn">
+          <div class="col-3" *ngFor="let user of users">
+            <button class="selectUserBtn" (click)="selectUser(user)" data-bs-dismiss="modal">
               <img src="./assets/image/user.png" class="w-100" alt="user">
             </button>
-            <p class="h5 text-center">ADMIN</p>
+            <p class="h5 text-center">{{user.name}}</p>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
       </div>
     </div>
   </div>
