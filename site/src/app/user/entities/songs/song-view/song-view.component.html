@@ -1,0 +1,54 @@
+<div class="container" >
+
+    <div class="row">
+        <div class="col-lg-4 col-12 foto">
+            <img src="data:image/jpeg;base64,{{Song?.albumImage}}">
+        </div>
+        <div class="col-lg-8 col-12 canciones">
+            
+            <div class="info">
+                <div class="style">
+                <p>{{Song?.styleName}}</p>
+                </div>
+
+                <div class="duration">
+                    Autor: Cupido, Duration: {{Song?.duration}}
+                </div>
+                
+            </div>
+            <div class="titulo">
+                <p>{{Song?.name}}</p>
+            </div>
+            <hr>
+
+
+            <div class="interaccion">
+
+                <div class="play">
+                    <i class="bi bi-play bg-primary"></i>
+                </div>
+
+                <div class="stars">
+                    <form>
+                        <p class="clasification">
+                          <input id="radio1" type="radio" name="estrellas" value="5"><!--
+                          --><label for="radio1">★</label><!--
+                          --><input id="radio2" type="radio" name="estrellas" value="4"><!--
+                          --><label for="radio2">★</label><!--
+                          --><input id="radio3" type="radio" name="estrellas" value="3"><!--
+                          --><label for="radio3">★</label><!--
+                          --><input id="radio4" type="radio" name="estrellas" value="2"><!--
+                          --><label for="radio4">★</label><!--
+                          --><input id="radio5" type="radio" name="estrellas" value="1"><!--
+                          --><label for="radio5">★</label>
+                        </p>
+                      </form>
+                </div>
+
+            </div>
+            
+        </div>
+      </div>
+
+</div>
+

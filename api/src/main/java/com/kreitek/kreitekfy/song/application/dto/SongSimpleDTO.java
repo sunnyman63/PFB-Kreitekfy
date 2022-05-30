@@ -8,6 +8,7 @@ public class SongSimpleDTO {
     private String name;
     private Integer duration;
     private Long totalViews;
+    private Long totalRate;
     private Date inclusionDate;
     private Long styleId;
     private String styleName;
@@ -46,6 +47,14 @@ public class SongSimpleDTO {
 
     public void setTotalViews(Long totalViews) {
         this.totalViews = totalViews;
+    }
+
+    public Long getTotalRate() {
+        return totalRate;
+    }
+
+    public void setTotalRate(Long totalRate) {
+        this.totalRate = totalRate;
     }
 
     public Date getInclusionDate() {

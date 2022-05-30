@@ -28,8 +28,11 @@ public class Song {
     @Column(name = "inclusion_date", nullable = false)
     private Date inclusionDate;
 
-    @Column(name = "total_views", nullable = false)
+    @Transient
     private Long totalViews;
+
+    @Transient
+    private Long totalRate;
 
     @ManyToOne
     @JoinColumn(name = "album_id", nullable = false)
@@ -80,6 +83,14 @@ public class Song {
 
     public void setTotalViews(Long totalVisualizations) {
         this.totalViews = totalVisualizations;
+    }
+
+    public Long getTotalRate() {
+        return totalRate;
+    }
+
+    public void setTotalRate(Long totalRate) {
+        this.totalRate = totalRate;
     }
 
     public Album getAlbum() {

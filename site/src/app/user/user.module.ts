@@ -3,11 +3,20 @@ import { CommonModule } from '@angular/common';
 
 import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
+import { MostRatedComponent } from './entities/songs/most-rated/most-rated.component';
+import { SongCardComponent } from './entities/songs/song-card/song-card.component';
+import { SongCardListComponent } from './entities/songs/song-card-list/song-card-list.component';
+import { SongViewComponent } from './entities/songs/song-view/song-view.component';
 
 
 @NgModule({
   declarations: [
-    UserComponent
+    UserComponent,
+    MostRatedComponent,
+    SongCardComponent,
+    SongCardListComponent
+    UserComponent,
+    SongViewComponent
   ],
   imports: [
     CommonModule,
