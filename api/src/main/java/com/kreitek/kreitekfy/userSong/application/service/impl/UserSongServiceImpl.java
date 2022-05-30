@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -59,5 +60,22 @@ public class UserSongServiceImpl implements UserSongService {
         return this.userSongPersistence
                 .getUserSongById(id)
                 .map(userSongMapper::toDto);
+    }
+
+    @Override
+    public Boolean existUserSongBySongIdAndUserId(Long idSong, Long idUser) {
+        return this.userSongPersistence.existUserSongBySongIdAndUserId(idSong, idUser);
+    }
+
+    @Override
+    public UserSongSimpleDTO findUserSongBySongIdAndUserId(Long idSong, Long idUser ) {
+        UserSong userSongsimple = this.userSongPersistence.findUserSongBySongIdAndUserId(idSong, idUser);
+        return this.userSongMapper.toSimpleDto(userSongsimple);
+    }
+
+    @Override
+    public List<UserSongDTO> getAllUserSongBySong_Id(Long id) {
+        List<UserSong> userSongDTOS = this.userSongPersistence.getUserSongBySong_Id(id);
+        return this.userSongMapper.toDto(userSongDTOS);
     }
 }

@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserComponent } from './user.component';
-import { MostViewComponent } from './entities/songs/mostView/mostView.component';
+import { SongViewComponent } from './entities/songs/song-view/song-view.component';
+
 
 const routes: Routes = [
-  { path: '', component: MostViewComponent },
-  { path: '', component: UserComponent }];
+  { path: '', component: UserComponent },
+  { path: 'song/:idSong', component: SongViewComponent}
+];
 
 @NgModule({
-
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })

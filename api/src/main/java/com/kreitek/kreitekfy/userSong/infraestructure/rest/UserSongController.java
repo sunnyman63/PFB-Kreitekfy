@@ -22,6 +22,11 @@ public class UserSongController {
 
     @PostMapping(consumes = "application/json")
     ResponseEntity<UserSongSimpleDTO> insertUserSong(@RequestBody UserSongSimpleDTO userSongSimpleDTO){
+
+        if(userSongService.existUserSongBySongIdAndUserId(userSongSimpleDTO.getSongId(),userSongSimpleDTO.getUserId())){
+            userSongSimpleDTO = this.userSongService.findUserSongBySongIdAndUserId(userSongSimpleDTO.getSongId(),userSongSimpleDTO.getUserId());
+            return new ResponseEntity<>(userSongSimpleDTO, HttpStatus.I_AM_A_TEAPOT);
+        }
         userSongSimpleDTO = this.userSongService.saveUserSong(userSongSimpleDTO);
         return new ResponseEntity<>(userSongSimpleDTO, HttpStatus.CREATED);
 
@@ -45,6 +50,8 @@ public class UserSongController {
         }else{
             return new ResponseEntity<>(userSongSimpleDTO, HttpStatus.OK);
         }    }
+
+
 
 
 }

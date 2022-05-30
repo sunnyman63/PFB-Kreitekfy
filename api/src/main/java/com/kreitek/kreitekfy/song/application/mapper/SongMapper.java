@@ -1,6 +1,7 @@
 package com.kreitek.kreitekfy.song.application.mapper;
 
 import com.kreitek.kreitekfy.album.application.mapper.AlbumMapper;
+import com.kreitek.kreitekfy.artist.application.mapper.ArtistMapper;
 import com.kreitek.kreitekfy.shared.mapper.EntityMapper;
 import com.kreitek.kreitekfy.song.application.dto.SongDTO;
 import com.kreitek.kreitekfy.song.application.dto.SongSimpleDTO;
@@ -10,7 +11,7 @@ import com.kreitek.kreitekfy.user.domain.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = { AlbumMapper.class, StyleMapper.class })
+@Mapper(componentModel = "spring", uses = { AlbumMapper.class, StyleMapper.class, ArtistMapper.class})
 public interface SongMapper extends EntityMapper<SongDTO, Song> {
 
     @Override
@@ -24,6 +25,8 @@ public interface SongMapper extends EntityMapper<SongDTO, Song> {
     @Mapping(source = "album.image", target = "albumImage")
     @Mapping(source = "style.id", target = "styleId")
     @Mapping(source = "style.name", target = "styleName")
+    @Mapping(source = "album.artist.id", target = "artistId")
+    @Mapping(source = "album.artist.name", target = "artistName")
     SongDTO toDto(Song song);
 
     @Mapping(source = "style.id", target = "styleId")

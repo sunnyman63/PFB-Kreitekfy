@@ -7,6 +7,7 @@ import com.kreitek.kreitekfy.userSong.infraestructure.persistence.UserSongReposi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -22,7 +23,18 @@ public class UserSongPersistenceImpl implements UserSongPersistence {
     @Override
     public UserSong saveUserSong(UserSong userSong) {
 
-        return this.userSongRepository.save(userSong);
+            return this.userSongRepository.save(userSong);
+    }
+
+    @Override
+    public Boolean existUserSongBySongIdAndUserId(Long idSong, Long idUser){
+
+        return this.userSongRepository.existsBySong_IdAndUser_Id(idSong, idUser);
+    }
+
+    @Override
+    public UserSong findUserSongBySongIdAndUserId(Long idSong, Long idUser){
+        return this.userSongRepository.findBySong_IdAndUser_Id(idSong, idUser);
     }
 
     @Override
@@ -67,5 +79,10 @@ public class UserSongPersistenceImpl implements UserSongPersistence {
     @Override
     public Optional<UserSong> getUserSongById(Long id) {
         return this.userSongRepository.findById(id);
+    }
+
+    @Override
+    public List<UserSong> getUserSongBySong_Id(Long id) {
+        return this.userSongRepository.getUserSongBySong_Id(id);
     }
 }

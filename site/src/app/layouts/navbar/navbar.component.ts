@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SongService } from 'src/app/admin/entities/song/service/song.service';
+import { UserDTO } from 'src/app/shared/models/UserDTO.model';
+import { SessionService } from 'src/app/shared/service/session.service';
+import { UserService } from 'src/app/shared/service/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,42 +10,38 @@ import { SongService } from 'src/app/admin/entities/song/service/song.service';
 })
 export class NavbarComponent implements OnInit {
 
+  users: Array<UserDTO> = [];
+  isAdmin: boolean = false;
 
-    styleFilter?: string;
-  navbarService: any;
-
-
-  constructor(    private songService: SongService) { }
+  constructor(
+    private userService: UserService,
+    private sessionService: SessionService
+  ) { }
 
   ngOnInit(): void {
+    this.getUsers();
   }
-public searchByStyle():void{
-  this.getAllItems();
-}
 
-private buildFilters(): string | undefined {
-  const filters: string[] = [];
-  if(this.styleFilter){
-    filters.push("name:MATCH:" + this.styleFilter);
+  private getUsers(): void {
+    this.userService.getUsers().subscribe({
+      next:(data) => {
+        this.users = data;
+        console.log(this.users);
+      }
+    })
   }
-  if (filters.length > 0){
-let globalFilters: string = "";
-for(let filter of filters){
-  globalFilters = globalFilters + filter + ",";
-}
-globalFilters = globalFilters.substring(0, globalFilters.length-1);
-return globalFilters;
-  } else {
-    return undefined;
+
+  selectUser(user: UserDTO): void {
+    this.sessionService.setId(user.id);
+    this.sessionService.setIsAdmin(user.admin);
+    this.sessionService.setName(user.name);
+    if(user.admin) {
+      this.isAdmin = true;
+    } else {
+      this.isAdmin = false;
+    }
   }
-}
-
-private getAllItems():void {
-const filters: string | undefined = this.buildFilters();
-this.navbarService.getAllSongs(this.styleFilter).subscribe();
 
 
 
-
-}
 }
