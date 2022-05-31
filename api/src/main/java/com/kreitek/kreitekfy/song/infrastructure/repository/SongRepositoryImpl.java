@@ -23,6 +23,16 @@ public class SongRepositoryImpl implements SongRepository {
     }
 
     @Override
+    public List<Song> findAll() {
+        return songJpaRepository.findAll();
+    }
+
+    @Override
+    public List<Song> getSongsByName(String partialName) {
+        return songJpaRepository.findByNameContainsIgnoreCase(partialName);
+    }
+
+    @Override
     public Page<Song> findAll(Pageable pageable, String filters) {
         SongSpecification specification = new SongSpecification(SearchCriteriaHelper.fromFilterString(filters));
         return this.songJpaRepository.findAll(specification, pageable);

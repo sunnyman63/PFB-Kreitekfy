@@ -29,6 +29,19 @@ public class ArtistRestController {
         return new ResponseEntity<>(items, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/search", produces = "application/json")
+    public ResponseEntity<List<ArtistDTO>> getArtist(@RequestParam(name = "partialName", required = false) String partialName) {
+        List<ArtistDTO> artist;
+
+        if(partialName == null) {
+            artist = this.artistService.getArtists();
+        } else {
+            artist = this.artistService.getArtistByName(partialName);
+        }
+
+        return new ResponseEntity<>(artist, HttpStatus.OK);
+    }
+
     @GetMapping(value = "/{artistsId}", produces = "application/json")
     ResponseEntity<ArtistDTO> getArtistById(@PathVariable Long albumId){
         Optional<ArtistDTO> artist = this.artistService.getArtistById(albumId);

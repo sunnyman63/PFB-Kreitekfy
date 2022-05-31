@@ -10,6 +10,7 @@ import java.util.Optional;
 
 public interface ArtistPersistence {
     Page<Artist> findAll(Pageable pageable, String filters);
+    List<Artist> findAll();
     Optional<Artist> getArtistById(Long artistId);
     Artist saveArtist(Artist artist);
     void deleteArtist(Long artistId);

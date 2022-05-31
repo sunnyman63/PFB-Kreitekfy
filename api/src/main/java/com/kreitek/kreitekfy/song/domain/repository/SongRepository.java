@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SongRepository {
+    List<Song> findAll();
+    List<Song> getSongsByName(String partialName);
     Page<Song> findAll(Pageable pageable, String filters);
     Song save(Song entity);
     void deleteById(Long id);

@@ -11,8 +11,9 @@ import java.util.Optional;
 @Service
 public interface ArtistService {
     Page<ArtistDTO> getArtistByCriteriaPaged(Pageable pageable, String filter);
+    List<ArtistDTO> getArtists();
+    List<ArtistDTO> getArtistByName(String partialName);
     Optional<ArtistDTO> getArtistById(Long artistId);
     ArtistDTO saveArtist(ArtistDTO artist);
     void deleteArtist(Long artistId);
-    List<ArtistDTO> getArtistByName(String partialName);
 }

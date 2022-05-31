@@ -34,6 +34,12 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
+    public List<ArtistDTO> getArtists() {
+        List<Artist> artist = this.artistPersistence.findAll();
+        return this.artistMapper.toDto(artist);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Optional<ArtistDTO> getArtistById(Long artistId) {
         return this.artistPersistence
@@ -58,6 +64,7 @@ public class ArtistServiceImpl implements ArtistService {
     @Override
     @Transactional(readOnly = true)
     public List<ArtistDTO> getArtistByName(String partialName) {
-        return null;
+        List<Artist> artist = this.artistPersistence.getArtistByName(partialName);
+        return this.artistMapper.toDto(artist);
     }
 }
