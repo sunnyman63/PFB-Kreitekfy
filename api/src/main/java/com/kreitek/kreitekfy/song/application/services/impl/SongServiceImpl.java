@@ -59,7 +59,12 @@ public class SongServiceImpl implements SongService {
     public List<SongSimpleDTO> getAllSongsByOrderByInclusionDateDesc() {
         List<Song> newestSong = this.addCalculatedValuesToSong(this.repository.findAll());
         newestSong.sort(Comparator.comparing(Song::getInclusionDate).reversed());
-        return this.mapper.toSimpleDto(newestSong);
+
+        List<Song> fiveNewestSongs = new ArrayList<>();
+        for (int i = 0; i < 5; i++){
+            fiveNewestSongs.add(newestSong.get(i));
+        }
+        return this.mapper.toSimpleDto(fiveNewestSongs);
     }
 
     @Override
