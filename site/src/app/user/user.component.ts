@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Song } from '../admin/entities/song/model/song.model';
+import { SongsService } from './entities/songs/service/songs.service';
 
 @Component({
   selector: 'app-user',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  constructor() { }
+  title? : string;
+  songsTopRated: Song[] = [];
+
+  constructor(private songService: SongsService) {}
 
   ngOnInit(): void {
+    this.getTopRated();
+  }
+
+  private getTopRated(): void{
+    this.title = "Las mas valoradas"
+    this.songService.getTopRated().subscribe({
+      next: (songRest) => {
+        this.songsTopRated = songRest;
+      },
+      error: (err) => {}
+    })
   }
 
 }

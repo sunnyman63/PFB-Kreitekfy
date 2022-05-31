@@ -1,10 +1,10 @@
-<div class="song">
+<div class="song" *ngIf="song" [routerLink]="['user','song', song.id]">
     <div class="image">
-        <img src="https://picsum.photos/300/300" alt="">
+        <img src="data:image/jpeg;base64,{{song?.albumImage}}" alt="">
     </div>
     <div class="text">
-        <h3>Yo no soy Celoso</h3>
+        <h3>{{ song!.name }}</h3>
         <hr>
-        <h4>Bad Bunny</h4>
+        <h4>{{ song!.artistName}}</h4>
     </div>
 </div>

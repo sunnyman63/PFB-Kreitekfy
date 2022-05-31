@@ -1,0 +1,48 @@
+.cont{
+    display: flex;
+    justify-content:space-around;
+}
+
+.song{
+    background-color: rgba(50, 0, 59, 0.363);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    width: 300px;
+
+}
+
+img{
+    width: 100%;
+    border-radius: 5px;
+}
+
+.image{
+    width: 240px;
+    height: 240px;
+    display: flex;
+    justify-content: space-around; 
+    margin-top: 10%;
+    overflow: hidden;
+}
+
+.text{
+    width: 100%;
+    margin: 3%;
+    color:white;
+    text-align: center;
+    h3{
+        font-size:x-large;
+    }
+    h4{
+        font-size: medium;
+    }
+}
+hr{
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    height: 5px;
+    background-color: #7700ff;
+}

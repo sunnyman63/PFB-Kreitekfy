@@ -9,6 +9,7 @@ import { SongCardComponent } from './entities/songs/song-card/song-card.componen
 import { SongCardListComponent } from './entities/songs/song-card-list/song-card-list.component';
 import { SongViewComponent } from './entities/songs/song-view/song-view.component';
 import { ForYouComponent } from './entities/songs/for-you/for-you.component';
+import { SongStripComponent } from './entities/songs/song-strip/song-strip.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ForYouComponent } from './entities/songs/for-you/for-you.component';
     SongCardComponent,
     SongCardListComponent,
     SongViewComponent,
-    ForYouComponent
+    ForYouComponent,
+    SongStripComponent
   ],
   imports: [
     CommonModule,
