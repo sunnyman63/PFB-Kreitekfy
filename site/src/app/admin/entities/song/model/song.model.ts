@@ -1,3 +1,5 @@
+import { Artist } from "../../artist/model/artist.model";
+
 export class Song {
 
     id: number | undefined;
@@ -10,6 +12,7 @@ export class Song {
     albumImage?: string;
     styleId?: number;
     styleName?: string;
+    artists?: Artist[];
 
     constructor(
         id: number | undefined,
@@ -21,7 +24,8 @@ export class Song {
         albumName?: string,
         albumImage?: string,
         styleId?: number,
-        styleName?: string
+        styleName?: string,
+        artists?: Artist[]
     ) {
         this.id = id
         this.name = name
@@ -33,6 +37,7 @@ export class Song {
         this.albumImage = albumImage
         this.styleId = styleId
         this.styleName = styleName
+        this.artists = artists
     }
 
 }

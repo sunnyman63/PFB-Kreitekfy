@@ -1,5 +1,34 @@
 <h1  class="text-light">LISTA DE CANCIONES</h1>
 
+<div class="filters text-light">
+  <h5>Filtros</h5>
+  <form action="" class="row" *ngIf="filterForm" [formGroup]="filterForm" novalidate autocomplete="off">
+    <div class="col-md-6 col-12">
+      <label for="" class="form-label">Estilo</label>
+      <p-autoComplete formControlName="styleFiler" [suggestions]="stylesFilter" 
+      (completeMethod)="getStyles($event)" field="name"></p-autoComplete>
+    </div>
+    <div class="col-md-6 col-12">
+      <label for="" class="form-label">Artista</label>
+      <p-autoComplete formControlName="artistFilter" [suggestions]="artistFilter" 
+      (completeMethod)="getArtists($event)" field="name"></p-autoComplete>
+    </div>
+    <div class="col-md-6 col-12">
+      <label for="" class="form-label">Album</label>
+      <p-autoComplete formControlName="albumFilter" [suggestions]="albumsFilter" 
+      (completeMethod)="getAlbums($event)" field="name"></p-autoComplete>
+    </div>
+    <div class="col-md-6 col-12">
+      <label for="" class="form-label">Cancion</label>
+      <p-autoComplete formControlName="songFilter" [suggestions]="songsFilter" 
+      (completeMethod)="getSongs($event)" field="name"></p-autoComplete>
+    </div>
+    <div class="col-12 col-md-3 mt-3">
+      <button id="btnSearch" class="btn btn-primary" (click)="searchByFilters()">Buscar</button>
+    </div>
+  </form>
+</div>
+
 <div class="text-light">
   <i class="bi bi-plus-square-fill" [routerLink]="['create']"> AÑADIR CANCION</i>
 </div>
@@ -16,6 +45,7 @@
             <th scope="col">Nombre album</th>
             <th scope="col">Imagen album</th>
             <th scope="col">Estilo</th>
+            <th scope="col">Artista</th>
             <th scope="col">Acciones</th>
           </tr>
         </thead>
@@ -29,6 +59,11 @@
             <td>{{ song.albumName }}</td>
             <td>{{ song.albumImage }}</td>
             <td>{{ song.styleName }}</td>
+            <td>
+              <p *ngFor="let artist of song.artists">
+                {{ artist.name }}
+              </p>
+            </td>
             <td>
                 <i class="bi bi-pencil-square" [routerLink]="[song.id,'update']"></i>
                 <i class="bi bi-trash"  data-bs-toggle="modal" data-bs-target="#askConfirmationDelete" (click)="prepareItemToDelete(song.id!);"></i>
@@ -44,7 +79,7 @@
       </div>
 </section>
 
-  <!-- Modal -->
+<!-- Modal -->
 <div class="modal fade" id="askConfirmationDelete" tabindex="-1" aria-labelledby="askConfirmationDelete" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
