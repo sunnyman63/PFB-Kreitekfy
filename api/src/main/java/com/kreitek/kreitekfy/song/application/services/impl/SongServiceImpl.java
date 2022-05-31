@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -63,12 +64,23 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
+    public List<SongSimpleDTO> findByOrderByTotalRateDesc() {
+        List<Song> calculatedAdded = this.addCalculatedValuesToSong(this.repository.findAll());
+        calculatedAdded.sort(Comparator.comparing(Song::getTotalRate).reversed());
+        List<Song> fiveBestRatedSongs = new ArrayList<>();
+        for (int i = 0; i < 5; i++){
+            fiveBestRatedSongs.add(calculatedAdded.get(i));
+        }
+
+        return this.mapper.toSimpleDto(fiveBestRatedSongs);
+    }
+
+    @Override
     public Page<SongDTO> getSongByCriteriaPaged(Pageable pageable, String filter) {
         Page<Song> itemPage = this.repository.findAll(pageable, filter);
         List<Song> calculatedAdded = this.addCalculatedValuesToSong(itemPage.getContent());
         itemPage = new PageImpl<Song>(calculatedAdded, itemPage.getPageable(), calculatedAdded.size());
         return itemPage.map(mapper::toDto);
-
     }
 
     private List<Song> addCalculatedValuesToSong(List<Song> iterable) {

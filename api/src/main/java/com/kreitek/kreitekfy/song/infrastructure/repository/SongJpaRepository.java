@@ -9,6 +9,5 @@ import java.util.List;
 public interface SongJpaRepository extends JpaRepository<Song, Long>, JpaSpecificationExecutor<Song> {
     List<Song> findByNameContainsIgnoreCase(String partialName);
 
-
 //    List<Song> getAllSongsByOrderByInclusion_DateDesc();
 }
