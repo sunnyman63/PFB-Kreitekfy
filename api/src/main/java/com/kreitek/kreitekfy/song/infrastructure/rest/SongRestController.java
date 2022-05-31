@@ -33,6 +33,19 @@ public class SongRestController  {
         return new ResponseEntity<>(items, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/search",produces = "application/json")
+    ResponseEntity<List<SongSimpleDTO>> getSongs(@RequestParam(name = "partialName", required = false) String partialName){
+
+        List<SongSimpleDTO> styles;
+
+        if(partialName == null) {
+            styles = this.service.getSongs();
+        }else{
+            styles = this.service.getSongsByName(partialName);
+        }
+
+        return new ResponseEntity<>(styles, HttpStatus.OK);
+    }
 
     @GetMapping(value = "/{idSong}", produces = "application/json")
     public ResponseEntity<SongDTO> getSongById(@PathVariable Long idSong) {
@@ -65,6 +78,12 @@ public class SongRestController  {
     public ResponseEntity<SongDTO> updateSong(@RequestBody SongDTO songDTO) {
         songDTO = this.service.saveSong(songDTO);
         return new ResponseEntity<>(songDTO,HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/{idSong}")
+    public  ResponseEntity<?> deleteSong(@PathVariable Long idSong){
+        this.service.deleteSong(idSong);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
