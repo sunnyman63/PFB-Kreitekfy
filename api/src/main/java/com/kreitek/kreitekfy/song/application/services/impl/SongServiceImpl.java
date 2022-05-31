@@ -10,9 +10,11 @@ import com.kreitek.kreitekfy.userSong.application.dto.UserSongDTO;
 import com.kreitek.kreitekfy.userSong.application.service.UserSongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -63,7 +65,14 @@ public class SongServiceImpl implements SongService {
     @Override
     public Page<SongDTO> getSongByCriteriaPaged(Pageable pageable, String filter) {
         Page<Song> itemPage = this.repository.findAll(pageable, filter);
-        itemPage.forEach(song -> {
+        List<Song> calculatedAdded = this.addCalculatedValuesToSong(itemPage.getContent());
+        itemPage = new PageImpl<Song>(calculatedAdded, itemPage.getPageable(), calculatedAdded.size());
+        return itemPage.map(mapper::toDto);
+
+    }
+
+    private List<Song> addCalculatedValuesToSong(List<Song> iterable) {
+        iterable.forEach(song -> {
             AtomicReference<Long> totalRate = new AtomicReference<>(0L);
             AtomicReference<Long> totalViews = new AtomicReference<>(0L);
             AtomicInteger numRates = new AtomicInteger();
@@ -83,8 +92,7 @@ public class SongServiceImpl implements SongService {
                 song.setTotalRate(totalRate.get());
             }
         });
-        return itemPage.map(mapper::toDto);
-
+        return iterable;
     }
 
     @Override
