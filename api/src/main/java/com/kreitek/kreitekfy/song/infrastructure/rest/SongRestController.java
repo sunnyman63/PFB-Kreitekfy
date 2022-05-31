@@ -57,15 +57,15 @@ public class SongRestController  {
     }
 
     @GetMapping(value = "/newests", produces = "application/json")
-    public ResponseEntity<List<SongSimpleDTO>> getNewestSongs() {
-        List<SongSimpleDTO> songDTOS = this.service.getAllSongsByOrderByInclusionDateDesc();
+    public ResponseEntity<List<SongDTO>> getNewestSongs() {
+        List<SongDTO> songDTOS = this.service.getAllSongsByOrderByInclusionDateDesc();
         return new ResponseEntity<>(songDTOS, HttpStatus.OK);
     }
 
     @GetMapping(value = "/top-rated", produces = "application/json")
-    public ResponseEntity<List<SongSimpleDTO>> getTopRatedSongs(){
-        List<SongSimpleDTO> songSimpleDTOS = this.service.findByOrderByTotalRateDesc();
-        return new ResponseEntity<>(songSimpleDTOS, HttpStatus.OK);
+    public ResponseEntity<List<SongDTO>> getTopRatedSongs(){
+        List<SongDTO> songDTOS = this.service.findByOrderByTotalRateDesc();
+        return new ResponseEntity<>(songDTOS, HttpStatus.OK);
     }
 
     @PostMapping(produces = "application/json", consumes = "application/json")
