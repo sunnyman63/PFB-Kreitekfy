@@ -35,7 +35,6 @@ public class SongServiceImpl implements SongService {
         this.mapper = mapper;
         this.userSongService = userSongService;
     }
-   
 
     @Override
     public Optional<SongDTO> getSongById(Long idSong) {
@@ -56,11 +55,10 @@ public class SongServiceImpl implements SongService {
         return this.mapper.toSimpleDto(songs);
     }
 
-    @Override
-    public List<SongDTO> getNewestSongs() {
-//        List<Song> songDTOs = this.repository.getAllSongsByOrderByInclusion_DateDesc();
-//        List<Song> newests = new ArrayList<>();
-        return null;
+    public List<SongSimpleDTO> getAllSongsByOrderByInclusionDateDesc() {
+        List<Song> newestSong = this.addCalculatedValuesToSong(this.repository.findAll());
+        newestSong.sort(Comparator.comparing(Song::getInclusionDate).reversed());
+        return this.mapper.toSimpleDto(newestSong);
     }
 
     @Override
@@ -81,6 +79,7 @@ public class SongServiceImpl implements SongService {
         List<Song> calculatedAdded = this.addCalculatedValuesToSong(itemPage.getContent());
         itemPage = new PageImpl<Song>(calculatedAdded, itemPage.getPageable(), calculatedAdded.size());
         return itemPage.map(mapper::toDto);
+
     }
 
     private List<Song> addCalculatedValuesToSong(List<Song> iterable) {

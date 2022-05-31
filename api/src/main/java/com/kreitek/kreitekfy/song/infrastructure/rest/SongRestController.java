@@ -43,23 +43,9 @@ public class SongRestController  {
 
     }
 
-    @GetMapping(value = "/search", produces = "application/json")
-    ResponseEntity<List<SongSimpleDTO>> getAllSongs(@RequestParam(name = "partialName", required = false) String partialName){
-
-        List<SongSimpleDTO> songs;
-
-        if(partialName == null) {
-            songs = this.service.getSongs();
-        }else{
-            songs = this.service.getSongsByName(partialName);
-        }
-
-        return new ResponseEntity<>(songs, HttpStatus.OK);
-    }
-
     @GetMapping(value = "/newests", produces = "application/json")
-    public ResponseEntity<List<SongDTO>> getNewestSongs() {
-        List<SongDTO> songDTOS = this.service.getNewestSongs();
+    public ResponseEntity<List<SongDTO>> getNewestSongs(@PathVariable Date inclusionDate) {
+        List<SongDTO> songDTOS = this.service.getNewestSongs(inclusionDate);
         return new ResponseEntity<>(songDTOS, HttpStatus.OK);
     }
 

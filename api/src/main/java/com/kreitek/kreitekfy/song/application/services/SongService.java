@@ -12,7 +12,7 @@ public interface SongService {
 
     List<SongSimpleDTO> getSongs();
     List<SongSimpleDTO> getSongsByName(String partialName);
-    List<SongDTO> getNewestSongs();
+    List<SongSimpleDTO> getAllSongsByOrderByInclusionDateDesc();
     List<SongSimpleDTO> findByOrderByTotalRateDesc();
     Page<SongDTO> getSongByCriteriaPaged(Pageable pageable, String filter);
     Optional<SongDTO> getSongById(Long idSong);

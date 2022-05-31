@@ -1,10 +1,11 @@
+import { SessionService } from 'src/app/shared/service/session.service';
 import { usersong } from './../../usersong/model/usersong.model';
 import { UsersongService } from './../../usersong/service/usersong.service';
 import { Songs } from './../model/songs.model';
 import { SongsService } from './../service/songs.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { SongsListComponent } from '../songs-list/songs-list.component';
+
 
 @Component({
   selector: 'app-song-view',
@@ -16,7 +17,7 @@ export class SongViewComponent implements OnInit {
   Song?:Songs;
   usersong={
     songId : this.idSong!,
-    userId : 1, // this.idUser
+    userId : this.sessionService.getId()!,
     id: 0,
     personalViews:0,
     personalValorations:0
@@ -26,7 +27,8 @@ export class SongViewComponent implements OnInit {
   constructor(
     private route:ActivatedRoute,
     private SongsService:SongsService,
-    private usersongService: UsersongService
+    private usersongService: UsersongService,
+    private sessionService: SessionService
     ) { }
 
   ngOnInit(): void {

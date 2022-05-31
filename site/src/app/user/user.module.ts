@@ -1,4 +1,4 @@
-import { SongsListComponent } from './entities/songs/songs-list/songs-list.component';
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -18,7 +18,6 @@ import { ForYouComponent } from './entities/songs/for-you/for-you.component';
     SongCardComponent,
     SongCardListComponent,
     SongViewComponent,
-    SongsListComponent,
     ForYouComponent
   ],
   imports: [
