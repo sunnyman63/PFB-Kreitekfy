@@ -18,5 +18,4 @@ public getOneSong(id:number): Observable<Songs>{
   const urlEndpoint: string = "http://localhost:8080/api/songs/"+id;
   return this.http.get<Songs>(urlEndpoint);
 }
-
 }
