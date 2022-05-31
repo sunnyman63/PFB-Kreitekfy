@@ -14,10 +14,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -34,32 +31,30 @@ public class SongServiceImpl implements SongService {
         this.mapper = mapper;
         this.userSongService = userSongService;
     }
-   
 
-    @Override
-    public Optional<SongDTO> getSongById(Long idSong) {
-        return this.repository
-                .findById(idSong)
-                .map(mapper::toDto);
-    }
+
+   // @Override
+   // public Optional<SongDTO> getSongById(Long idSong) {
+     //   return this.repository
+        //        .findById(idSong)
+        //        .map(mapper::toDto);
+   // }
 
     @Override
     public List<SongSimpleDTO> getSongs() {
         List<Song> songs = repository.findAll();
         return this.mapper.toSimpleDto(songs);
     }
-
     @Override
     public List<SongSimpleDTO> getSongsByName(String partialName) {
         List<Song> songs = repository.getSongsByName(partialName);
         return this.mapper.toSimpleDto(songs);
     }
-
     @Override
-    public List<SongDTO> getNewestSongs() {
-//        List<Song> songDTOs = this.repository.getAllSongsByOrderByInclusion_DateDesc();
-//        List<Song> newests = new ArrayList<>();
-        return null;
+    public List<SongSimpleDTO> getAllSongsByOrderByInclusionDateDesc(){
+        List<Song> newestSong = this.addCalculatedValuesToSong(this.repository.findAll());
+        newestSong.sort(Comparator.comparing(Song::getInclusionDate).reversed());
+        return this.mapper.toSimpleDto(newestSong);
     }
 
     @Override
@@ -69,6 +64,11 @@ public class SongServiceImpl implements SongService {
         itemPage = new PageImpl<Song>(calculatedAdded, itemPage.getPageable(), calculatedAdded.size());
         return itemPage.map(mapper::toDto);
 
+    }
+
+    @Override
+    public List<SongDTO> getNewestSongs(Date inclusionDate) {
+        return null;
     }
 
     private List<Song> addCalculatedValuesToSong(List<Song> iterable) {
@@ -96,6 +96,11 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
+    public Optional<SongDTO> getSongById(Long idSong) {
+        return Optional.empty();
+    }
+
+    @Override
     public SongDTO saveSong(SongDTO songDTO) {
         songDTO.setTotalViews(0L);
         songDTO.setTotalViews(0L);
@@ -109,6 +114,5 @@ public class SongServiceImpl implements SongService {
     public void deleteSong(Long idSong) {
         this.repository.deleteById(idSong);
     }
-
 
 }

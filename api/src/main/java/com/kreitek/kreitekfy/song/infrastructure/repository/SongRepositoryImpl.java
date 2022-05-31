@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,10 +54,11 @@ public class SongRepositoryImpl implements SongRepository {
         return songJpaRepository.findById(id);
     }
 
-  //@Override
- // public List<Song> getAllSongsByOrderByInclusion_DateDesc() {
-        //return songJpaRepository.getAllSongsByOrderByInclusion_DateDesc();
-  //}
+
+  @Override
+ public List<Song> getAllSongsByOrderByInclusionDateDesc() {
+        return songJpaRepository.getAllSongsByOrderByInclusionDateDesc();
+  }
     }
 
 

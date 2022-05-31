@@ -17,7 +17,7 @@ export class MostViewComponent implements OnInit {
     this.getSongs();
   }
   private getSongs(): void{
-    this.songsService.getAllSongs(this.pageSize).subscribe({
+    this.songsService.getAllNewestSongs().subscribe({
       next: (SongsRequest: any) => {this.songs = SongsRequest.content;
       this.pageSize = SongsRequest.pageSize },
       error: (err) => {this.handleError(err);}

@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -40,12 +41,12 @@ public class SongRestController  {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
     }
-   // @CrossOrigin
-   // @GetMapping(value = "/songs/newests", produces = "application/json")
-   // public ResponseEntity<List<SongDTO>> getNewestSongs() {
-       // List<SongDTO> songDTOS = this.service.getNewestSongs();
-        //return new ResponseEntity<>(songDTOS, HttpStatus.OK);
-    //}
+    @CrossOrigin
+    @GetMapping(value = "/songs/newests", produces = "application/json")
+    public ResponseEntity<List<SongDTO>> getNewestSongs(@PathVariable Date inclusionDate) {
+        List<SongDTO> songDTOS = this.service.getNewestSongs(inclusionDate);
+        return new ResponseEntity<>(songDTOS, HttpStatus.OK);
+    }
     @CrossOrigin
     @PostMapping(value = "/songs", produces = "application/json", consumes = "application/json")
     public ResponseEntity<SongDTO> saveSong(@RequestBody SongDTO songDTO) {

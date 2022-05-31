@@ -4,8 +4,10 @@ import com.kreitek.kreitekfy.song.domain.entity.Song;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
+import java.util.Date;
 import java.util.List;
 
 public interface SongJpaRepository extends JpaRepository<Song, Long>, JpaSpecificationExecutor<Song> {
- // List<Song> getAllSongsByOrderByInclusion_DateDesc();
+    List<Song> findByNameContainsIgnoreCase(String partialName);
+     List<Song> getAllSongsByOrderByInclusionDateDesc();
 }

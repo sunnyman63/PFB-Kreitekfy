@@ -5,7 +5,7 @@ import { Songs } from './../model/songs.model';
 import { SongsService } from './../service/songs.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { SongsListComponent } from '../songs-list/songs-list.component';
+
 
 @Component({
   selector: 'app-song-view',
