@@ -1,3 +1,4 @@
+import { SongsListComponent } from './entities/songs/songs-list/songs-list.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -7,6 +8,7 @@ import { MostRatedComponent } from './entities/songs/most-rated/most-rated.compo
 import { SongCardComponent } from './entities/songs/song-card/song-card.component';
 import { SongCardListComponent } from './entities/songs/song-card-list/song-card-list.component';
 import { SongViewComponent } from './entities/songs/song-view/song-view.component';
+import { ForYouComponent } from './entities/songs/for-you/for-you.component';
 
 
 @NgModule({
@@ -14,9 +16,10 @@ import { SongViewComponent } from './entities/songs/song-view/song-view.componen
     UserComponent,
     MostRatedComponent,
     SongCardComponent,
-    SongCardListComponent
-    UserComponent,
-    SongViewComponent
+    SongCardListComponent,
+    SongViewComponent,
+    SongsListComponent,
+    ForYouComponent
   ],
   imports: [
     CommonModule,

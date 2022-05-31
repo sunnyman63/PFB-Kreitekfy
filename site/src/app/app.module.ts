@@ -15,7 +15,6 @@ import { SongsListComponent } from './user/entities/songs/songs-list/songs-list.
     AppComponent,
     FooterComponent,
     NavbarComponent,
-    SongsListComponent
   ],
   imports: [
     BrowserModule,
