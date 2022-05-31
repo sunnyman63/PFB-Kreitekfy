@@ -2,12 +2,14 @@ package com.kreitek.kreitekfy.song.domain.entity;
 
 import com.kreitek.kreitekfy.album.domain.entity.Album;
 
+import com.kreitek.kreitekfy.artist.domain.entity.Artist;
 import com.kreitek.kreitekfy.style.domain.entity.Style;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "songs")
@@ -41,6 +43,14 @@ public class Song {
     @ManyToOne
     @JoinColumn(name = "style_id", nullable = false)
     private Style style;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "canciones_artistas",
+            joinColumns = @JoinColumn(name = "song_id"),
+            inverseJoinColumns = @JoinColumn(name = "artist_id")
+    )
+    Set<Artist> artists;
 
 
     public Song() {
@@ -107,5 +117,13 @@ public class Song {
 
     public void setStyle(Style style) {
         this.style = style;
+    }
+
+    public Set<Artist> getArtists() {
+        return artists;
+    }
+
+    public void setArtists(Set<Artist> artists) {
+        this.artists = artists;
     }
 }

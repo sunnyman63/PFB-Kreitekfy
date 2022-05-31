@@ -18,9 +18,6 @@ public class Artist {
     @Size(min = 4, max = 100)
     private String name;
 
-    @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
-    Set<Album> albums;
-
     public Artist() {
     }
 
@@ -38,13 +35,5 @@ public class Artist {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Set<Album> getAlbums() {
-        return albums;
-    }
-
-    public void setAlbums(Set<Album> albums) {
-        this.albums = albums;
     }
 }

@@ -35,6 +35,7 @@ public class SongServiceImpl implements SongService {
         this.mapper = mapper;
         this.userSongService = userSongService;
     }
+   
 
     @Override
     public Optional<SongDTO> getSongById(Long idSong) {
@@ -82,7 +83,8 @@ public class SongServiceImpl implements SongService {
 
     }
 
-    private List<Song> addCalculatedValuesToSong(List<Song> iterable) {
+    @Override
+    public List<Song> addCalculatedValuesToSong(List<Song> iterable) {
         iterable.forEach(song -> {
             AtomicReference<Long> totalRate = new AtomicReference<>(0L);
             AtomicReference<Long> totalViews = new AtomicReference<>(0L);

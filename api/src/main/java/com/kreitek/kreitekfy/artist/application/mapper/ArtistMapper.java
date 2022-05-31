@@ -7,13 +7,6 @@ import com.kreitek.kreitekfy.shared.mapper.EntityMapper;
 
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring", uses = { AlbumMapper.class })
+@Mapper(componentModel = "spring")
 public interface ArtistMapper extends EntityMapper<ArtistDTO, Artist> {
-    default Artist fromId(Long id) {
-        if (id == null) return null;
-
-        Artist artist = new Artist();
-        artist.setId(id);
-        return artist;
-    }
 }

@@ -15,18 +15,11 @@ import java.util.List;
 public interface AlbumMapper extends EntityMapper<AlbumDTO, Album> {
 
     @Override
-    @Mapping(source = "artistId", target = "artist")
     @Mapping(target = "songs", ignore = true)
     Album toEntity(AlbumDTO dto);
 
-    @Override
-    @Mapping(source = "artist.id", target = "artistId")
-    @Mapping(source = "artist.name", target = "artistName")
-    AlbumDTO toDto(Album entity);
-
     List<AlbumSimpleDTO> toSimpleDto(List<Album> albums);
 
-    @Mapping(target = "artist", ignore = true)
     @Mapping(target = "songs", ignore = true)
     Album toDto(AlbumSimpleDTO albumSimpleDTO);
 

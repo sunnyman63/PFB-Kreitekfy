@@ -1,10 +1,9 @@
 package com.kreitek.kreitekfy.song.application.dto;
 
-import com.kreitek.kreitekfy.artist.domain.entity.Artist;
+import com.kreitek.kreitekfy.artist.application.dto.ArtistDTO;
 
-import javax.persistence.Column;
-import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 public class SongDTO {
 
@@ -19,8 +18,7 @@ public class SongDTO {
     private byte[] albumImage;
     private Long styleId;
     private String styleName;
-    private String artistId;
-    private String artistName;
+    private List<ArtistDTO> artists;
 
     public SongDTO() {
     }
@@ -112,19 +110,11 @@ public class SongDTO {
         this.styleName = styleName;
     }
 
-    public String getArtistId() {
-        return artistId;
+    public List<ArtistDTO> getArtists() {
+        return artists;
     }
 
-    public void setArtistId(String artistId) {
-        this.artistId = artistId;
-    }
-
-    public String getArtistName() {
-        return artistName;
-    }
-
-    public void setArtistName(String artistName) {
-        this.artistName = artistName;
+    public void setArtists(List<ArtistDTO> artists) {
+        this.artists = artists;
     }
 }

@@ -1,6 +1,9 @@
 package com.kreitek.kreitekfy.song.application.dto;
 
+import com.kreitek.kreitekfy.artist.application.dto.ArtistDTO;
+
 import java.util.Date;
+import java.util.List;
 
 public class SongSimpleDTO {
 
@@ -12,7 +15,7 @@ public class SongSimpleDTO {
     private Date inclusionDate;
     private Long styleId;
     private String styleName;
-
+    private List<ArtistDTO> artists;
 
     public SongSimpleDTO() {
     }
@@ -79,5 +82,13 @@ public class SongSimpleDTO {
 
     public void setStyleName(String styleName) {
         this.styleName = styleName;
+    }
+
+    public List<ArtistDTO> getArtists() {
+        return artists;
+    }
+
+    public void setArtists(List<ArtistDTO> artists) {
+        this.artists = artists;
     }
 }
