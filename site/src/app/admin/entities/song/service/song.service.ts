@@ -10,8 +10,21 @@ export class SongService {
 
   constructor(private http: HttpClient) { }
 
-  getAllSongs(): Observable<Song[]>{
-    const urlEndPoint: string = "http://localhost:8080/api/songs";
+  getSongs(partialName?: string): Observable<Song[]> {
+    let urlEndpoint: string = "http://localhost:8080/api/songs/search";
+
+    if(partialName) {
+      urlEndpoint = urlEndpoint + "?partialName=" + partialName;
+    }
+
+    return this.http.get<Song[]>(urlEndpoint);
+  }
+
+  getPaginatedFilteredSongs(page: number, size: number, sort: string, filters?: string): Observable<Song[]>{
+    let urlEndPoint: string = "http://localhost:8080/api/songs?page=" + page + "&size=" + size + "&sort=" + sort;
+    if (filters) {
+      urlEndPoint = urlEndPoint + "&filter=" + filters;
+    }
     return this.http.get<Song[]>(urlEndPoint)
   }
 

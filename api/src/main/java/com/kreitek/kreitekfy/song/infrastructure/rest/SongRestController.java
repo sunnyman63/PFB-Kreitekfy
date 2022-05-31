@@ -44,8 +44,8 @@ public class SongRestController  {
     }
 
     @GetMapping(value = "/newests", produces = "application/json")
-    public ResponseEntity<List<SongDTO>> getNewestSongs(@PathVariable Date inclusionDate) {
-        List<SongDTO> songDTOS = this.service.getNewestSongs(inclusionDate);
+    public ResponseEntity<List<SongSimpleDTO>> getNewestSongs() {
+        List<SongSimpleDTO> songDTOS = this.service.getAllSongsByOrderByInclusionDateDesc();
         return new ResponseEntity<>(songDTOS, HttpStatus.OK);
     }
 
