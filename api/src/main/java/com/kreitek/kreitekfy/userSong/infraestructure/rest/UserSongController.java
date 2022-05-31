@@ -25,7 +25,7 @@ public class UserSongController {
 
         if(userSongService.existUserSongBySongIdAndUserId(userSongSimpleDTO.getSongId(),userSongSimpleDTO.getUserId())){
             userSongSimpleDTO = this.userSongService.findUserSongBySongIdAndUserId(userSongSimpleDTO.getSongId(),userSongSimpleDTO.getUserId());
-            return new ResponseEntity<>(userSongSimpleDTO, HttpStatus.NOT_MODIFIED);
+            return new ResponseEntity<>(userSongSimpleDTO, HttpStatus.ACCEPTED);
         }
         userSongSimpleDTO = this.userSongService.saveUserSong(userSongSimpleDTO);
         return new ResponseEntity<>(userSongSimpleDTO, HttpStatus.CREATED);
