@@ -56,7 +56,7 @@ public class SongServiceImpl implements SongService {
         return this.mapper.toSimpleDto(songs);
     }
 
-    public List<SongSimpleDTO> getAllSongsByOrderByInclusionDateDesc() {
+    public List<SongDTO> getAllSongsByOrderByInclusionDateDesc() {
         List<Song> newestSong = this.addCalculatedValuesToSong(this.repository.findAll());
         newestSong.sort(Comparator.comparing(Song::getInclusionDate).reversed());
 
@@ -64,11 +64,11 @@ public class SongServiceImpl implements SongService {
         for (int i = 0; i < 5; i++){
             fiveNewestSongs.add(newestSong.get(i));
         }
-        return this.mapper.toSimpleDto(fiveNewestSongs);
+        return this.mapper.toDto(fiveNewestSongs);
     }
 
     @Override
-    public List<SongSimpleDTO> findByOrderByTotalRateDesc() {
+    public List<SongDTO> findByOrderByTotalRateDesc() {
         List<Song> calculatedAdded = this.addCalculatedValuesToSong(this.repository.findAll());
         calculatedAdded.sort(Comparator.comparing(Song::getTotalRate).reversed());
         List<Song> fiveBestRatedSongs = new ArrayList<>();
@@ -76,7 +76,7 @@ public class SongServiceImpl implements SongService {
             fiveBestRatedSongs.add(calculatedAdded.get(i));
         }
 
-        return this.mapper.toSimpleDto(fiveBestRatedSongs);
+        return this.mapper.toDto(fiveBestRatedSongs);
     }
 
     @Override
