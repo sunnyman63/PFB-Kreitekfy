@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Song } from '../admin/entities/song/model/song.model';
+
+import { Songs } from './entities/songs/model/songs.model';
 import { SongsService } from './entities/songs/service/songs.service';
 
 @Component({
@@ -9,20 +10,33 @@ import { SongsService } from './entities/songs/service/songs.service';
 })
 export class UserComponent implements OnInit {
 
-  title? : string;
-  songsTopRated: Song[] = [];
+
+  titleTopRated: string = "Los mejor valorados";
+  titleNewest : string = "Novedades";
+  songsTopRated: Songs[] = [];
+  songsNewest: Songs[] = [];
 
   constructor(private songService: SongsService) {}
 
   ngOnInit(): void {
     this.getTopRated();
+    this.getTopNewest();
   }
 
   private getTopRated(): void{
-    this.title = "Las mas valoradas"
+
     this.songService.getTopRated().subscribe({
       next: (songRest) => {
         this.songsTopRated = songRest;
+      },
+      error: (err) => {}
+    })
+  }
+  private getTopNewest(): void{
+
+    this.songService.getAllNewestSongs().subscribe({
+      next: (songRest) => {
+        this.songsNewest = songRest;
       },
       error: (err) => {}
     })

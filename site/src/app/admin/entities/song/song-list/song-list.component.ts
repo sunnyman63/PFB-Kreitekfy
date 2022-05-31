@@ -35,13 +35,13 @@ export class SongListComponent implements OnInit {
   }
 
   private getAllSongs(): void {
-    this.songService.getAllSongs().subscribe({
-      next: (data: any) => { 
+    this.songService.getSongs().subscribe({
+      next: (data: any) => {
         this.songs = data.content,
         this.first = data.first;
         this.last = data.last;
         this.totalPages = data.totalPages;
-        this.totalElements = data.totalElements;  
+        this.totalElements = data.totalElements;
       },
       error: () => {}
     })
@@ -71,7 +71,7 @@ export class SongListComponent implements OnInit {
         next: (data) => {
           this.getAllSongs();
         },
-        error: (err) => {} 
+        error: (err) => {}
       })
     }
   }

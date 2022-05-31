@@ -16,7 +16,7 @@ public getAllSongs(): Observable<Songs[]>{
 }
 
 public getAllNewestSongs(): Observable<Songs[]>{
-  const urlEndpoint: string = "http://localhost:8080/api/songs/newest";
+  const urlEndpoint: string = "http://localhost:8080/api/songs/newests";
   return this.http.get<Songs[]>(urlEndpoint);
 }
 

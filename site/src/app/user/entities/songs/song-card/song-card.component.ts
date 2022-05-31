@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Song } from 'src/app/admin/entities/song/model/song.model';
+import { Songs } from '../model/songs.model';
+
 
 @Component({
   selector: 'app-song-card',
@@ -8,7 +9,7 @@ import { Song } from 'src/app/admin/entities/song/model/song.model';
 })
 export class SongCardComponent implements OnInit {
 
-  @Input() song?: Song;
+  @Input() song?: Songs;
 
   constructor() { }
 

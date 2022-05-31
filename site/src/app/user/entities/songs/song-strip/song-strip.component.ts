@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Song } from 'src/app/admin/entities/song/model/song.model';
+import { Songs } from '../model/songs.model';
+
 
 @Component({
   selector: 'app-song-strip',
@@ -9,7 +10,7 @@ import { Song } from 'src/app/admin/entities/song/model/song.model';
 export class SongStripComponent implements OnInit {
 
   @Input() title?: string;
-  @Input() songs?: Song[];
+  @Input() songs?: Songs[];
 
   constructor() { }
 
