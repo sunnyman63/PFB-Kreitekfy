@@ -20,19 +20,18 @@
     .buscador {
         width: 100%;
         background-color: #fff;
-        border-radius: 19px;
-        overflow: hidden;
+        display: flex;
+        align-items: stretch;
         button {
-            width: 30px;
-            height: 30px;
+            width: 42px;
             border: none;
             border-radius: 50%;
             background-color: #fff;
         }
-        input {
+        &>.input {
             flex-basis: 100% !important;
             flex-grow: 1 !important;
-            border: none;
+            border: none !important;
             &:focus {
                 box-shadow: none;
             }

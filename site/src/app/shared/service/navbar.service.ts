@@ -1,24 +1,36 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-import { Song } from '../../admin/entities/song/model/song.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NavbarService {
 
-  styleId:number=0
+  styleId: number = 0;
+  isLogged: boolean = false;
+  private emitChangeSourceStyle = new Subject<number>();
+  private emitChangeSourceIsLogged = new Subject<boolean>();
+  styleEmitted = this.emitChangeSourceStyle.asObservable();
+  isLoggedEmitted = this.emitChangeSourceIsLogged.asObservable();
 
-  constructor(private http:HttpClient,
-     ) { }
+  constructor() { }
 
-  public getActualStyleId(){
+  public getActualStyleId(): number{
     return this.styleId;
   }
 
-  setActualStyleId(styleId:number){
-    this.styleId=styleId
+  public getActualIsLogged(): boolean {
+    return this.isLogged;
+  }
+
+  emitStyle(style: number): void {
+    this.styleId = style;
+    this.emitChangeSourceStyle.next(style);
+  }
+
+  emitIsLogged(isLogged: boolean): void {
+    this.isLogged = isLogged;
+    this.emitChangeSourceIsLogged.next(isLogged);
   }
 
 }
