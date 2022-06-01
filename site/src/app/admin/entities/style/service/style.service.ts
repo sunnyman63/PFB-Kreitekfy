@@ -33,14 +33,14 @@ export class StyleService {
     return this.http.get<Style>(urlEndPoint);
   }
 
-  insertStyle(song: Style) {
+  insertStyle(style: Style) {
     const urlEndPoint: string = "http://localhost:8080/api/styles/";
-    return this.http.post<Style>(urlEndPoint, song);
+    return this.http.post<Style>(urlEndPoint, style);
   }
 
-  updateStyle(song: Style) {
+  updateStyle(style: Style) {
     const urlEndPoint: string = "http://localhost:8080/api/styles/";
-    return this.http.patch<Style>(urlEndPoint, song);
+    return this.http.patch<Style>(urlEndPoint, style);
   }
 
   deleteStyle(styleIdToDelete: number): Observable<any>{
