@@ -35,17 +35,63 @@ $light: #f8f9fa;
     .p-autocomplete-multiple-container {
         padding: 0.02rem 0.75rem;
         width: 100%;
-    
+
         .p-autocomplete-token {
             background: $primary;
         }
-    
+
         &:not(.p-disabled).p-focus {
             box-shadow: 0 0 0 0.2rem #6e41a179;
             border-color: $primary;
         }
     }
 
+}
+
+.filters{
+
+    margin: 10px 0px;
+
+}
+
+.action-buttons{
+    i{
+        margin: 10px;
+    }
+}
+
+.botonera-paginacion {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    position: relative;
+    bottom: 0;
+
+    button{
+        margin: 0pc 10px;
+    }
+}
+
+.botoneraPaginacion button, .botoneraPaginacion span {
+    margin-left: 10px;
+}
+
+form{
+    div{
+        label{
+            color: #f8f9fa;;
+        }
+    }
+
+    .form-buttons{
+        display: flex;
+        justify-content: space-between;
+
+        input{
+            border-radius: 0.25rem;
+            width: 45%;
+        }
+    }
 }
 
 
