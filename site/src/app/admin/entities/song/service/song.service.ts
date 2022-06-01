@@ -10,6 +10,11 @@ export class SongService {
 
   constructor(private http: HttpClient) { }
 
+  getAllSongs(): Observable<Song[]>{
+    const urlEndPoint: string = "http://localhost:8080/api/songs/";
+    return this.http.get<Song[]>(urlEndPoint);
+  }
+
   getSongs(partialName?: string): Observable<Song[]> {
     let urlEndpoint: string = "http://localhost:8080/api/songs/search";
 

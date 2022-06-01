@@ -3,7 +3,7 @@
 <main class="container mt-2">
     <section class="row">
         <article class="d-flex justify-content-center">
-            <form class="col-lg-5 col-md-6 col-sm-8 col-10" *ngIf="songForm" [formGroup]="songForm" novalidate autocomplete="off">
+            <form class="col-10" *ngIf="songForm" [formGroup]="songForm" novalidate autocomplete="off">
             
                 <!-- ID -->
     
@@ -19,12 +19,33 @@
                     <input type="text" class="form-control" placeholder="Nombre" formControlName="name">
                 </div>
     
+                <div *ngIf="(songForm.get('name')!.dirty && songForm.get('name')!.errors)">
+                    <small class="form-text text-danger"
+                    *ngIf="songForm.get('name')!.errors!['required']">
+                    Este campo es requerido
+                    </small>
+                    <small class="form-text text-danger"
+                    *ngIf="songForm.get('name')!.errors!['minlength']">
+                    Este campo tiene que tener una longitud mínima de 3 caracteres
+                    </small>
+                </div>
     
                 <!-- DURATION  -->
     
                 <div>
                     <label for="" class="form-label">Duration</label>
                     <input type="number" class="form-control" placeholder="Duracion" formControlName="duration">
+                </div>
+
+                <div *ngIf="(songForm.get('duration')!.dirty && songForm.get('duration')!.errors)">
+                    <small class="form-text text-danger"
+                    *ngIf="songForm.get('duration')!.errors!['required']">
+                    Este campo es requerido
+                    </small>
+                    <small class="form-text text-danger"
+                    *ngIf="songForm.get('duration')!.errors!['min']">
+                    Este campo tiene que ser positivo
+                    </small>
                 </div>
     
                 <!-- ESTYLE -->
@@ -36,6 +57,30 @@
                     (onSelect)="styleSelected()" (onClear)="styleUnselected()" 
                     [required]="true" [forceSelection]="true" [dropdown]="true"></p-autoComplete>
                 </div>
+
+                <div *ngIf="(songForm.get('style')!.dirty && songForm.get('style')!.errors)">
+                    <small class="form-text text-danger"
+                    *ngIf="songForm.get('style')!.errors!['required']">
+                    Este campo es requerido
+                    </small>
+                </div>
+
+                <!-- ARTIST -->
+
+                <div>
+                    <label for="categoryId" class="form-label">Artista</label>
+                    <p-autoComplete formControlName ="artist" name="style" [suggestions]="artists" 
+                    (completeMethod)="getArtists($event)" field="name" 
+                    (onSelect)="artistSelected()" (onClear)="artistUnselected()" 
+                    [required]="true" [forceSelection]="true" [dropdown]="true" [multiple]="true"></p-autoComplete>
+                </div>
+
+                <div *ngIf="(songForm.get('artist')!.dirty && songForm.get('artist')!.errors)">
+                    <small class="form-text text-danger"
+                    *ngIf="songForm.get('artist')!.errors!['required']">
+                    Este campo es requerido
+                    </small>
+                </div>
     
                 <!-- ALBUM  -->
     
@@ -46,9 +91,12 @@
                     (onSelect)="albumSelected()" (onClear)="albumUnselected()" 
                     [required]="true" [forceSelection]="true" [dropdown]="true"></p-autoComplete>
                 </div>
-    
-                <div>
-                    <img  *ngIf="song?.albumImage" [src]="'data:image/jpeg;base64,'+ song!.albumImage">
+
+                <div *ngIf="(songForm.get('album')!.dirty && songForm.get('album')!.errors)">
+                    <small class="form-text text-danger"
+                    *ngIf="songForm.get('album')!.errors!['required']">
+                    Este campo es requerido
+                    </small>
                 </div>
     
                 <div class="songform-buttons mt-4">
