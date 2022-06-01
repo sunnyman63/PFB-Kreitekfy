@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface StyleRepository extends JpaRepository<Style, Long> {
     List<Style> findByNameContainsIgnoreCase(String partialName);
+
 }

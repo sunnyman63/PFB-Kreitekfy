@@ -64,9 +64,15 @@ public class SongServiceImpl implements SongService {
         return this.mapper.toSimpleDto(songs);
     }
 
-    public List<SongDTO> getAllSongsByOrderByInclusionDateDesc() {
-        List<Song> newestSong = this.addCalculatedValuesToSong(this.repository.findAll());
+    public List<SongDTO> getAllSongsByOrderByInclusionDateDesc(Long styleId) {
+        List<Song> newestSong = new ArrayList<Song>();
+        if(styleId==0L){
+            newestSong = this.addCalculatedValuesToSong(this.repository.findAll());
+        }else{
+            newestSong = this.addCalculatedValuesToSong(this.repository.getSongsByStyle(styleId));
+        }
         newestSong.sort(Comparator.comparing(Song::getInclusionDate).reversed());
+
 
         List<Song> fiveNewestSongs = new ArrayList<>();
         for (int i = 0; i < newestSong.size(); i++){
@@ -79,8 +85,15 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public List<SongDTO> findByOrderByTotalRateDesc() {
-        List<Song> calculatedAdded = this.addCalculatedValuesToSong(this.repository.findAll());
+    public List<SongDTO> findByOrderByTotalRateDesc(Long styleId) {
+        List<Song> calculatedAdded = new ArrayList<Song>();
+        if(styleId==0){
+            calculatedAdded = this.addCalculatedValuesToSong(this.repository.findAll());
+        }else {
+            calculatedAdded = this.addCalculatedValuesToSong(this.repository.getSongsByStyle(styleId));
+
+        }
+
         calculatedAdded.sort(Comparator.comparing(Song::getTotalRate).reversed());
         List<Song> fiveBestRatedSongs = new ArrayList<>();
         for (int i = 0; i < calculatedAdded.size(); i++){
@@ -94,8 +107,15 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public List<SongDTO> findByOrderByTotalViewsDesc() {
-        List<Song> calculatedAdded = this.addCalculatedValuesToSong(this.repository.findAll());
+    public List<SongDTO> findByOrderByTotalViewsDesc(Long styleId) {
+
+        List<Song> calculatedAdded = new ArrayList<Song>();
+        if(styleId==0){
+            calculatedAdded = this.addCalculatedValuesToSong(this.repository.findAll());
+        }else{
+            calculatedAdded = this.addCalculatedValuesToSong(this.repository.getSongsByStyle(styleId));
+        }
+
         calculatedAdded.sort(Comparator.comparing(Song::getTotalViews).reversed());
         List<Song> fiveMostViewedSongs = new ArrayList<>();
         for (int i = 0; i < calculatedAdded.size(); i++){
@@ -108,13 +128,18 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public List<SongDTO> findByUserPreferences(Long idUser) {
+    public List<SongDTO> findByUserPreferences(Long idUser, Long styleId) {
 
         List<UserSong> userSongs = this.userSongRepository.getUserSongByUser_Id(idUser);
         Long mostlistened;
         Long secondListened=0L;
 
         HashMap<Long,Long> StylesTimes = getStylesByListened(userSongs);
+
+        if(styleId!=0){
+            mostlistened=styleId;
+            return getAllSongsByStyleandRate(mostlistened, secondListened);
+        }
 
         mostlistened=getMostListenedStyle(StylesTimes);
         StylesTimes.remove(mostlistened);

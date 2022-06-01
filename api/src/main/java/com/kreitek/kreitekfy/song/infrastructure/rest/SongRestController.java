@@ -4,6 +4,7 @@ package com.kreitek.kreitekfy.song.infrastructure.rest;
 import com.kreitek.kreitekfy.song.application.dto.SongDTO;
 import com.kreitek.kreitekfy.song.application.dto.SongSimpleDTO;
 import com.kreitek.kreitekfy.song.application.services.SongService;
+import com.kreitek.kreitekfy.song.domain.entity.Song;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.ResponseErrorHandler;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -58,26 +60,49 @@ public class SongRestController  {
     }
 
     @GetMapping(value = "/newests", produces = "application/json")
-    public ResponseEntity<List<SongDTO>> getNewestSongs() {
-        List<SongDTO> songDTOS = this.service.getAllSongsByOrderByInclusionDateDesc();
+    public ResponseEntity<List<SongDTO>> getNewestSongs(@RequestParam(value = "styleId", required = false) Long styleId) {
+        List<SongDTO> songDTOS = new ArrayList<SongDTO>();
+        if(styleId!=null){
+            songDTOS = this.service.getAllSongsByOrderByInclusionDateDesc(styleId);
+        }else{
+            songDTOS = this.service.getAllSongsByOrderByInclusionDateDesc(0L);
+        }
+
         return new ResponseEntity<>(songDTOS, HttpStatus.OK);
     }
 
     @GetMapping(value = "/top-rated", produces = "application/json")
-    public ResponseEntity<List<SongDTO>> getTopRatedSongs(){
-        List<SongDTO> songDTOS = this.service.findByOrderByTotalRateDesc();
+    public ResponseEntity<List<SongDTO>> getTopRatedSongs(@RequestParam(value = "styleId", required = false) Long styleId){
+        List<SongDTO> songDTOS = new ArrayList<SongDTO>();
+        if(styleId!=null){
+            songDTOS = this.service.findByOrderByTotalRateDesc(styleId);
+        }else{
+            songDTOS = this.service.findByOrderByTotalRateDesc(0L);
+        }
         return new ResponseEntity<>(songDTOS, HttpStatus.OK);
     }
 
     @GetMapping(value = "/top-view", produces = "application/json")
-    public ResponseEntity<List<SongDTO>> getTopViewedSongs(){
-        List<SongDTO> songDTOS = this.service.findByOrderByTotalViewsDesc();
+    public ResponseEntity<List<SongDTO>> getTopViewedSongs(@RequestParam(value = "styleId", required = false) Long styleId){
+        List<SongDTO> songDTOS = new ArrayList<SongDTO>();
+        if(styleId!=null){
+            songDTOS = this.service.findByOrderByTotalViewsDesc(styleId);
+        }else{
+            songDTOS = this.service.findByOrderByTotalViewsDesc(0L);
+        }
+
         return new ResponseEntity<>(songDTOS, HttpStatus.OK);
     }
 
     @GetMapping(value = "/foru/{idUser}", produces = "application/json")
-    public ResponseEntity<List<SongDTO>> getForUSongs(@PathVariable Long idUser){
-        List<SongDTO> songDTOS = this.service.findByUserPreferences(idUser);
+    public ResponseEntity<List<SongDTO>> getForUSongs(@PathVariable Long idUser, @RequestParam(value = "styleId", required = false) Long styleId){
+        List<SongDTO> songDTOS = new ArrayList<SongDTO>();
+        if(styleId!=null) {
+            songDTOS = this.service.findByUserPreferences(idUser, styleId);
+        }else{
+            songDTOS = this.service.findByUserPreferences(idUser, 0L);
+        }
+
 
         return new ResponseEntity<>(songDTOS, HttpStatus.OK);
     }
