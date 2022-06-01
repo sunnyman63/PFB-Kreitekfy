@@ -7,6 +7,7 @@ import { UserDTO } from 'src/app/shared/models/UserDTO.model';
 import { SessionService } from 'src/app/shared/service/session.service';
 import { UserService } from 'src/app/shared/service/user.service';
 import { Style } from 'src/app/admin/entities/style/model/style.model';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-navbar',
@@ -21,8 +22,9 @@ export class NavbarComponent implements OnInit {
   users: Array<UserDTO> = [];
   isAdmin: boolean = false;
   styles: Style[] = [];
-  currentStyle:number=0
-  
+  currentStyle:number=0;
+  myGroup!: FormGroup;
+
 
   constructor(
     private userService: UserService,
@@ -37,14 +39,15 @@ export class NavbarComponent implements OnInit {
     if(this.sessionService.getIsAdmin != null) {
       this.isAdmin = this.sessionService.getIsAdmin()!;
     }
-
+    this.myGroup = new FormGroup({
+      estilo: new FormControl()
+    })
   }
 
   private getUsers(): void {
     this.userService.getUsers().subscribe({
       next:(data) => {
         this.users = data;
-        console.log(this.users);
       }
     })
   }
@@ -53,6 +56,7 @@ export class NavbarComponent implements OnInit {
     this.sessionService.setId(user.id);
     this.sessionService.setIsAdmin(user.admin);
     this.sessionService.setName(user.name);
+    this.navbarService.emitIsLogged(true);
     this.router.navigate(['/']);
     if(user.admin) {
       this.isAdmin = true;
@@ -70,17 +74,15 @@ export class NavbarComponent implements OnInit {
 
     this.styleService.getStyles(styleSearch).subscribe({
       next: (stylesFilter) => { this.styles = stylesFilter },
-      error: (err) => { 
+      error: (err) => {
         //TO DO
        }
     });
   }
 
   styleSelected():void{
-    this.navbarService.setActualStyleId(this.styles[0].id!)
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/']);
+    this.navbarService.emitStyle(this.myGroup.get(["estilo"])!.value.id);
+    this.myGroup.reset();
   }
 
 

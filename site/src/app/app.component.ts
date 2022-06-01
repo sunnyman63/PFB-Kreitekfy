@@ -8,8 +8,6 @@ import { Subject } from 'rxjs';
 })
 export class AppComponent{
 
-
-  styleId=new Subject<number>();
   title = 'site';
 
 }

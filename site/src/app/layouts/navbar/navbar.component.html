@@ -38,12 +38,16 @@
           </li>
         </ul>
       </div>
-      <div class="searcher">
-        <p-autoComplete formControlName ="style" name="style" [suggestions]="styles" 
-        (completeMethod)="getStyles($event)" field="name" 
-        [required]="true" [forceSelection]="true" ></p-autoComplete>
-        <button (click)="styleSelected()" type="submit">Buscar</button>
-    </div>
+      <div class="div-buscador">
+        <div class="buscador" [formGroup]="myGroup">
+          <p-autoComplete class="input" formControlName="estilo" name="style" [suggestions]="styles" 
+          (completeMethod)="getStyles($event)" field="name" 
+          [required]="true" [forceSelection]="true"></p-autoComplete>
+          <button (click)="styleSelected()" type="reset">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+      </div>
       <button class="bg-white user-icon" type="button" data-bs-toggle="modal" data-bs-target="#userModal">
         <img src="./assets/image/user.png" class="w-100" alt="user">
       </button>
