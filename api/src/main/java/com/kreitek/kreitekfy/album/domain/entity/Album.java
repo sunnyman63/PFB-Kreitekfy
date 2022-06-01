@@ -22,6 +22,9 @@ public class Album {
     @Lob
     private byte[] image;
 
+    @Column()
+    private String imageType;
+
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
     private Set<Song> songs;
 
@@ -47,6 +50,14 @@ public class Album {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public String getImageType() {
+        return imageType;
+    }
+
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
     }
 
     public Set<Song> getSongs() {

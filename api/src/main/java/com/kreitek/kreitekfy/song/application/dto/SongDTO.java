@@ -16,6 +16,7 @@ public class SongDTO {
     private Long albumId;
     private String albumName;
     private byte[] albumImage;
+    private String albumImageType;
     private Long styleId;
     private String styleName;
     private List<ArtistDTO> artists;
@@ -92,6 +93,14 @@ public class SongDTO {
 
     public void setAlbumImage(byte[] albumImage) {
         this.albumImage = albumImage;
+    }
+
+    public String getAlbumImageType() {
+        return albumImageType;
+    }
+
+    public void setAlbumImageType(String albumImageType) {
+        this.albumImageType = albumImageType;
     }
 
     public Long getStyleId() {

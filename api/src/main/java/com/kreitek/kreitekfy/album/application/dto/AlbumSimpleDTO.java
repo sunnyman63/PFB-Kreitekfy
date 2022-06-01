@@ -5,6 +5,7 @@ public class AlbumSimpleDTO {
     private Long id;
     private String name;
     private byte[] image;
+    private String imageType;
 
     public AlbumSimpleDTO() {
     }
@@ -31,5 +32,13 @@ public class AlbumSimpleDTO {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public String getImageType() {
+        return imageType;
+    }
+
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
     }
 }
