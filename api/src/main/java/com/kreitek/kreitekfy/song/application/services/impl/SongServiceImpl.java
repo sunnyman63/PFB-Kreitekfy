@@ -66,7 +66,7 @@ public class SongServiceImpl implements SongService {
         List<Song> fiveNewestSongs = new ArrayList<>();
         for (int i = 0; i < newestSong.size(); i++){
             fiveNewestSongs.add(newestSong.get(i));
-            if(i == 5) {
+            if(i == 4) {
                 break;
             }
         }
@@ -80,7 +80,7 @@ public class SongServiceImpl implements SongService {
         List<Song> fiveBestRatedSongs = new ArrayList<>();
         for (int i = 0; i < calculatedAdded.size(); i++){
             fiveBestRatedSongs.add(calculatedAdded.get(i));
-            if(i == 5) {
+            if(i == 4) {
                 break;
             }
         }
@@ -95,7 +95,7 @@ public class SongServiceImpl implements SongService {
         List<Song> fiveMostViewedSongs = new ArrayList<>();
         for (int i = 0; i < calculatedAdded.size(); i++){
             fiveMostViewedSongs.add(calculatedAdded.get(i));
-            if(i == 5) {
+            if(i == 4) {
                 break;
             }
         }
@@ -130,8 +130,11 @@ public class SongServiceImpl implements SongService {
         List<Song> mostratedListened = this.addCalculatedValuesToSong(totalSongs);
         mostratedListened.sort(Comparator.comparing(Song::getTotalRate).reversed());
         List<Song> fiveBestRatedSongs = new ArrayList<>();
-        for (int i = 0; i < 5 && mostratedListened.get(i).getTotalRate()>=3 ; i++){
+        for (int i = 0; i < mostratedListened.size() && mostratedListened.get(i).getTotalRate()>=3 ; i++){
             fiveBestRatedSongs.add(mostratedListened.get(i));
+            if(i == 4) {
+                break;
+            }
         }
         return this.mapper.toDto(fiveBestRatedSongs);
     }

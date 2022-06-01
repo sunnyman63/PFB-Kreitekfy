@@ -1,3 +1,4 @@
 <app-song-strip [songs]="songsNewest" [title]="titleNewest"></app-song-strip>
 <app-song-strip [songs]="songsTopRated" [title]="titleTopRated"></app-song-strip>
 <app-song-strip [songs]="songsTopViewed" [title]="titleTopViewed"></app-song-strip>
+<app-song-strip *ngIf="userId" [songs]="songsForU" [title]="titleForU"></app-song-strip>

@@ -1,10 +1,10 @@
-<div class="song" *ngIf="song" [routerLink]="['user','song', song.id]">
+<div class="song" *ngIf="song" [routerLink]="['song', song.id]">
     <div class="image">
         <img src="data:image/jpeg;base64,{{song?.albumImage}}" alt="">
     </div>
     <div class="text">
         <h3>{{ song!.name }}</h3>
         <hr>
-        <h4>{{ song!.artistName}}</h4>
+        <h4 *ngFor="let artist of song.artists">{{ artist.name}}</h4>
     </div>
 </div>

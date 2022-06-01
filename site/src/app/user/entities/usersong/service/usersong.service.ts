@@ -15,6 +15,7 @@ export class UsersongService {
     return this.http.put<usersong>(urlEndpoint, usersong);
   }
   public postUserSong(usersong:usersong):Observable<usersong>{
+    usersong.personalValorations=null!;
     const urlEndpoint: string = "http://localhost:8080/api/usersong";
     return this.http.post<usersong>(urlEndpoint, usersong);
   }

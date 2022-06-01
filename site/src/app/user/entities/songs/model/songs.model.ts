@@ -1,3 +1,5 @@
+import { Artist } from "src/app/admin/entities/artist/model/artist.model"
+
 export class Songs{
 
   constructor(
@@ -8,7 +10,7 @@ export class Songs{
     albumImage: string, 
     totalViews: number,
     styleName:string,
-    artistName:string
+    artists: Artist[]
 
 ) {
     this.id = id
@@ -18,7 +20,7 @@ export class Songs{
     this.albumImage = albumImage
     this.totalViews = totalViews
     this.styleName = styleName
-    this.artistName = artistName
+    this.artists = artists
   }
     id: number | undefined;
     name: string;
@@ -27,5 +29,5 @@ export class Songs{
     albumImage: string;
     totalViews: number;
     styleName:string;
-    artistName:string;
+    artists: Artist[];
 }
