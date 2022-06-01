@@ -58,10 +58,12 @@ public class AlbumServiceImpl implements AlbumService {
                 .map(this.mapper::toDto);
         if (opAlbumDTO.isPresent()) {
             Album album = this.mapper.toEntity(opAlbumDTO.get());
-            List<Song> songs = album.getSongs().stream().toList();
-            songs = this.addCalculatedValuesToSong(songs);
-            album.setSongs(new HashSet<>(songs));
-            opAlbumDTO = Optional.of(this.mapper.toDto(album));
+            if(album.getSongs() != null){
+                List<Song> songs = album.getSongs().stream().toList();
+                songs = this.addCalculatedValuesToSong(songs);
+                album.setSongs(new HashSet<>(songs));
+                opAlbumDTO = Optional.of(this.mapper.toDto(album));
+            }
         }
         return opAlbumDTO;
     }
