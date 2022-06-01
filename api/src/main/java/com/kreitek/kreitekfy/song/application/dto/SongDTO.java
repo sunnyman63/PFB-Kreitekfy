@@ -12,7 +12,7 @@ public class SongDTO {
     private Integer duration;
     private Date inclusionDate;
     private Long totalViews;
-    private Long totalRate;
+    private Double totalRate;
     private Long albumId;
     private String albumName;
     private byte[] albumImage;
@@ -63,11 +63,11 @@ public class SongDTO {
         this.totalViews = totalViews;
     }
 
-    public Long getTotalRate() {
+    public Double getTotalRate() {
         return totalRate;
     }
 
-    public void setTotalRate(Long totalRate) {
+    public void setTotalRate(Double totalRate) {
         this.totalRate = totalRate;
     }
 

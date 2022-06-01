@@ -11,7 +11,7 @@ public class SongSimpleDTO {
     private String name;
     private Integer duration;
     private Long totalViews;
-    private Long totalRate;
+    private Double totalRate;
     private Date inclusionDate;
     private Long styleId;
     private String styleName;
@@ -52,11 +52,11 @@ public class SongSimpleDTO {
         this.totalViews = totalViews;
     }
 
-    public Long getTotalRate() {
+    public Double getTotalRate() {
         return totalRate;
     }
 
-    public void setTotalRate(Long totalRate) {
+    public void setTotalRate(Double totalRate) {
         this.totalRate = totalRate;
     }
 
