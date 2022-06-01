@@ -1,0 +1,41 @@
+<p-toast></p-toast>
+
+<main class="container mt-2">
+    <section class="row">
+        <article class="d-flex justify-content-center">
+            <form class="col-10" *ngIf="artistForm" [formGroup]="artistForm" novalidate autocomplete="off">
+            
+                <!-- ID -->
+    
+                <div *ngIf="mode == 'UPDATE'">
+                    <label for="" class="form-label">Id</label>
+                    <input type="text" class="form-control" placeholder="Indefinido" formControlName="id">
+                </div>
+                
+                <!-- NAME  -->
+    
+                <div>
+                    <label for="" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" placeholder="Nombre" formControlName="name">
+                </div>
+    
+                <div *ngIf="(artistForm.get('name')!.dirty && artistForm.get('name')!.errors)">
+                    <small class="form-text text-danger"
+                    *ngIf="artistForm.get('name')!.errors!['required']">
+                    Este campo es requerido
+                    </small>
+                    <small class="form-text text-danger"
+                    *ngIf="artistForm.get('name')!.errors!['minlength']">
+                    Este campo tiene que tener una longitud mínima de 3 caracteres
+                    </small>
+                </div>
+
+                <div class="songform-buttons mt-4">
+                    <input type="button" value="{{ textButton }}" (click)="saveArtist()" [disabled]="artistForm.invalid" class="btn btn-primary">
+                    <input type="button" value="Volver" [routerLink]="['/admin','artists']" class="btn btn-primary">
+                </div>
+
+            </form>
+        </article>
+    </section>
+</main>
