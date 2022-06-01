@@ -5,14 +5,14 @@ export class usersong{
         userId:number,
         songId:number,
         personalViews:number,
-        personalValorations:number
+        personalValorations:number|null
     ){
 
         this.id=id
         this.userId=userId
         this.songId=songId
         this.personalViews=personalViews
-        this.personalValorations= personalValorations
+        this.personalValorations=personalValorations!
     }
 
     id:number;

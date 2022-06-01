@@ -1,5 +1,5 @@
+import { SessionService } from 'src/app/shared/service/session.service';
 import { Component, OnInit } from '@angular/core';
-
 import { Songs } from './entities/songs/model/songs.model';
 import { SongsService } from './entities/songs/service/songs.service';
 
@@ -11,16 +11,26 @@ import { SongsService } from './entities/songs/service/songs.service';
 export class UserComponent implements OnInit {
 
 
-  titleTopRated: string = "Los mejor valorados";
+  titleTopRated: string = "Lo mejor valorado";
+  titleTopViewed: string = "Lo más sonado";
   titleNewest : string = "Novedades";
+  titleForU: string = "Para ti"
   songsTopRated: Songs[] = [];
   songsNewest: Songs[] = [];
+  songsTopViewed: Songs[] = [];
+  songsForU: Songs[] = [];
+  userId: number = this.sessionService.getId()!;
 
-  constructor(private songService: SongsService) {}
+  constructor(
+    private songService: SongsService,
+    private sessionService: SessionService
+    ) {}
 
   ngOnInit(): void {
     this.getTopRated();
     this.getTopNewest();
+    this.getTopViewed();
+    this.getForU();
   }
 
   private getTopRated(): void{
@@ -41,5 +51,26 @@ export class UserComponent implements OnInit {
       error: (err) => {}
     })
   }
+
+  private getTopViewed(): void{
+
+    this.songService.getAllTopViewed().subscribe({
+      next: (songRest) => {
+        this.songsTopViewed = songRest;
+      },
+      error: (err) => {}
+    })
+  }
+
+  private getForU(): void{
+
+    this.songService.getForU(this.userId).subscribe({
+      next: (songRest) => {
+        this.songsForU = songRest;
+      },
+      error: (err) => {}
+    })
+    }
+
 
 }

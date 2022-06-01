@@ -25,4 +25,14 @@ export class SongsService {
     return this.http.get<Songs[]>(urlEndpoint);
   }
 
+  getAllTopViewed(): Observable<Songs[]> {
+    const urlEndpoint: string = "http://localhost:8080/api/songs/top-view";
+    return this.http.get<Songs[]>(urlEndpoint);
+  }
+
+  getForU(id:number ):Observable<Songs[]>{
+    const urlEndpoint: string = "http://localhost:8080/api/songs/foru/"+id;
+    return this.http.get<Songs[]>(urlEndpoint);
+  }
+
 }

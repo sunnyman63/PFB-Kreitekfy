@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="duration">
-                    Autor: {{Song?.artistName | titlecase}}, Duration: {{Song?.duration}}
+                    <div *ngFor="let artist of Song?.artists" class="autor">Autor: {{artist.name | titlecase}}</div> Duration: {{Song?.duration}}
                 </div>
 
             </div>
@@ -22,7 +22,7 @@
             <hr>
 
 
-            <div class="interaccion">
+            <div class="interaccion" *ngIf="usersong.userId" >
 
                 <div class="play">
 
@@ -58,7 +58,7 @@
                 </div>
 
             </div>
-            <p>{{usersong?.personalViews}}</p>
+            <p *ngIf="!usersong.userId">Debes iniciar session para poder ver y votar las canciones!</p>
         </div>
       </div>
 

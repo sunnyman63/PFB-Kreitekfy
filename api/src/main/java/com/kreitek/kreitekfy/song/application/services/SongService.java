@@ -13,8 +13,9 @@ public interface SongService {
 
     List<SongSimpleDTO> getSongs();
     List<SongSimpleDTO> getSongsByName(String partialName);
-    List<SongDTO> getAllSongsByOrderByInclusionDateDesc();
-    List<SongDTO> findByOrderByTotalRateDesc();
+    List<SongDTO> getAllSongsByOrderByInclusionDateDesc(Long styleId);
+    List<SongDTO> findByOrderByTotalRateDesc(Long styleId);
+    List<SongDTO> findByOrderByTotalViewsDesc(Long styleId);
     Page<SongDTO> getSongByCriteriaPaged(Pageable pageable, String filter);
     Optional<SongDTO> getSongById(Long idSong);
 
@@ -23,5 +24,5 @@ public interface SongService {
     SongDTO saveSong(SongDTO songDTO);
     void deleteSong(Long idSong);
 
-    List<SongDTO> findByUserPreferences(Long idUser);
+    List<SongDTO> findByUserPreferences(Long idUser, Long styleId);
 }

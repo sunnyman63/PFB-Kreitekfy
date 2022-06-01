@@ -10,6 +10,7 @@ public class AlbumDTO implements Serializable {
     private Long id;
     private String name;
     private byte[] image;
+    private String imageType;
     private List<SongSimpleDTO> songs;
 
     public AlbumDTO() {
@@ -37,6 +38,14 @@ public class AlbumDTO implements Serializable {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public String getImageType() {
+        return imageType;
+    }
+
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
     }
 
     public List<SongSimpleDTO> getSongs() {
