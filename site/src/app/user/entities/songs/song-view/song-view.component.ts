@@ -62,7 +62,8 @@ export class SongViewComponent implements OnInit {
   onClick(){
 
       this.usersongService.updateuserSong(this.usersong).subscribe({
-        next: (data) => {this.usersong = data, console.log(this.usersong)},
+        next: (data) => {this.usersong = data, console.log(this.usersong)
+        this.Song!.totalViews++},
       })
     }
   
@@ -72,7 +73,8 @@ export class SongViewComponent implements OnInit {
 
     console.log(this.usersong)
     this.usersongService.updateUserSongNote(this.usersong).subscribe({
-      next: (data) => {this.usersong = data}
+      next: (data) => {this.usersong = data
+        this.getSong(this.idSong!);}
     })
   }
 

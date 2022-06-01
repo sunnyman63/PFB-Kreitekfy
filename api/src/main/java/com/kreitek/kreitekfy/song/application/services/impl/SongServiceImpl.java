@@ -213,7 +213,7 @@ public class SongServiceImpl implements SongService {
     @Override
     public List<Song> addCalculatedValuesToSong(List<Song> iterable) {
         iterable.forEach(song -> {
-            AtomicReference<Long> totalRate = new AtomicReference<>(0L);
+            AtomicReference<Double> totalRate = new AtomicReference<>(0.0);
             AtomicReference<Long> totalViews = new AtomicReference<>(0L);
             AtomicInteger numRates = new AtomicInteger();
             List<UserSongDTO> userSongs = userSongService.getAllUserSongBySong_Id(song.getId());

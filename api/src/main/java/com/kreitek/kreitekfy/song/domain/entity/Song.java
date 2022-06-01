@@ -34,7 +34,7 @@ public class Song {
     private Long totalViews;
 
     @Transient
-    private Long totalRate;
+    private Double totalRate;
 
     @ManyToOne
     @JoinColumn(name = "album_id", nullable = false)
@@ -95,11 +95,11 @@ public class Song {
         this.totalViews = totalVisualizations;
     }
 
-    public Long getTotalRate() {
+    public Double getTotalRate() {
         return totalRate;
     }
 
-    public void setTotalRate(Long totalRate) {
+    public void setTotalRate(Double totalRate) {
         this.totalRate = totalRate;
     }
 
