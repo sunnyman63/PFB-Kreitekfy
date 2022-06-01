@@ -58,7 +58,7 @@
                 </div>
 
             </div>
-            <p>Debes iniciar session para poder ver y votar las canciones!</p>
+            <p *ngIf="!usersong.userId">Debes iniciar session para poder ver y votar las canciones!</p>
         </div>
       </div>
 

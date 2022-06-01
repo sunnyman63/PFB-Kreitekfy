@@ -1,5 +1,15 @@
-<h2 class="text-light">{{ title }}</h2>
+<h2 class="text-light my-4">{{ title }}</h2>
 
 <div class="strip-song">
-    <app-song-card *ngFor="let song of songs" [song]="song"></app-song-card>
+    <div class="strip-center" *ngIf="songs?.length else NoContent">
+        <app-song-card class="song-card" *ngFor="let song of songs" [song]="song"></app-song-card>
+        <div class="barier-1"></div>
+        <div class="barier-2"></div>
+        <div class="barier-3"></div>
+    </div>
+
 </div>
+
+<ng-template #NoContent>
+    <p class="text-secondary h5 noContent">Sigue explorando ...</p>
+</ng-template>

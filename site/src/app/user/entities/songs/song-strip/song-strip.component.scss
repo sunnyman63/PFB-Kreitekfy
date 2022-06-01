@@ -1,5 +1,51 @@
 .strip-song{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
 }
+
+.strip-center {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    .song-card {
+        margin: 10px 0px;
+    }
+    div[class ^= "barier"] {
+        width: 260px;
+    }
+}
+
+.noContent {
+    text-transform: uppercase;
+    margin-left: 20px;
+}
+
+@media ( max-width: 563px ) {
+    .div[class ^= "barier"] {
+        display: none;
+    }
+}
+
+@media ( max-width: 823px ) {
+    .div[class ^= "barier"] {
+        &[class $= "1"] {
+            display: block;
+        }
+    }
+}
+
+@media ( max-width: 1083px ) {
+    .div[class ^= "barier"] {
+        display: block;
+    }
+}
+
+@media ( max-width: 1343px ) {
+    .div[class ^= "barier"] {
+        display: none;
+    }
+}
+

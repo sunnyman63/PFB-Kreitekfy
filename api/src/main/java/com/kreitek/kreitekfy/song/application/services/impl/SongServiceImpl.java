@@ -42,14 +42,19 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public Optional<SongDTO> getSongById(Long idSong) {
-        return this.repository
-                .findById(idSong)
-                .map(mapper::toDto);
+        Optional<Song> opSong = this.repository.findById(idSong);
+        if(opSong.isPresent()) {
+            List<Song> song = new ArrayList<>();
+            song.add(opSong.get());
+            song = this.addCalculatedValuesToSong(song);
+            opSong = Optional.of(song.get(0));
+        }
+        return opSong.map(mapper::toDto);
     }
 
     @Override
     public List<SongSimpleDTO> getSongs() {
-        List<Song> songs = repository.findAll();
+        List<Song> songs = this.addCalculatedValuesToSong(this.repository.findAll());
         return this.mapper.toSimpleDto(songs);
     }
 
