@@ -1,12 +1,15 @@
 .container{
     margin-top: 3%;
-    background-color: #3b3b3b;
+    
     border-radius: 5px;
 }
 .foto{
     display:flex;
     justify-content: center;
     align-items: center;
+    background-color: #3b3b3b;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 @media only screen and (max-width: 991px) {
     .foto{
@@ -21,11 +24,17 @@
     display:flex;
     flex-direction: column;
     background-color: #3b3b3b;
-    border-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.lista{
+    margin-top: 3%;
+    padding: 0;
 }
 
 img{
     width: 100%;
+    border-radius: 5%;
 }
 
 .info{
@@ -49,6 +58,9 @@ hr{
 
 .style p {
     margin: 0;
+}
+.similarsongs{
+    font-size: 2rem;
 }
 .album{
     padding-top: 5%;

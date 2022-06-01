@@ -3,7 +3,7 @@ import { usersong } from './../../usersong/model/usersong.model';
 import { UsersongService } from './../../usersong/service/usersong.service';
 import { Songs } from './../model/songs.model';
 import { SongsService } from './../service/songs.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./song-view.component.scss']
 })
 export class SongViewComponent implements OnInit {
+
   idSong?:number;
   Song?:Songs;
   usersong={
@@ -40,7 +41,7 @@ export class SongViewComponent implements OnInit {
 
   private getSong(idSong:number){
     this.SongsService.getOneSong(idSong).subscribe({
-      next: (SongRequest) => {this.Song = SongRequest, console.log(this.Song),
+      next: (SongRequest) => {this.Song = SongRequest,
         this.usersong.songId=this.Song.id!,
         this.createUserSong();},
       error: (err) => {this.handleError(err);
@@ -55,7 +56,7 @@ export class SongViewComponent implements OnInit {
 
   createUserSong(){
     this.usersongService.postUserSong(this.usersong).subscribe({
-      next: (data) => {this.usersong = data, console.log(data)
+      next: (data) => {this.usersong = data
     }});
   }
 

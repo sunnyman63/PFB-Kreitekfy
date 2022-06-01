@@ -69,6 +69,8 @@
         </div>
       </div>
 
-     <!--<app-songs-list></app-songs-list>-->
 </div>
-
+<div class="lista container">
+    <p class="similarsongs">Canciones similares:</p>
+<app-album-list *ngIf="Song?.albumId" [albumId]="Song!.albumId" (newItemEvent)="ngOnInit()"></app-album-list>
+</div>

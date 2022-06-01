@@ -1,0 +1,15 @@
+<section  *ngIf="album">
+    <table class="table">
+        <tbody class="table">
+          <tr *ngFor="let song of album.songs" (click)="onclick(song.id!)" >
+            <td>Nombre: {{ song.name }}</td>
+            <td>Estilo: {{ song.styleName }}</td>
+            <td>Duracion: {{song.duration}}</td>
+            <td>                
+                <i class="bi bi-play bg-primary"></i>
+               </td>
+          </tr>
+        </tbody>
+      </table>
+
+</section>
