@@ -10,6 +10,14 @@ export class ArtistService {
 
   constructor(private http: HttpClient) { }
 
+  getArtistsByCriteriaPaged(page: number, size: number, sort: string, filters?: string): Observable<Artist[]> {
+    let urlEndPoint: string = "http://localhost:8080/api/artists?page=" + page + "&size=" + size + "&sort=" + sort;
+    if (filters) {
+      urlEndPoint = urlEndPoint + "&filter=" + filters;
+    }
+    return this.http.get<Artist[]>(urlEndPoint)
+  }
+
   getArtists(partialName?: string): Observable<Artist[]> {
     let urlEndpoint: string = "http://localhost:8080/api/artists/search";
 
@@ -19,4 +27,25 @@ export class ArtistService {
 
     return this.http.get<Artist[]>(urlEndpoint);
   }
+
+  getArtist(artistId: number): Observable<Artist> {
+    const urlEndPoint: string = "http://localhost:8080/api/artists/"+ artistId;
+    return this.http.get<Artist>(urlEndPoint);
+  }
+
+  insertArtist(artist: Artist) {
+    const urlEndPoint: string = "http://localhost:8080/api/artists/";
+    return this.http.post<Artist>(urlEndPoint, artist);
+  }
+
+  updateArtist(artist: Artist) {
+    const urlEndPoint: string = "http://localhost:8080/api/artists/";
+    return this.http.patch<Artist>(urlEndPoint, artist);
+  }
+
+  deleteArtist(artistIdToDelete: number): Observable<any>{
+    const urlEndPoint: string = "http://localhost:8080/api/artists/"+ artistIdToDelete;
+    return this.http.delete<Artist[]>(urlEndPoint)
+  }
+
 }

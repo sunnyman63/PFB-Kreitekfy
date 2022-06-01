@@ -13,13 +13,13 @@
             </a>
           </li>
           <li class="nav-item" *ngIf="isAdmin">
-            <a class="nav-link" href="#" [routerLink]="['admin','styles']">
+            <a class="nav-link" [routerLink]="['admin','styles']">
               <i class="bi bi-tags h4"></i>
               Estilos
             </a>
           </li>
           <li class="nav-item" *ngIf="isAdmin">
-            <a class="nav-link" href="#">
+            <a class="nav-link" [routerLink]="['admin','artists']">
               <i class="bi bi-mic h4"></i>
               Artistas
             </a>

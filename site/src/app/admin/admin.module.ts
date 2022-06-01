@@ -14,6 +14,8 @@ import { SongFormComponent } from './entities/song/song-form/song-form.component
 import { SongListComponent } from './entities/song/song-list/song-list.component';
 import { StyleListComponent } from './entities/style/style-list/style-list.component';
 import { StyleFormComponent } from './entities/style/style-form/style-form.component';
+import { ArtistListComponent } from './entities/artist/artist-list/artist-list.component';
+import { ArtistFormComponent } from './entities/artist/artist-form/artist-form.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { StyleFormComponent } from './entities/style/style-form/style-form.compo
     SongFormComponent,
     SongListComponent,
     StyleListComponent,
-    StyleFormComponent
+    StyleFormComponent,
+    ArtistListComponent,
+    ArtistFormComponent
   ],
   imports: [
     CommonModule,
