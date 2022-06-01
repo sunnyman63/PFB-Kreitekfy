@@ -15,6 +15,7 @@ public interface SongService {
     List<SongSimpleDTO> getSongsByName(String partialName);
     List<SongDTO> getAllSongsByOrderByInclusionDateDesc();
     List<SongDTO> findByOrderByTotalRateDesc();
+    List<SongDTO> findByOrderByTotalViewsDesc();
     Page<SongDTO> getSongByCriteriaPaged(Pageable pageable, String filter);
     Optional<SongDTO> getSongById(Long idSong);
 

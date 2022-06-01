@@ -25,4 +25,9 @@ export class SongsService {
     return this.http.get<Songs[]>(urlEndpoint);
   }
 
+  getAllTopViewed() {
+    const urlEndpoint: string = "http://localhost:8080/api/songs/top-view";
+    return this.http.get<Songs[]>(urlEndpoint);
+  }
+
 }

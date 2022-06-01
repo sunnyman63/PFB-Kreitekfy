@@ -69,6 +69,12 @@ public class SongRestController  {
         return new ResponseEntity<>(songDTOS, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/top-view", produces = "application/json")
+    public ResponseEntity<List<SongDTO>> getTopViewedSongs(){
+        List<SongDTO> songDTOS = this.service.findByOrderByTotalViewsDesc();
+        return new ResponseEntity<>(songDTOS, HttpStatus.OK);
+    }
+
     @GetMapping(value = "/foru/{idUser}", produces = "application/json")
     public ResponseEntity<List<SongDTO>> getForUSongs(@PathVariable Long idUser){
         List<SongDTO> songDTOS = this.service.findByUserPreferences(idUser);

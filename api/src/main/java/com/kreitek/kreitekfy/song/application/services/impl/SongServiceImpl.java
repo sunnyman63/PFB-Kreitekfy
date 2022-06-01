@@ -64,8 +64,11 @@ public class SongServiceImpl implements SongService {
         newestSong.sort(Comparator.comparing(Song::getInclusionDate).reversed());
 
         List<Song> fiveNewestSongs = new ArrayList<>();
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < newestSong.size(); i++){
             fiveNewestSongs.add(newestSong.get(i));
+            if(i == 5) {
+                break;
+            }
         }
         return this.mapper.toDto(fiveNewestSongs);
     }
@@ -75,11 +78,28 @@ public class SongServiceImpl implements SongService {
         List<Song> calculatedAdded = this.addCalculatedValuesToSong(this.repository.findAll());
         calculatedAdded.sort(Comparator.comparing(Song::getTotalRate).reversed());
         List<Song> fiveBestRatedSongs = new ArrayList<>();
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < calculatedAdded.size(); i++){
             fiveBestRatedSongs.add(calculatedAdded.get(i));
+            if(i == 5) {
+                break;
+            }
         }
 
         return this.mapper.toDto(fiveBestRatedSongs);
+    }
+
+    @Override
+    public List<SongDTO> findByOrderByTotalViewsDesc() {
+        List<Song> calculatedAdded = this.addCalculatedValuesToSong(this.repository.findAll());
+        calculatedAdded.sort(Comparator.comparing(Song::getTotalViews).reversed());
+        List<Song> fiveMostViewedSongs = new ArrayList<>();
+        for (int i = 0; i < calculatedAdded.size(); i++){
+            fiveMostViewedSongs.add(calculatedAdded.get(i));
+            if(i == 5) {
+                break;
+            }
+        }
+        return this.mapper.toDto(fiveMostViewedSongs);
     }
 
     @Override

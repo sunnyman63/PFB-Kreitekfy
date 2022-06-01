@@ -11,16 +11,19 @@ import { SongsService } from './entities/songs/service/songs.service';
 export class UserComponent implements OnInit {
 
 
-  titleTopRated: string = "Los mejor valorados";
+  titleTopRated: string = "Lo mejor valorados";
+  titleTopViewed: string = "Lo más sonado";
   titleNewest : string = "Novedades";
   songsTopRated: Songs[] = [];
   songsNewest: Songs[] = [];
+  songsTopViewed: Songs[] = [];
 
   constructor(private songService: SongsService) {}
 
   ngOnInit(): void {
     this.getTopRated();
     this.getTopNewest();
+    this.getTopViewed();
   }
 
   private getTopRated(): void{
@@ -37,6 +40,16 @@ export class UserComponent implements OnInit {
     this.songService.getAllNewestSongs().subscribe({
       next: (songRest) => {
         this.songsNewest = songRest;
+      },
+      error: (err) => {}
+    })
+  }
+
+  private getTopViewed(): void{
+
+    this.songService.getAllTopViewed().subscribe({
+      next: (songRest) => {
+        this.songsTopViewed = songRest;
       },
       error: (err) => {}
     })
