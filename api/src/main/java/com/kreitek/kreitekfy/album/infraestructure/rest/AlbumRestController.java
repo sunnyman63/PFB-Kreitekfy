@@ -58,6 +58,12 @@ public class AlbumRestController {
         return new ResponseEntity<>(albumSaved, HttpStatus.CREATED);
     }
 
+    @PatchMapping(produces = "application/json")
+    ResponseEntity<AlbumDTO> updateAlbum(@RequestBody AlbumDTO albumDTO) {
+        AlbumDTO albumSaved = this.albumService.saveAlbum(albumDTO);
+        return new ResponseEntity<>(albumSaved, HttpStatus.CREATED);
+    }
+
     @DeleteMapping(value = "/{albumId}")
     ResponseEntity<?> deleteAlbumById(@PathVariable Long albumId) {
         this.albumService.deleteAlbum(albumId);
