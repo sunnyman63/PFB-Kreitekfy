@@ -4,21 +4,21 @@
     <section class="row">
         <article class="d-flex justify-content-center">
             <form class="col-10" *ngIf="albumForm" [formGroup]="albumForm" novalidate autocomplete="off">
-            
+
                 <!-- ID -->
-    
+
                 <div>
                     <label for="" class="form-label">Id</label>
                     <input type="text" class="form-control" placeholder="Indefinido" formControlName="id">
                 </div>
-                
+
                 <!-- NAME  -->
-    
+
                 <div>
                     <label for="" class="form-label">Nombre</label>
                     <input type="text" class="form-control" placeholder="Nombre" formControlName="name">
                 </div>
-    
+
                 <div *ngIf="(albumForm.get('name')!.dirty && albumForm.get('name')!.errors)">
                     <small class="form-text text-danger"
                     *ngIf="albumForm.get('name')!.errors!['required']">
@@ -36,6 +36,7 @@
                     <label for="imagen">Imagen</label>
                     <input type="file" id="image" class="form-control" id="imagen" (change)="includeImageInItem($event);">
                     <img *ngIf="album?.image" [src]="album!.imageType + ',' + album!.image">
+                    <img *ngIf="!album?.image" src="./assets/image/imagenDefault.png">
                 </div>
 
                 <div class="form-buttons mt-4">

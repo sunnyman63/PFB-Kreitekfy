@@ -1,10 +1,9 @@
 import { SessionService } from 'src/app/shared/service/session.service';
-import { usersong } from './../../usersong/model/usersong.model';
 import { UsersongService } from './../../usersong/service/usersong.service';
 import { Songs } from './../model/songs.model';
 import { SongsService } from './../service/songs.service';
 import { Component, OnInit, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -29,14 +28,24 @@ export class SongViewComponent implements OnInit {
     private route:ActivatedRoute,
     private SongsService:SongsService,
     private usersongService: UsersongService,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
 
-    this.idSong =+ this.route.snapshot.paramMap.get("idSong")!;
+    this.idSong = Number(this.route.snapshot.paramMap.get("idSong")!);
+    console.log(this.route.snapshot.paramMap.get("idSong"));
+    console.log(this.router.url);
     this.getSong(this.idSong);
     
+  }
+
+  refresh(id: string): void {
+    this.router.navigate(['/song/'+id])
+    if(this.idSong != Number(id)) {
+      this.ngOnInit();
+    }
   }
 
   private getSong(idSong:number){
@@ -55,9 +64,11 @@ export class SongViewComponent implements OnInit {
   }
 
   createUserSong(){
-    this.usersongService.postUserSong(this.usersong).subscribe({
-      next: (data) => {this.usersong = data
-    }});
+    if(this.sessionService.getId() != 0) {
+      this.usersongService.postUserSong(this.usersong).subscribe({
+        next: (data) => {this.usersong = data
+      }});
+    }
   }
 
   onClick(){
@@ -72,7 +83,6 @@ export class SongViewComponent implements OnInit {
   vote(rate:number){
     this.usersong.personalValorations=rate
 
-    console.log(this.usersong)
     this.usersongService.updateUserSongNote(this.usersong).subscribe({
       next: (data) => {this.usersong = data
         this.getSong(this.idSong!);}

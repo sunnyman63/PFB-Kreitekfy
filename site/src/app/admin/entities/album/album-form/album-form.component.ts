@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -30,7 +31,6 @@ export class AlbumFormComponent implements OnInit {
   ngOnInit(): void {
 
     this.buildForm();
-
     const entryParam: string = this.route.snapshot.paramMap.get("idAlbum") ?? "new";
 
     if(entryParam !== "new"){
@@ -90,13 +90,13 @@ export class AlbumFormComponent implements OnInit {
   }
 
   saveAlbum(){
-    const styleToSave: any = this.createFromForm();
+    let albumToSave: any = this.createFromForm();
     if (this.mode === "NEW") {
-      this.insertAlbum(styleToSave);
+      this.insertAlbum(albumToSave);
     }
 
     if (this.mode === "UPDATE") {
-      this.updateAlbum(styleToSave);
+      this.updateAlbum(albumToSave);
     }
   }
 
@@ -157,7 +157,7 @@ export class AlbumFormComponent implements OnInit {
       (error) => {
         console.log("No se pudo cargar la imagen")
       })
-        
+
   }
 
   private readFileAsString(file: File) {
@@ -172,10 +172,10 @@ export class AlbumFormComponent implements OnInit {
 
   private toast(severity: string, summary: string, message: string): void {
     this.messageService.add({
-      severity: severity, 
-      summary: summary, 
+      severity: severity,
+      summary: summary,
       detail: message
-    }); 
+    });
   }
 
 

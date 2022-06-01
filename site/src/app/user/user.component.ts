@@ -4,7 +4,6 @@ import { SessionService } from 'src/app/shared/service/session.service';
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { Songs } from './entities/songs/model/songs.model';
 import { SongsService } from './entities/songs/service/songs.service';
-import { style } from '@angular/animations';
 
 
 @Component({
@@ -50,7 +49,10 @@ export class UserComponent implements OnInit {
     this.getTopRated();
     this.getTopNewest();
     this.getTopViewed();
-    this.getForU();
+    if(this.userId != 0) {
+      this.getForU();
+    }
+    
   }
 
   private getTopRated(): void{

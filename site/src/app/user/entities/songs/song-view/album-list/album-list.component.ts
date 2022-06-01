@@ -1,7 +1,6 @@
 import { Router } from '@angular/router';
 import { totalAlbum } from './../../../../../admin/entities/album/model/totalalbum.model';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Album } from 'src/app/admin/entities/album/model/album.model';
 import { AlbumService } from 'src/app/admin/entities/album/service/album.service';
 import { Songs } from '../../model/songs.model';
 
@@ -30,7 +29,7 @@ export class AlbumListComponent implements OnInit {
   getSongsByAlbum(){
     this.albumService.getAlbum(this.albumId).subscribe({
       next: (data) => {this.album = data
-      console.log(this.album)},
+      },
       error: (err) => {this.handleError(err);
       }
 
@@ -42,9 +41,8 @@ export class AlbumListComponent implements OnInit {
   }
 
   onclick(id:number){
-    this.route.navigate(['/song/'+id])
-    this.ngOnInit()
-    this.newEventEmiter.emit();
+    this.ngOnInit();
+    this.newEventEmiter.emit(String(id));
   }
 
 }

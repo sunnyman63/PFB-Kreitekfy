@@ -43,15 +43,15 @@ export class AlbumListComponent implements OnInit {
     const filters:string | undefined = this.buildFilters();
 
     this.albumService.getAlbumsByCriteriaPaged(this.page,this.size,this.sort, filters).subscribe({
-      next: (data: any) => { 
-        this.albums = data.content,
+      next: (data: any) => {
+        this.albums = data.content;
         this.first = data.first;
         this.last = data.last;
         this.totalPages = data.totalPages;
         this.totalElements = data.totalElements;
       } ,
-      error: (error) => { 
-        //To do 
+      error: (error) => {
+        //To do
       }
     });
   }
@@ -136,10 +136,10 @@ export class AlbumListComponent implements OnInit {
 
   private toast(severity: string, summary: string, message: string): void {
     this.messageService.add({
-      severity: severity, 
-      summary: summary, 
+      severity: severity,
+      summary: summary,
       detail: message
-    }); 
+    });
   }
 
 }

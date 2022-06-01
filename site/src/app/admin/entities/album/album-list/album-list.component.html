@@ -33,10 +33,12 @@
             <th>{{ album.id }}</th>
             <td>{{ album.name }}</td>
             <td class="image-form">
-                <div *ngIf="album.image == undefined"> Sin imagen </div>
                 <div *ngIf="album.image">
-                    <img src="data:image/jpeg;base64,{{album?.image}}" alt="">
+                    <img src="{{album?.imageType}},{{album?.image}}" alt="">
                 </div>
+                <div *ngIf="!album.image">
+                  <img src="./assets/image/imagenDefault.png" alt="Default">
+              </div>
             </td>
             <td class="action-buttons">
                 <i class="bi bi-pencil-square" [routerLink]="[album.id,'update']"></i>
@@ -45,7 +47,7 @@
           </tr>
         </tbody>
       </table>
-    
+
       <div class="botonera-paginacion">
         <button [disabled]="first" class="btn btn-primary btnAtras" (click)="previousPage()">Anterior</button>
         <span class="text-light">Pagina {{(page+1)}} de {{totalPages}} - Elementos totales: {{totalElements}}</span>

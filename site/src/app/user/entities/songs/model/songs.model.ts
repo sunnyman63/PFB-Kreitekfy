@@ -3,11 +3,12 @@ import { Artist } from "src/app/admin/entities/artist/model/artist.model"
 export class Songs{
 
   constructor(
-    id: number , 
-    name: string, 
-    duration: number, 
-    albumId: number, 
-    albumImage: string, 
+    id: number ,
+    name: string,
+    duration: number,
+    albumId: number,
+    albumImage: string,
+    albumImageType: string,
     totalViews: number,
     totalRate:number,
     styleName:string,
@@ -20,6 +21,7 @@ export class Songs{
     this.duration = duration
     this.albumId = albumId
     this.albumImage = albumImage
+    this.albumImageType = albumImageType
     this.totalViews = totalViews
     this.styleName = styleName
     this.artists = artists
@@ -31,6 +33,7 @@ export class Songs{
     duration: number;
     albumId: number;
     albumImage: string;
+    albumImageType: string;
     totalViews: number;
     styleName:string;
     artists: Artist[];
