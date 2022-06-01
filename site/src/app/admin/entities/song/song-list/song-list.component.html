@@ -5,22 +5,22 @@
   <form action="" class="row" *ngIf="filterForm" [formGroup]="filterForm" novalidate autocomplete="off">
     <div class="col-md-6 col-12">
       <label for="" class="form-label">Estilo</label>
-      <p-autoComplete formControlName="styleFiler" [suggestions]="stylesFilter" 
+      <p-autoComplete formControlName="styleFiler" [suggestions]="stylesFilter"
       (completeMethod)="getStyles($event)" field="name"></p-autoComplete>
     </div>
     <div class="col-md-6 col-12">
       <label for="" class="form-label">Artista</label>
-      <p-autoComplete formControlName="artistFilter" [suggestions]="artistFilter" 
+      <p-autoComplete formControlName="artistFilter" [suggestions]="artistFilter"
       (completeMethod)="getArtists($event)" field="name"></p-autoComplete>
     </div>
     <div class="col-md-6 col-12">
       <label for="" class="form-label">Album</label>
-      <p-autoComplete formControlName="albumFilter" [suggestions]="albumsFilter" 
+      <p-autoComplete formControlName="albumFilter" [suggestions]="albumsFilter"
       (completeMethod)="getAlbums($event)" field="name"></p-autoComplete>
     </div>
     <div class="col-md-6 col-12">
       <label for="" class="form-label">Cancion</label>
-      <p-autoComplete formControlName="songFilter" [suggestions]="songsFilter" 
+      <p-autoComplete formControlName="songFilter" [suggestions]="songsFilter"
       (completeMethod)="getSongs($event)" field="name"></p-autoComplete>
     </div>
     <div class="col-12 col-md-3 mt-3">
@@ -29,7 +29,7 @@
   </form>
 </div>
 
-<div class="text-light">
+<div class="text-light mb-2">
   <i class="bi bi-plus-square-fill" [routerLink]="['create']"> AÑADIR CANCION</i>
 </div>
 
@@ -43,7 +43,6 @@
             <th scope="col">Fecha inclusion</th>
             <th scope="col">Visitas totales</th>
             <th scope="col">Nombre album</th>
-            <th scope="col">Imagen album</th>
             <th scope="col">Estilo</th>
             <th scope="col">Artista</th>
             <th scope="col">Acciones</th>
@@ -57,7 +56,6 @@
             <td>{{ song.inclusionDate }}</td>
             <td>{{ song.totalViews }}</td>
             <td>{{ song.albumName }}</td>
-            <td>{{ song.albumImage }}</td>
             <td>{{ song.styleName }}</td>
             <td>
               <p *ngFor="let artist of song.artists">
@@ -71,7 +69,7 @@
           </tr>
         </tbody>
       </table>
-    
+
       <div class="botonera-paginacion">
         <button [disabled]="first" class="btn btn-primary btnAtras" (click)="previousPage()">Anterior</button>
         <span class="text-light">Pagina {{(page+1)}} de {{totalPages}} - Elementos totales: {{totalElements}}</span>
