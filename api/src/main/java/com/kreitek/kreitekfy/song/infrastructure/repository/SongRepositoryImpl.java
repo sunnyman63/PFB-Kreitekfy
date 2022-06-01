@@ -54,9 +54,13 @@ public class SongRepositoryImpl implements SongRepository {
         return songJpaRepository.findById(id);
     }
 
+    @Override
+    public List<Song> getSongsByStyle(Long styleId) {
+        return this.songJpaRepository.getAllSongsByStyleId(styleId);
+    }
 
-  @Override
- public List<Song> getAllSongsByOrderByInclusionDateDesc() {
+    @Override
+        public List<Song> getAllSongsByOrderByInclusionDateDesc() {
         return songJpaRepository.getAllSongsByOrderByInclusionDateDesc();
   }
     }

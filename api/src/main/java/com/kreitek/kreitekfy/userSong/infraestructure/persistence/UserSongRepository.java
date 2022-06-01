@@ -12,4 +12,5 @@ public interface UserSongRepository extends JpaRepository<UserSong, Long> {
 
     UserSong findBySong_IdAndUser_Id(Long id, Long id1);
     List<UserSong> getUserSongBySong_Id(Long id);
+    List<UserSong> getUserSongByUser_Id(Long id);
 }

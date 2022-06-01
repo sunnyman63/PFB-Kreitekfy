@@ -12,7 +12,7 @@ public interface UserSongPersistence {
     UserSong updateUserSong(UserSong userSong);
     UserSong updateUserSongRating(UserSong userSong);
     Optional<UserSong> getUserSongById(Long id);
-
+    List<UserSong> findSongByUserId(Long idUser);
     List<UserSong> getUserSongBySong_Id(Long id);
     Boolean existUserSongBySongIdAndUserId(Long id, Long id1);
     UserSong findUserSongBySongIdAndUserId(Long id, Long id1);

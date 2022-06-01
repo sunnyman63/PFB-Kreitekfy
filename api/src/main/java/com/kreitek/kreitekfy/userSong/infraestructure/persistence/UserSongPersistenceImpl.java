@@ -82,6 +82,12 @@ public class UserSongPersistenceImpl implements UserSongPersistence {
     }
 
     @Override
+    public List<UserSong> findSongByUserId(Long idUser) {
+
+        return this.userSongRepository.getUserSongByUser_Id(idUser);
+    }
+
+    @Override
     public List<UserSong> getUserSongBySong_Id(Long id) {
         return this.userSongRepository.getUserSongBySong_Id(id);
     }

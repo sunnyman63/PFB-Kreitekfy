@@ -16,5 +16,7 @@ public interface SongRepository {
     void deleteById(Long id);
     Optional<Song> findById(Long id);
 
+    List<Song> getSongsByStyle(Long styleId);
+
 //    List<Song> getAllSongsByOrderByInclusion_DateDesc();
 }

@@ -74,6 +74,13 @@ public class UserSongServiceImpl implements UserSongService {
     }
 
     @Override
+    public UserSongSimpleDTO findUserSongbyUserId(Long idUser) {
+
+        List<UserSong> userSongsimple = this.userSongPersistence.findSongByUserId(idUser);
+        return null;
+    }
+
+    @Override
     public List<UserSongDTO> getAllUserSongBySong_Id(Long id) {
         List<UserSong> userSongDTOS = this.userSongPersistence.getUserSongBySong_Id(id);
         return this.userSongMapper.toDto(userSongDTOS);

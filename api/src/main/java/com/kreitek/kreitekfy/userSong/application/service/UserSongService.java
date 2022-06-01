@@ -16,7 +16,7 @@ public interface UserSongService {
     Optional<UserSongDTO> getUserSongById(Long id);
     Boolean existUserSongBySongIdAndUserId(Long idSong, Long idUser);
     UserSongSimpleDTO findUserSongBySongIdAndUserId(Long idSong, Long idUser);
-
+    UserSongSimpleDTO findUserSongbyUserId(Long idUser);
     List<UserSongDTO> getAllUserSongBySong_Id(Long id);
 
 }

@@ -6,19 +6,18 @@ import com.kreitek.kreitekfy.song.application.mapper.SongMapper;
 import com.kreitek.kreitekfy.song.application.services.SongService;
 import com.kreitek.kreitekfy.song.domain.entity.Song;
 import com.kreitek.kreitekfy.song.domain.repository.SongRepository;
+import com.kreitek.kreitekfy.style.infraestructure.persistence.StyleRepository;
 import com.kreitek.kreitekfy.userSong.application.dto.UserSongDTO;
 import com.kreitek.kreitekfy.userSong.application.service.UserSongService;
+import com.kreitek.kreitekfy.userSong.domain.entity.UserSong;
+import com.kreitek.kreitekfy.userSong.infraestructure.persistence.UserSongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -28,12 +27,16 @@ public class SongServiceImpl implements SongService {
     private final SongRepository repository;
     private final SongMapper mapper;
     private final UserSongService userSongService;
+    private final UserSongRepository userSongRepository;
+    private final StyleRepository styleRepository;
 
     @Autowired
-    public SongServiceImpl(SongRepository repository, SongMapper mapper, UserSongService userSongService) {
+    public SongServiceImpl(SongRepository repository, SongMapper mapper, UserSongService userSongService, UserSongRepository userSongRepository, StyleRepository styleRepository) {
         this.repository = repository;
         this.mapper = mapper;
         this.userSongService = userSongService;
+        this.userSongRepository = userSongRepository;
+        this.styleRepository = styleRepository;
     }
    
 
@@ -80,12 +83,75 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
+    public List<SongDTO> findByUserPreferences(Long idUser) {
+
+        List<UserSong> userSongs = this.userSongRepository.getUserSongByUser_Id(idUser);
+        Long mostlistened;
+        Long secondListened;
+
+        HashMap<Long,Long> StylesTimes = getStylesByListened(userSongs);
+
+        mostlistened=getMostListenedStyle(StylesTimes);
+        StylesTimes.remove(mostlistened);
+        secondListened=getMostListenedStyle(StylesTimes);
+
+        System.out.println(mostlistened);
+        System.out.println(secondListened);
+
+        return getAllSongsByStyleandRate(mostlistened, secondListened);
+
+    }
+
+    private List<SongDTO> getAllSongsByStyleandRate(Long mostlistened, Long secondListened) {
+
+        List<Song> totalSongs = new ArrayList<Song>(this.repository.getSongsByStyle(mostlistened));
+        totalSongs.addAll(this.repository.getSongsByStyle(secondListened));
+
+        List<Song> mostratedListened = this.addCalculatedValuesToSong(totalSongs);
+        mostratedListened.sort(Comparator.comparing(Song::getTotalRate).reversed());
+        List<Song> fiveBestRatedSongs = new ArrayList<>();
+        for (int i = 0; i < 5 && mostratedListened.get(i).getTotalRate()>=3 ; i++){
+            fiveBestRatedSongs.add(mostratedListened.get(i));
+        }
+        return this.mapper.toDto(fiveBestRatedSongs);
+    }
+
+    public HashMap<Long,Long> getStylesByListened(List<UserSong> userSongs){
+        HashMap<Long,Long> StylesTimes= new HashMap<Long,Long>();
+
+        for(int i = 0; i<userSongs.size();i++){
+
+            if(StylesTimes.containsKey(userSongs.get(i).getSong().getStyle().getId())){
+                Long aux=0L;
+                aux=StylesTimes.get(userSongs.get(i).getSong().getStyle().getId());
+
+                StylesTimes.put(userSongs.get(i).getSong().getStyle().getId(), userSongs.get(i).getPersonalViews()+aux);
+            }else
+                StylesTimes.put(userSongs.get(i).getSong().getStyle().getId(), userSongs.get(i).getPersonalViews());
+        }
+        return StylesTimes;
+    }
+
+    public Long getMostListenedStyle( HashMap<Long,Long> StylesTimes){
+        Long mostListenedStyle=0L;
+
+        Long maxValueInMap=(Collections.max(StylesTimes.values()));
+        for (Map.Entry<Long, Long> entry : StylesTimes.entrySet()) {
+            if (entry.getValue()==maxValueInMap) {
+                mostListenedStyle=entry.getKey();
+            }
+        }
+        return mostListenedStyle;
+    }
+
+
+
+    @Override
     public Page<SongDTO> getSongByCriteriaPaged(Pageable pageable, String filter) {
         Page<Song> itemPage = this.repository.findAll(pageable, filter);
         List<Song> calculatedAdded = this.addCalculatedValuesToSong(itemPage.getContent());
         itemPage = new PageImpl<Song>(calculatedAdded, itemPage.getPageable(), calculatedAdded.size());
         return itemPage.map(mapper::toDto);
-
     }
 
     @Override

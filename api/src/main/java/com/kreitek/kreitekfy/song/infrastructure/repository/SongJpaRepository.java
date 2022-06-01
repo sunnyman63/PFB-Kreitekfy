@@ -10,5 +10,6 @@ public interface SongJpaRepository extends JpaRepository<Song, Long>, JpaSpecifi
 
     List<Song> findByNameContainsIgnoreCase(String partialName);
     List<Song> getAllSongsByOrderByInclusionDateDesc();
+    List<Song> getAllSongsByStyleId(Long styleId);
 
 }

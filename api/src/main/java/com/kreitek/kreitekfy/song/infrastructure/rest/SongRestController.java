@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.ResponseErrorHandler;
 
 import java.util.List;
 
@@ -65,6 +66,13 @@ public class SongRestController  {
     @GetMapping(value = "/top-rated", produces = "application/json")
     public ResponseEntity<List<SongDTO>> getTopRatedSongs(){
         List<SongDTO> songDTOS = this.service.findByOrderByTotalRateDesc();
+        return new ResponseEntity<>(songDTOS, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/foru/{idUser}", produces = "application/json")
+    public ResponseEntity<List<SongDTO>> getForUSongs(@PathVariable Long idUser){
+        List<SongDTO> songDTOS = this.service.findByUserPreferences(idUser);
+
         return new ResponseEntity<>(songDTOS, HttpStatus.OK);
     }
 
