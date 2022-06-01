@@ -5,33 +5,14 @@ $primary: #6d41a1;
 $light: #f8f9fa;
 
 .p-autocomplete {
-    display: inline-flex;
-    position: relative;
     width: 100%;
 
-    .p-autocomplete-multiple-container {
-        padding: 0.02rem 0.75rem;
+    .p-inputtext {
         width: 100%;
-    
-        .p-autocomplete-token {
-            padding: 0.25rem 0.75rem;
-            margin-right: 0.5rem;
-            background: $primary;
-            color: #ffffff;
-            border-radius: 4px;
-        }
-    
-        &:not(.p-disabled).p-focus {
-            outline: 0 none;
-            outline-offset: 0;
-            box-shadow: 0 0 0 0.2rem #6e41a179;
-            border-color: $primary;
-        }
+        margin: 0;
     }
 
     .p-inputtext:enabled:focus {
-        outline: 0 none;
-        outline-offset: 0;
         box-shadow: 0 0 0 0.2rem #6e41a180;
         border-color: $primary;
     }
@@ -40,10 +21,6 @@ $light: #f8f9fa;
         color: $dark;
         background: $light;
         border: 1px solid $light;
-        padding: 0.5rem 0.75rem;
-        font-size: 1rem;
-        transition: background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
-        border-radius: 4px;
 
         &:hover{
             color: $dark;
@@ -51,11 +28,24 @@ $light: #f8f9fa;
             border: 1px solid $light;
         }
         &:focus {
-            outline: 0 none;
-            outline-offset: 0;
             box-shadow: 0 0 0 0.2rem #6e41a180;
         }
     }
+
+    .p-autocomplete-multiple-container {
+        padding: 0.02rem 0.75rem;
+        width: 100%;
+    
+        .p-autocomplete-token {
+            background: $primary;
+        }
+    
+        &:not(.p-disabled).p-focus {
+            box-shadow: 0 0 0 0.2rem #6e41a179;
+            border-color: $primary;
+        }
+    }
+
 }
 
 
