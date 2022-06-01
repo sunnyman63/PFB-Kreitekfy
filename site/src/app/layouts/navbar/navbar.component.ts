@@ -22,6 +22,9 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers();
+    if(this.sessionService.getIsAdmin != null) {
+      this.isAdmin = this.sessionService.getIsAdmin()!;
+    }
   }
 
   private getUsers(): void {
