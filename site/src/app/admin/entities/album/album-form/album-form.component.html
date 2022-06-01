@@ -1,0 +1,49 @@
+<p-toast></p-toast>
+
+<main class="container mt-2">
+    <section class="row">
+        <article class="d-flex justify-content-center">
+            <form class="col-10" *ngIf="albumForm" [formGroup]="albumForm" novalidate autocomplete="off">
+            
+                <!-- ID -->
+    
+                <div>
+                    <label for="" class="form-label">Id</label>
+                    <input type="text" class="form-control" placeholder="Indefinido" formControlName="id">
+                </div>
+                
+                <!-- NAME  -->
+    
+                <div>
+                    <label for="" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" placeholder="Nombre" formControlName="name">
+                </div>
+    
+                <div *ngIf="(albumForm.get('name')!.dirty && albumForm.get('name')!.errors)">
+                    <small class="form-text text-danger"
+                    *ngIf="albumForm.get('name')!.errors!['required']">
+                    Este campo es requerido
+                    </small>
+                    <small class="form-text text-danger"
+                    *ngIf="albumForm.get('name')!.errors!['minlength']">
+                    Este campo tiene que tener una longitud mínima de 3 caracteres
+                    </small>
+                </div>
+
+                <!-- IMAGE  -->
+
+                <div class="image-form">
+                    <label for="imagen">Imagen</label>
+                    <input type="file" id="image" class="form-control" id="imagen" (change)="includeImageInItem($event);">
+                    <img *ngIf="album?.image" [src]="album!.imageType + ',' + album!.image">
+                </div>
+
+                <div class="form-buttons mt-4">
+                    <input type="button" value="{{ textButton }}" (click)="saveAlbum()" [disabled]="albumForm.invalid" class="btn btn-primary">
+                    <input type="button" value="Volver" [routerLink]="['/admin','albums']" class="btn btn-primary">
+                </div>
+
+            </form>
+        </article>
+    </section>
+</main>
