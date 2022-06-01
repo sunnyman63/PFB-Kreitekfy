@@ -12,12 +12,16 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
 import { SongFormComponent } from './entities/song/song-form/song-form.component';
 import { SongListComponent } from './entities/song/song-list/song-list.component';
+import { StyleListComponent } from './entities/style/style-list/style-list.component';
+import { StyleFormComponent } from './entities/style/style-form/style-form.component';
 
 @NgModule({
   declarations: [
     AdminComponent,
     SongFormComponent,
-    SongListComponent
+    SongListComponent,
+    StyleListComponent,
+    StyleFormComponent
   ],
   imports: [
     CommonModule,

@@ -10,13 +10,42 @@ export class StyleService {
 
   constructor(private http: HttpClient) { }
 
+  getStylesByCriteriaPaged(page: number, size: number, sort: string, filters?: string): Observable<Style[]> {
+    let urlEndPoint: string = "http://localhost:8080/api/styles?page=" + page + "&size=" + size + "&sort=" + sort;
+    if (filters) {
+      urlEndPoint = urlEndPoint + "&filter=" + filters;
+    }
+    return this.http.get<Style[]>(urlEndPoint)
+  }
+
   getStyles(partialName?: string): Observable<Style[]> {
-    let urlEndpoint: string = "http://localhost:8080/api/styles";
+    let urlEndPoint: string = "http://localhost:8080/api/styles/search/";
 
     if(partialName) {
-      urlEndpoint = urlEndpoint + "?partialName=" + partialName;
+      urlEndPoint = urlEndPoint + "?partialName=" + partialName;
     }
 
-    return this.http.get<Style[]>(urlEndpoint);
+    return this.http.get<Style[]>(urlEndPoint);
   }
+
+  getStyle(styleId: number): Observable<Style> {
+    const urlEndPoint: string = "http://localhost:8080/api/styles/"+ styleId;
+    return this.http.get<Style>(urlEndPoint);
+  }
+
+  insertStyle(song: Style) {
+    const urlEndPoint: string = "http://localhost:8080/api/styles/";
+    return this.http.post<Style>(urlEndPoint, song);
+  }
+
+  updateStyle(song: Style) {
+    const urlEndPoint: string = "http://localhost:8080/api/styles/";
+    return this.http.patch<Style>(urlEndPoint, song);
+  }
+
+  deleteStyle(styleIdToDelete: number): Observable<any>{
+    const urlEndPoint: string = "http://localhost:8080/api/styles/"+ styleIdToDelete;
+    return this.http.delete<Style[]>(urlEndPoint)
+  }
+
 }
