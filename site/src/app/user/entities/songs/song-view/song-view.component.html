@@ -9,6 +9,7 @@
             <div class="info">
                 <div class="style">
                 <p>{{Song?.styleName | titlecase}}</p>
+                <p class="album">Album: {{Song?.albumName | titlecase}}</p>
                 </div>
 
                 <div class="duration">
@@ -27,8 +28,12 @@
                 <div class="play">
 
                     <i (click)="onClick()" class="bi bi-play bg-primary"></i>
-
+                   
                 </div>
+                <div class="vecesescuchada">
+                    Veces Escuchada: {{Song?.totalViews}}
+                </div>
+                
 
                 <div class="stars">
                     <form>
@@ -56,7 +61,9 @@
                         </p>
                       </form>
                 </div>
-
+                <div class="notamedia">
+                    Nota media: {{Song?.totalRate}}
+                </div>
             </div>
             <p *ngIf="!usersong.userId">Debes iniciar session para poder ver y votar las canciones!</p>
         </div>

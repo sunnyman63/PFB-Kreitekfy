@@ -9,8 +9,10 @@ export class Songs{
     albumId: number, 
     albumImage: string, 
     totalViews: number,
+    totalRate:number,
     styleName:string,
-    artists: Artist[]
+    artists: Artist[],
+    albumName:string
 
 ) {
     this.id = id
@@ -21,6 +23,8 @@ export class Songs{
     this.totalViews = totalViews
     this.styleName = styleName
     this.artists = artists
+    this.totalRate= totalRate
+    this.albumName=albumName
   }
     id: number | undefined;
     name: string;
@@ -30,4 +34,6 @@ export class Songs{
     totalViews: number;
     styleName:string;
     artists: Artist[];
+    totalRate: number;
+    albumName:string
 }
