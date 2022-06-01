@@ -42,9 +42,9 @@ public class ArtistRestController {
         return new ResponseEntity<>(artist, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{artistsId}", produces = "application/json")
-    ResponseEntity<ArtistDTO> getArtistById(@PathVariable Long albumId){
-        Optional<ArtistDTO> artist = this.artistService.getArtistById(albumId);
+    @GetMapping(value = "/{artistId}", produces = "application/json")
+    ResponseEntity<ArtistDTO> getArtistById(@PathVariable Long artistId){
+        Optional<ArtistDTO> artist = this.artistService.getArtistById(artistId);
         if(artist.isPresent()){
             return new ResponseEntity<>(artist.get(), HttpStatus.OK);
         } else {
@@ -56,6 +56,12 @@ public class ArtistRestController {
     ResponseEntity<ArtistDTO> insertArtist(@RequestBody ArtistDTO artistDTO){
         artistDTO = this.artistService.saveArtist(artistDTO);
         return new ResponseEntity<>(artistDTO, HttpStatus.CREATED);
+    }
+
+    @PatchMapping(produces = "application/json")
+    ResponseEntity<ArtistDTO> updateArtist(@RequestBody ArtistDTO artistDTO){
+        artistDTO = this.artistService.saveArtist(artistDTO);
+        return new ResponseEntity<>(artistDTO, HttpStatus.OK);
     }
 
     @DeleteMapping()
