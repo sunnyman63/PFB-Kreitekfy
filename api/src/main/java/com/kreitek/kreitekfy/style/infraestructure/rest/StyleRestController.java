@@ -1,7 +1,10 @@
 package com.kreitek.kreitekfy.style.infraestructure.rest;
 
+import com.kreitek.kreitekfy.album.application.dto.AlbumDTO;
 import com.kreitek.kreitekfy.style.application.dto.StyleDTO;
 import com.kreitek.kreitekfy.style.application.service.StyleService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +23,15 @@ public class StyleRestController {
         this.styleService = styleService;
     }
 
-    @GetMapping(produces = "application/json")
+    @GetMapping
+    public ResponseEntity<Page<StyleDTO>> getStylesByCriteriaPaged(@RequestParam(value = "filter", required = false) String filter, Pageable pageable) {
+
+        Page<StyleDTO> styles = this.styleService.getStylesByCriteriaPaged(pageable, filter);
+        return new ResponseEntity<>(styles, HttpStatus.OK);
+
+    }
+
+    @GetMapping(value = "/search", produces = "application/json")
     ResponseEntity<List<StyleDTO>> getAllStyles(@RequestParam(name = "partialName", required = false) String partialName){
 
         List<StyleDTO> styles;
@@ -48,6 +59,12 @@ public class StyleRestController {
     ResponseEntity<StyleDTO> insertStyle(@RequestBody StyleDTO styleDTO){
         StyleDTO styleSaved = this.styleService.saveStyle(styleDTO);
         return new ResponseEntity<>(styleSaved,HttpStatus.CREATED);
+    }
+
+    @PatchMapping(produces = "application/json")
+    ResponseEntity<StyleDTO> updateStyle(@RequestBody StyleDTO styleDTO){
+        StyleDTO styleSaved = this.styleService.saveStyle(styleDTO);
+        return new ResponseEntity<>(styleSaved,HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{styleId}")
