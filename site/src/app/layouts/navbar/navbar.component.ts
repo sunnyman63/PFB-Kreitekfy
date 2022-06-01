@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserDTO } from 'src/app/shared/models/UserDTO.model';
 import { SessionService } from 'src/app/shared/service/session.service';
 import { UserService } from 'src/app/shared/service/user.service';
@@ -15,7 +16,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -35,6 +37,7 @@ export class NavbarComponent implements OnInit {
     this.sessionService.setId(user.id);
     this.sessionService.setIsAdmin(user.admin);
     this.sessionService.setName(user.name);
+    this.router.navigate(['/']);
     if(user.admin) {
       this.isAdmin = true;
     } else {
