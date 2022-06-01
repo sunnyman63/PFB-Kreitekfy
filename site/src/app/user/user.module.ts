@@ -7,6 +7,7 @@ import { UserComponent } from './user.component';
 import { SongCardComponent } from './entities/songs/song-card/song-card.component';
 import { SongViewComponent } from './entities/songs/song-view/song-view.component';
 import { SongStripComponent } from './entities/songs/song-strip/song-strip.component';
+import { NavbarComponent } from '../layouts/navbar/navbar.component';
 
 
 @NgModule({
@@ -14,7 +15,7 @@ import { SongStripComponent } from './entities/songs/song-strip/song-strip.compo
     UserComponent,
     SongCardComponent,
     SongViewComponent,
-    SongStripComponent
+    SongStripComponent,
   ],
   imports: [
     CommonModule,

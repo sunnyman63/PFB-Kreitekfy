@@ -38,14 +38,12 @@
           </li>
         </ul>
       </div>
-      <div class="d-flex div-buscador">
-        <form class="d-flex align-items-center buscador">
-          <button type="submit" >
-            <i class="bi bi-search"></i>
-          </button>
-          <input type="search" placeholder="Search" aria-label="Search" >
-        </form>
-      </div>
+      <div class="searcher">
+        <p-autoComplete formControlName ="style" name="style" [suggestions]="styles" 
+        (completeMethod)="getStyles($event)" field="name" 
+        [required]="true" [forceSelection]="true" ></p-autoComplete>
+        <button (click)="styleSelected()" type="submit">Buscar</button>
+    </div>
       <button class="bg-white user-icon" type="button" data-bs-toggle="modal" data-bs-target="#userModal">
         <img src="./assets/image/user.png" class="w-100" alt="user">
       </button>

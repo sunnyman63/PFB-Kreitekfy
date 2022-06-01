@@ -1,7 +1,10 @@
+import { Subject } from 'rxjs';
+import { NavbarService } from '../shared/service/navbar.service';
 import { SessionService } from 'src/app/shared/service/session.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { Songs } from './entities/songs/model/songs.model';
 import { SongsService } from './entities/songs/service/songs.service';
+
 
 @Component({
   selector: 'app-user',
@@ -10,6 +13,7 @@ import { SongsService } from './entities/songs/service/songs.service';
 })
 export class UserComponent implements OnInit {
 
+  @Output() styleId!: Subject<number>
 
   titleTopRated: string = "Lo mejor valorado";
   titleTopViewed: string = "Lo más sonado";
@@ -20,13 +24,17 @@ export class UserComponent implements OnInit {
   songsTopViewed: Songs[] = [];
   songsForU: Songs[] = [];
   userId: number = this.sessionService.getId()!;
+  currentStyleId:number=0
 
   constructor(
     private songService: SongsService,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private navbarService: NavbarService
     ) {}
 
   ngOnInit(): void {
+    this.currentStyleId=this.navbarService.getActualStyleId()
+    console.log("qwer")
     this.getTopRated();
     this.getTopNewest();
     this.getTopViewed();
@@ -34,8 +42,9 @@ export class UserComponent implements OnInit {
   }
 
   private getTopRated(): void{
+    console.log(this.currentStyleId);
 
-    this.songService.getTopRated().subscribe({
+    this.songService.getTopRated(this.currentStyleId).subscribe({
       next: (songRest) => {
         this.songsTopRated = songRest;
       },
@@ -44,7 +53,7 @@ export class UserComponent implements OnInit {
   }
   private getTopNewest(): void{
 
-    this.songService.getAllNewestSongs().subscribe({
+    this.songService.getAllNewestSongs(this.currentStyleId).subscribe({
       next: (songRest) => {
         this.songsNewest = songRest;
       },
@@ -54,7 +63,7 @@ export class UserComponent implements OnInit {
 
   private getTopViewed(): void{
 
-    this.songService.getAllTopViewed().subscribe({
+    this.songService.getAllTopViewed(this.currentStyleId).subscribe({
       next: (songRest) => {
         this.songsTopViewed = songRest;
       },
@@ -64,7 +73,7 @@ export class UserComponent implements OnInit {
 
   private getForU(): void{
 
-    this.songService.getForU(this.userId).subscribe({
+    this.songService.getForU(this.userId,this.currentStyleId).subscribe({
       next: (songRest) => {
         this.songsForU = songRest;
       },
@@ -72,5 +81,12 @@ export class UserComponent implements OnInit {
     })
     }
 
+    getStyleId():void{
+
+      this.styleId.subscribe((styleId:number)=>{
+        this.currentStyleId=styleId
+      })
+  
+    }
 
 }
