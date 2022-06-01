@@ -107,12 +107,15 @@ public class SongServiceImpl implements SongService {
 
         List<UserSong> userSongs = this.userSongRepository.getUserSongByUser_Id(idUser);
         Long mostlistened;
-        Long secondListened;
+        Long secondListened=0L;
 
         HashMap<Long,Long> StylesTimes = getStylesByListened(userSongs);
 
         mostlistened=getMostListenedStyle(StylesTimes);
         StylesTimes.remove(mostlistened);
+        if(StylesTimes.size()==0){
+            return getAllSongsByStyleandRate(mostlistened, secondListened);
+        }
         secondListened=getMostListenedStyle(StylesTimes);
 
         System.out.println(mostlistened);
